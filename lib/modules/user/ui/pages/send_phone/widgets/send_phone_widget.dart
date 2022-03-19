@@ -24,12 +24,18 @@ class _SendPhoneWidgetState extends State<SendPhoneWidget> {
     super.dispose();
   }
 
+  void _submit() {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      context.read<SendPhoneCubit>().sendPhone(phoneController.text);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    final cubit = context.read<SendPhoneCubit>();
 
     return Scaffold(
       body: SafeArea(
@@ -38,7 +44,7 @@ class _SendPhoneWidgetState extends State<SendPhoneWidget> {
           child: BlocBuilder<SendPhoneCubit, SendPhoneState>(
             builder: (context, state) {
               final errorMessage = state.mapOrNull(
-                error: (state) => state.error.toString(),
+                failure: (state) => state.error.toString(),
               );
               return Form(
                 key: formKey,
@@ -74,7 +80,7 @@ class _SendPhoneWidgetState extends State<SendPhoneWidget> {
                     const SizedBox(height: 28),
                     ElevatedButton(
                       child: const Text('Confirmar'),
-                      onPressed: () => cubit.sendPhone(phoneController.text),
+                      onPressed: _submit,
                     ),
                   ],
                 ),
