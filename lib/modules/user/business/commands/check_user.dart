@@ -1,8 +1,14 @@
+import '../adapters/user_datasource.dart';
 import '../entities/user.dart';
 
 class CheckUser {
-  Stream<User?> call() async* {
-    Future.delayed(const Duration(seconds: 3));
-    yield null;
+  final UserDatasource _userDatasource;
+
+  CheckUser({
+    required UserDatasource userDatasource,
+  }) : _userDatasource = userDatasource;
+
+  Stream<User?> call() {
+    return _userDatasource.currentUser;
   }
 }
