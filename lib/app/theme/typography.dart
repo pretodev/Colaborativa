@@ -31,13 +31,13 @@ class AppTextTheme extends TextTheme {
             color: AppColors.primaryText,
             letterSpacing: 0.15,
           ),
-          bodyText2: GoogleFonts.nunito(
+          bodyText1: GoogleFonts.nunito(
             fontSize: 16.0,
             fontWeight: FontWeight.w400,
             color: AppColors.primaryText,
             letterSpacing: 0.25,
           ),
-          bodyText1: GoogleFonts.nunito(
+          bodyText2: GoogleFonts.nunito(
             fontSize: 14.0,
             fontWeight: FontWeight.w400,
             color: AppColors.primaryText,
