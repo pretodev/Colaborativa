@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'auth_cubit.dart';
+part of 'user_status.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,8 +15,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$AuthStateTearOff {
-  const _$AuthStateTearOff();
+class _$UserStatusTearOff {
+  const _$UserStatusTearOff();
 
   _None none() {
     return const _None();
@@ -32,10 +32,10 @@ class _$AuthStateTearOff {
 }
 
 /// @nodoc
-const $AuthState = _$AuthStateTearOff();
+const $UserStatus = _$UserStatusTearOff();
 
 /// @nodoc
-mixin _$AuthState {
+mixin _$UserStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() none,
@@ -83,18 +83,19 @@ mixin _$AuthState {
 }
 
 /// @nodoc
-abstract class $AuthStateCopyWith<$Res> {
-  factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
-      _$AuthStateCopyWithImpl<$Res>;
+abstract class $UserStatusCopyWith<$Res> {
+  factory $UserStatusCopyWith(
+          UserStatus value, $Res Function(UserStatus) then) =
+      _$UserStatusCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
-  _$AuthStateCopyWithImpl(this._value, this._then);
+class _$UserStatusCopyWithImpl<$Res> implements $UserStatusCopyWith<$Res> {
+  _$UserStatusCopyWithImpl(this._value, this._then);
 
-  final AuthState _value;
+  final UserStatus _value;
   // ignore: unused_field
-  final $Res Function(AuthState) _then;
+  final $Res Function(UserStatus) _then;
 }
 
 /// @nodoc
@@ -104,7 +105,7 @@ abstract class _$NoneCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$NoneCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class __$NoneCopyWithImpl<$Res> extends _$UserStatusCopyWithImpl<$Res>
     implements _$NoneCopyWith<$Res> {
   __$NoneCopyWithImpl(_None _value, $Res Function(_None) _then)
       : super(_value, (v) => _then(v as _None));
@@ -120,7 +121,7 @@ class _$_None extends _None {
 
   @override
   String toString() {
-    return 'AuthState.none()';
+    return 'UserStatus.none()';
   }
 
   @override
@@ -201,7 +202,7 @@ class _$_None extends _None {
   }
 }
 
-abstract class _None extends AuthState {
+abstract class _None extends UserStatus {
   const factory _None() = _$_None;
   const _None._() : super._();
 }
@@ -214,7 +215,7 @@ abstract class _$AuthenticatedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$AuthenticatedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class __$AuthenticatedCopyWithImpl<$Res> extends _$UserStatusCopyWithImpl<$Res>
     implements _$AuthenticatedCopyWith<$Res> {
   __$AuthenticatedCopyWithImpl(
       _Authenticated _value, $Res Function(_Authenticated) _then)
@@ -231,7 +232,7 @@ class _$_Authenticated extends _Authenticated {
 
   @override
   String toString() {
-    return 'AuthState.authenticated()';
+    return 'UserStatus.authenticated()';
   }
 
   @override
@@ -312,7 +313,7 @@ class _$_Authenticated extends _Authenticated {
   }
 }
 
-abstract class _Authenticated extends AuthState {
+abstract class _Authenticated extends UserStatus {
   const factory _Authenticated() = _$_Authenticated;
   const _Authenticated._() : super._();
 }
@@ -325,7 +326,8 @@ abstract class _$UnauthenticatedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UnauthenticatedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class __$UnauthenticatedCopyWithImpl<$Res>
+    extends _$UserStatusCopyWithImpl<$Res>
     implements _$UnauthenticatedCopyWith<$Res> {
   __$UnauthenticatedCopyWithImpl(
       _Unauthenticated _value, $Res Function(_Unauthenticated) _then)
@@ -342,7 +344,7 @@ class _$_Unauthenticated extends _Unauthenticated {
 
   @override
   String toString() {
-    return 'AuthState.unauthenticated()';
+    return 'UserStatus.unauthenticated()';
   }
 
   @override
@@ -423,7 +425,7 @@ class _$_Unauthenticated extends _Unauthenticated {
   }
 }
 
-abstract class _Unauthenticated extends AuthState {
+abstract class _Unauthenticated extends UserStatus {
   const factory _Unauthenticated() = _$_Unauthenticated;
   const _Unauthenticated._() : super._();
 }
