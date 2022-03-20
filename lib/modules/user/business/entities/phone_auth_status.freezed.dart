@@ -26,8 +26,10 @@ class _$PhoneAuthStatusTearOff {
     return const _Success();
   }
 
-  _WaitingCode waitingCode() {
-    return const _WaitingCode();
+  _WaitingCode waitingCode(PhonePreferences preferences) {
+    return _WaitingCode(
+      preferences,
+    );
   }
 
   _Timeout timeout() {
@@ -44,7 +46,7 @@ mixin _$PhoneAuthStatus {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function() success,
-    required TResult Function() waitingCode,
+    required TResult Function(PhonePreferences preferences) waitingCode,
     required TResult Function() timeout,
   }) =>
       throw _privateConstructorUsedError;
@@ -52,7 +54,7 @@ mixin _$PhoneAuthStatus {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
   }) =>
       throw _privateConstructorUsedError;
@@ -60,7 +62,7 @@ mixin _$PhoneAuthStatus {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
     required TResult orElse(),
   }) =>
@@ -149,7 +151,7 @@ class _$_None extends _None {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function() success,
-    required TResult Function() waitingCode,
+    required TResult Function(PhonePreferences preferences) waitingCode,
     required TResult Function() timeout,
   }) {
     return none();
@@ -160,7 +162,7 @@ class _$_None extends _None {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
   }) {
     return none?.call();
@@ -171,7 +173,7 @@ class _$_None extends _None {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
     required TResult orElse(),
   }) {
@@ -264,7 +266,7 @@ class _$_Success extends _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function() success,
-    required TResult Function() waitingCode,
+    required TResult Function(PhonePreferences preferences) waitingCode,
     required TResult Function() timeout,
   }) {
     return success();
@@ -275,7 +277,7 @@ class _$_Success extends _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
   }) {
     return success?.call();
@@ -286,7 +288,7 @@ class _$_Success extends _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
     required TResult orElse(),
   }) {
@@ -344,6 +346,9 @@ abstract class _$WaitingCodeCopyWith<$Res> {
   factory _$WaitingCodeCopyWith(
           _WaitingCode value, $Res Function(_WaitingCode) then) =
       __$WaitingCodeCopyWithImpl<$Res>;
+  $Res call({PhonePreferences preferences});
+
+  $PhonePreferencesCopyWith<$Res> get preferences;
 }
 
 /// @nodoc
@@ -356,36 +361,67 @@ class __$WaitingCodeCopyWithImpl<$Res>
 
   @override
   _WaitingCode get _value => super._value as _WaitingCode;
+
+  @override
+  $Res call({
+    Object? preferences = freezed,
+  }) {
+    return _then(_WaitingCode(
+      preferences == freezed
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as PhonePreferences,
+    ));
+  }
+
+  @override
+  $PhonePreferencesCopyWith<$Res> get preferences {
+    return $PhonePreferencesCopyWith<$Res>(_value.preferences, (value) {
+      return _then(_value.copyWith(preferences: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_WaitingCode extends _WaitingCode {
-  const _$_WaitingCode() : super._();
+  const _$_WaitingCode(this.preferences) : super._();
+
+  @override
+  final PhonePreferences preferences;
 
   @override
   String toString() {
-    return 'PhoneAuthStatus.waitingCode()';
+    return 'PhoneAuthStatus.waitingCode(preferences: $preferences)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _WaitingCode);
+        (other.runtimeType == runtimeType &&
+            other is _WaitingCode &&
+            const DeepCollectionEquality()
+                .equals(other.preferences, preferences));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(preferences));
+
+  @JsonKey(ignore: true)
+  @override
+  _$WaitingCodeCopyWith<_WaitingCode> get copyWith =>
+      __$WaitingCodeCopyWithImpl<_WaitingCode>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function() success,
-    required TResult Function() waitingCode,
+    required TResult Function(PhonePreferences preferences) waitingCode,
     required TResult Function() timeout,
   }) {
-    return waitingCode();
+    return waitingCode(preferences);
   }
 
   @override
@@ -393,10 +429,10 @@ class _$_WaitingCode extends _WaitingCode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
   }) {
-    return waitingCode?.call();
+    return waitingCode?.call(preferences);
   }
 
   @override
@@ -404,12 +440,12 @@ class _$_WaitingCode extends _WaitingCode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
     required TResult orElse(),
   }) {
     if (waitingCode != null) {
-      return waitingCode();
+      return waitingCode(preferences);
     }
     return orElse();
   }
@@ -453,8 +489,13 @@ class _$_WaitingCode extends _WaitingCode {
 }
 
 abstract class _WaitingCode extends PhoneAuthStatus {
-  const factory _WaitingCode() = _$_WaitingCode;
+  const factory _WaitingCode(PhonePreferences preferences) = _$_WaitingCode;
   const _WaitingCode._() : super._();
+
+  PhonePreferences get preferences;
+  @JsonKey(ignore: true)
+  _$WaitingCodeCopyWith<_WaitingCode> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -497,7 +538,7 @@ class _$_Timeout extends _Timeout {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function() success,
-    required TResult Function() waitingCode,
+    required TResult Function(PhonePreferences preferences) waitingCode,
     required TResult Function() timeout,
   }) {
     return timeout();
@@ -508,7 +549,7 @@ class _$_Timeout extends _Timeout {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
   }) {
     return timeout?.call();
@@ -519,7 +560,7 @@ class _$_Timeout extends _Timeout {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function()? success,
-    TResult Function()? waitingCode,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     TResult Function()? timeout,
     required TResult orElse(),
   }) {

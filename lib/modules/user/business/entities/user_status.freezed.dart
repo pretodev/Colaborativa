@@ -29,6 +29,12 @@ class _$UserStatusTearOff {
   _Unauthenticated unauthenticated() {
     return const _Unauthenticated();
   }
+
+  _WaitingCode waitingCode(PhonePreferences preferences) {
+    return _WaitingCode(
+      preferences,
+    );
+  }
 }
 
 /// @nodoc
@@ -41,6 +47,7 @@ mixin _$UserStatus {
     required TResult Function() none,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function(PhonePreferences preferences) waitingCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +55,7 @@ mixin _$UserStatus {
     TResult Function()? none,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +63,7 @@ mixin _$UserStatus {
     TResult Function()? none,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +72,7 @@ mixin _$UserStatus {
     required TResult Function(_None value) none,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_WaitingCode value) waitingCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +80,7 @@ mixin _$UserStatus {
     TResult Function(_None value)? none,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +88,7 @@ mixin _$UserStatus {
     TResult Function(_None value)? none,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,6 +151,7 @@ class _$_None extends _None {
     required TResult Function() none,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function(PhonePreferences preferences) waitingCode,
   }) {
     return none();
   }
@@ -149,6 +162,7 @@ class _$_None extends _None {
     TResult Function()? none,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
   }) {
     return none?.call();
   }
@@ -159,6 +173,7 @@ class _$_None extends _None {
     TResult Function()? none,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     required TResult orElse(),
   }) {
     if (none != null) {
@@ -173,6 +188,7 @@ class _$_None extends _None {
     required TResult Function(_None value) none,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_WaitingCode value) waitingCode,
   }) {
     return none(this);
   }
@@ -183,6 +199,7 @@ class _$_None extends _None {
     TResult Function(_None value)? none,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
   }) {
     return none?.call(this);
   }
@@ -193,6 +210,7 @@ class _$_None extends _None {
     TResult Function(_None value)? none,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
     required TResult orElse(),
   }) {
     if (none != null) {
@@ -250,6 +268,7 @@ class _$_Authenticated extends _Authenticated {
     required TResult Function() none,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function(PhonePreferences preferences) waitingCode,
   }) {
     return authenticated();
   }
@@ -260,6 +279,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function()? none,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
   }) {
     return authenticated?.call();
   }
@@ -270,6 +290,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function()? none,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -284,6 +305,7 @@ class _$_Authenticated extends _Authenticated {
     required TResult Function(_None value) none,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_WaitingCode value) waitingCode,
   }) {
     return authenticated(this);
   }
@@ -294,6 +316,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function(_None value)? none,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
   }) {
     return authenticated?.call(this);
   }
@@ -304,6 +327,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function(_None value)? none,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -362,6 +386,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     required TResult Function() none,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
+    required TResult Function(PhonePreferences preferences) waitingCode,
   }) {
     return unauthenticated();
   }
@@ -372,6 +397,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function()? none,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
   }) {
     return unauthenticated?.call();
   }
@@ -382,6 +408,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function()? none,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -396,6 +423,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     required TResult Function(_None value) none,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_WaitingCode value) waitingCode,
   }) {
     return unauthenticated(this);
   }
@@ -406,6 +434,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function(_None value)? none,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
   }) {
     return unauthenticated?.call(this);
   }
@@ -416,6 +445,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function(_None value)? none,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -428,4 +458,160 @@ class _$_Unauthenticated extends _Unauthenticated {
 abstract class _Unauthenticated extends UserStatus {
   const factory _Unauthenticated() = _$_Unauthenticated;
   const _Unauthenticated._() : super._();
+}
+
+/// @nodoc
+abstract class _$WaitingCodeCopyWith<$Res> {
+  factory _$WaitingCodeCopyWith(
+          _WaitingCode value, $Res Function(_WaitingCode) then) =
+      __$WaitingCodeCopyWithImpl<$Res>;
+  $Res call({PhonePreferences preferences});
+
+  $PhonePreferencesCopyWith<$Res> get preferences;
+}
+
+/// @nodoc
+class __$WaitingCodeCopyWithImpl<$Res> extends _$UserStatusCopyWithImpl<$Res>
+    implements _$WaitingCodeCopyWith<$Res> {
+  __$WaitingCodeCopyWithImpl(
+      _WaitingCode _value, $Res Function(_WaitingCode) _then)
+      : super(_value, (v) => _then(v as _WaitingCode));
+
+  @override
+  _WaitingCode get _value => super._value as _WaitingCode;
+
+  @override
+  $Res call({
+    Object? preferences = freezed,
+  }) {
+    return _then(_WaitingCode(
+      preferences == freezed
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as PhonePreferences,
+    ));
+  }
+
+  @override
+  $PhonePreferencesCopyWith<$Res> get preferences {
+    return $PhonePreferencesCopyWith<$Res>(_value.preferences, (value) {
+      return _then(_value.copyWith(preferences: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_WaitingCode extends _WaitingCode {
+  const _$_WaitingCode(this.preferences) : super._();
+
+  @override
+  final PhonePreferences preferences;
+
+  @override
+  String toString() {
+    return 'UserStatus.waitingCode(preferences: $preferences)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _WaitingCode &&
+            const DeepCollectionEquality()
+                .equals(other.preferences, preferences));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(preferences));
+
+  @JsonKey(ignore: true)
+  @override
+  _$WaitingCodeCopyWith<_WaitingCode> get copyWith =>
+      __$WaitingCodeCopyWithImpl<_WaitingCode>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() none,
+    required TResult Function() authenticated,
+    required TResult Function() unauthenticated,
+    required TResult Function(PhonePreferences preferences) waitingCode,
+  }) {
+    return waitingCode(preferences);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
+  }) {
+    return waitingCode?.call(preferences);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function()? authenticated,
+    TResult Function()? unauthenticated,
+    TResult Function(PhonePreferences preferences)? waitingCode,
+    required TResult orElse(),
+  }) {
+    if (waitingCode != null) {
+      return waitingCode(preferences);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_None value) none,
+    required TResult Function(_Authenticated value) authenticated,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_WaitingCode value) waitingCode,
+  }) {
+    return waitingCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_None value)? none,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
+  }) {
+    return waitingCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_None value)? none,
+    TResult Function(_Authenticated value)? authenticated,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_WaitingCode value)? waitingCode,
+    required TResult orElse(),
+  }) {
+    if (waitingCode != null) {
+      return waitingCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WaitingCode extends UserStatus {
+  const factory _WaitingCode(PhonePreferences preferences) = _$_WaitingCode;
+  const _WaitingCode._() : super._();
+
+  PhonePreferences get preferences;
+  @JsonKey(ignore: true)
+  _$WaitingCodeCopyWith<_WaitingCode> get copyWith =>
+      throw _privateConstructorUsedError;
 }

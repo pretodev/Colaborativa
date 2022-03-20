@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,22 +9,18 @@ part 'send_phone_state.dart';
 class SendPhoneCubit extends Cubit<SendPhoneState> {
   final PhoneAuth _phoneAuth;
 
-  StreamSubscription? _subscription;
-
-  SendPhoneCubit({required PhoneAuth phoneAuth})
-      : _phoneAuth = phoneAuth,
+  SendPhoneCubit({
+    required PhoneAuth phoneAuth,
+  })  : _phoneAuth = phoneAuth,
         super(const SendPhoneState.none());
 
-  void sendPhone(String phone) {
+  void sendPhone(String phone) async {
     emit(const SendPhoneState.sending());
-    _subscription?.cancel();
-    _subscription = _phoneAuth.verifyPhoneNumber(phone).listen(
-      (status) {
-        print(status);
-      },
-      onError: (error) {
-        emit(SendPhoneState.failure(error));
-      },
-    );
+    try {
+      await _phoneAuth.verifyPhoneNumber(phone);
+      emit(const SendPhoneState.none());
+    } on Exception catch (error) {
+      emit(SendPhoneState.failure(error));
+    }
   }
 }

@@ -1,7 +1,7 @@
-import '../entities/user_status.dart';
+import '../entities/user.dart';
 
 abstract class UserDatasource {
   const UserDatasource();
 
-  Stream<UserStatus> get userStatus;
+  Stream<User?> get user;
 }

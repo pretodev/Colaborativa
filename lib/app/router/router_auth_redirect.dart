@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../modules/user/business/adapters/user_datasource.dart';
+import '../../modules/user/business/commands/check_user_status_command.dart';
 
 class RouterAuthRedirect extends StatefulWidget {
   const RouterAuthRedirect({Key? key, required this.child}) : super(key: key);
@@ -16,15 +16,16 @@ class RouterAuthRedirect extends StatefulWidget {
 }
 
 class _RouterAuthRedirectState extends State<RouterAuthRedirect> {
-  late UserDatasource _userDatasource;
+  late CheckUserStatusCommand _checkUserStatus;
   late StreamSubscription _subscription;
 
   @override
   void initState() {
     super.initState();
-    _userDatasource = context.read<UserDatasource>();
-    _subscription = _userDatasource.userStatus.listen(
+    _checkUserStatus = context.read<CheckUserStatusCommand>();
+    _subscription = _checkUserStatus().listen(
       (status) {
+        print('status: $status');
         status.whenOrNull(
           authenticated: () => context.go('/home'),
           unauthenticated: () => context.go('/sendPhone'),
