@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as fa;
 
-import '../business/adapters/user_datasource.dart';
-import '../business/entities/user.dart';
+import '../data/adapters/user_datasource.dart';
+import '../data/entities/user.dart';
 
 class FirebaseUserDatasource implements UserDatasource {
   fa.FirebaseAuth get _auth => fa.FirebaseAuth.instance;

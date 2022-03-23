@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../business/adapters/phone_auth.dart';
-import '../business/entities/phone_auth_status.dart';
-import '../business/entities/phone_preferences.dart';
+import '../data/adapters/phone_auth.dart';
+import '../data/entities/phone_auth_status.dart';
+import '../data/entities/phone_preferences.dart';
 
 class FirebasePhoneAuth implements PhoneAuth {
   FirebaseAuth get _auth => FirebaseAuth.instance;
@@ -41,7 +41,7 @@ class FirebasePhoneAuth implements PhoneAuth {
           _controller.add(PhoneAuthStatus.waitingCode(preferences));
         },
         codeAutoRetrievalTimeout: (verificationId) {
-          _controller.add(const PhoneAuthStatus.timeout());
+          //_controller.add(const PhoneAuthStatus.timeout());
         },
       );
     } catch (error) {
@@ -81,5 +81,14 @@ class FirebasePhoneAuth implements PhoneAuth {
       'timestamp',
       preferences.timestamp.millisecondsSinceEpoch,
     );
+  }
+
+  @override
+  Future<void> clearPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('phoneNumber');
+    await prefs.remove('verificationId');
+    await prefs.remove('timestamp');
+    _controller.add(const PhoneAuthStatus.none());
   }
 }

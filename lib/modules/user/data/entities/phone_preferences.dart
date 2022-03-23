@@ -11,4 +11,6 @@ class PhonePreferences with _$PhonePreferences {
     required String phoneNumber,
     required DateTime timestamp,
   }) = _PhonePreferences;
+
+  static const maxSecondsTimeout = 60 * 2;
 }

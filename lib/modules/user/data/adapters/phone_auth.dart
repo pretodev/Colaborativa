@@ -14,5 +14,7 @@ abstract class PhoneAuth {
 
   Future<void> loadPreferences();
 
+  Future<void> clearPreferences();
+
   Stream<PhoneAuthStatus> get status;
 }

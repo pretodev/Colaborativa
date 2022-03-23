@@ -16,4 +16,10 @@ class UserStatus with _$UserStatus {
 
   const factory UserStatus.waitingCode(PhonePreferences preferences) =
       _WaitingCode;
+
+  bool get isAuthenticated => this is _Authenticated;
+
+  bool get isUnauthenticated => this is _Unauthenticated;
+
+  bool get isWaitingCode => this is _WaitingCode;
 }

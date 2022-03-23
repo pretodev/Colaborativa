@@ -1,39 +1,41 @@
 import 'dart:async';
 
-import '../adapters/phone_auth.dart';
-import '../adapters/user_datasource.dart';
-import '../entities/user_status.dart';
+import 'package:mobx_triple/mobx_triple.dart';
 
-class CheckUserStatusCommand {
+import '../data/adapters/phone_auth.dart';
+import '../data/adapters/user_datasource.dart';
+import '../data/entities/user_status.dart';
+
+class UserStatusViewmodel extends MobXStore<Exception, UserStatus> {
   final UserDatasource _userDatasource;
   final PhoneAuth _phoneAuth;
 
-  StreamSubscription? _phoneAuthSubscription;
-
-  CheckUserStatusCommand({
+  UserStatusViewmodel({
     required UserDatasource userDatasource,
     required PhoneAuth phoneAuth,
   })  : _userDatasource = userDatasource,
-        _phoneAuth = phoneAuth;
+        _phoneAuth = phoneAuth,
+        super(const UserStatus.none());
 
-  Stream<UserStatus> call() {
-    final controller = StreamController<UserStatus>();
+  void checkStatus() {
+    StreamSubscription? _phoneAuthSubscription;
     _userDatasource.user.listen(
       (user) {
         if (user == null) {
           _phoneAuthSubscription?.cancel();
           _phoneAuthSubscription = _mapPhoneStatus().listen(
-            controller.add,
-            onError: controller.addError,
+            (phoneStatus) {
+              update(phoneStatus);
+            },
+            onError: (e) => setError(e, force: true),
           );
           return;
         }
         _phoneAuthSubscription?.cancel();
-        controller.add(const UserStatus.authenticated());
+        update(const UserStatus.authenticated());
       },
-      onError: controller.addError,
+      onError: (e) => setError(e, force: true),
     );
-    return controller.stream;
   }
 
   Stream<UserStatus> _mapPhoneStatus() async* {
