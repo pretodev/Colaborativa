@@ -6,7 +6,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../../app/widgets/field_wrapper.dart';
 import '../../../../utils/strings/strings.dart';
 import '../../../../utils/validation/validation.dart';
-import '../../viewmodels/viewmodels.dart';
+import '../../viewmodels/phone_auth_viewmodel.dart';
 import '../widgets/user_terms_widget.dart';
 
 class SendPhonePage extends StatefulWidget {
@@ -28,6 +28,8 @@ class _SendPhonePageState extends State<SendPhonePage> {
     filter: {"#": RegExp(r'[0-9]')},
     type: MaskAutoCompletionType.lazy,
   );
+
+  final phoneAuth = PhoneAuthViewmodel.instance;
 
   @override
   void dispose() {
@@ -54,47 +56,53 @@ class _SendPhonePageState extends State<SendPhonePage> {
           padding: const EdgeInsets.all(16.0),
           child: Form(
             key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 32),
-                Text(
-                  'Vamos fazer login',
-                  style: theme.textTheme.headline4,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'É bom ter você aqui com a gente',
-                  style: theme.textTheme.headline5,
-                ),
-                const Spacer(),
-                Observer(
-                  builder: (_) {
-                    return FieldWrapper(
-                      label: 'Digite seu telefone',
-                      child: TextFormField(
-                        controller: phoneController,
-                        keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                          errorText: phoneAuth.error?.toString(),
-                        ),
-                        inputFormatters: [maskFormatter],
-                        validator: useValidates([
-                          isRequired('Por favor, digite seu telefone'),
-                        ]),
+            child: Observer(builder: (_) {
+              print(phoneAuth.isLoading);
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 32),
+                  Text(
+                    'Vamos fazer login',
+                    style: theme.textTheme.headline4,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'É bom ter você aqui com a gente',
+                    style: theme.textTheme.headline5,
+                  ),
+                  const Spacer(),
+                  FieldWrapper(
+                    label: 'Digite seu telefone',
+                    child: TextFormField(
+                      controller: phoneController,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        errorText: phoneAuth.error?.toString(),
                       ),
-                    );
-                  },
-                ),
-                const Spacer(),
-                const SendPhoneTermsWidget(),
-                const SizedBox(height: 28),
-                ElevatedButton(
-                  child: const Text('Confirmar'),
-                  onPressed: _submit,
-                ),
-              ],
-            ),
+                      inputFormatters: [maskFormatter],
+                      validator: useValidates([
+                        isRequired('Por favor, digite seu telefone'),
+                      ]),
+                    ),
+                  ),
+                  const Spacer(),
+                  const SendPhoneTermsWidget(),
+                  const SizedBox(height: 28),
+                  Visibility(
+                    visible: !phoneAuth.isLoading,
+                    child: ElevatedButton(
+                      child: const Text('Confirmar'),
+                      onPressed: _submit,
+                    ),
+                    replacement: const ElevatedButton(
+                      child: Text('Aguarde um instance'),
+                      onPressed: null,
+                    ),
+                  ),
+                ],
+              );
+            }),
           ),
         ),
       ),

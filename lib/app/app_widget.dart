@@ -17,13 +17,11 @@ class _AppWidgetState extends State<AppWidget> {
     super.initState();
     userStatus.selectState.observe(
       (_) => userStatus.state.whenOrNull(
-        unauthenticated: () => Modular.to.pushNamedAndRemoveUntil(
+        unauthenticated: () => Modular.to.pushReplacementNamed(
           '/send_phone',
-          ModalRoute.withName('/'),
         ),
-        waitingCode: (preferences) => Modular.to.pushNamedAndRemoveUntil(
+        waitingCode: (preferences) => Modular.to.pushReplacementNamed(
           '/confirm_code',
-          ModalRoute.withName('/'),
           arguments: preferences,
         ),
         authenticated: () => print('authenticated'),

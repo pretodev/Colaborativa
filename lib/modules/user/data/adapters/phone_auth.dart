@@ -10,7 +10,10 @@ abstract class PhoneAuth {
     int timeoutSeconds,
   });
 
-  Future<void> confirmCode(String code);
+  Future<void> confirmCode({
+    required String verificationId,
+    required String smsCode,
+  });
 
   Future<void> loadPreferences();
 

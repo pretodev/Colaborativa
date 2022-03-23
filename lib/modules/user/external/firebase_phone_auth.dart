@@ -51,9 +51,14 @@ class FirebasePhoneAuth implements PhoneAuth {
   }
 
   @override
-  Future<void> confirmCode(String code) {
-    // TODO: implement confirmCode
-    throw UnimplementedError();
+  Future<void> confirmCode({
+    required String verificationId,
+    required String smsCode,
+  }) async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId, smsCode: smsCode);
+    await _auth.signInWithCredential(credential);
+    _controller.add(const PhoneAuthStatus.success());
   }
 
   @override
