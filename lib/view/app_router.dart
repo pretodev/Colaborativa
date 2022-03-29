@@ -5,8 +5,9 @@ import 'auth/send_phone_page.dart';
 import 'auth/splash_page.dart';
 
 class Routes {
-  static const String splash = '/';
-  static const String sendPhone = '/send-phone';
+  static const splash = '/';
+  static const sendPhone = '/send-phone';
+  static const confirmCode = '/confirm-code';
 }
 
 class AppRouter {
@@ -16,6 +17,9 @@ class AppRouter {
       redirect: (state) {
         final route = authCubit.state.whenOrNull(
           verifyPhoneNumber: () => Routes.sendPhone,
+          verifyPhoneNumberError: (_) => Routes.sendPhone,
+          verifyPhoneNumberLoading: () => Routes.sendPhone,
+          confirmSmsCode: (_) => Routes.confirmCode,
         );
         return route != null && state.subloc != route ? route : null;
       },

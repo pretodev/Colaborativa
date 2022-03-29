@@ -27,8 +27,9 @@ class FirebasePhoneAuthService implements PhoneAuthService {
     timeoutSeconds = 60,
   }) async {
     try {
+      final phoneNumberRaw = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
       await _auth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
+        phoneNumber: '+55$phoneNumberRaw',
         timeout: Duration(seconds: timeoutSeconds),
         verificationCompleted: (authCredential) async {
           await _auth.signInWithCredential(authCredential);

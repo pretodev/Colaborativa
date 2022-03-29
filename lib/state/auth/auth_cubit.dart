@@ -25,6 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void listenUser() {
     _checkUser().listen((userStatus) {
+      print(userStatus);
       final state = userStatus.when(
         none: () {
           return const AuthState.none();
@@ -44,17 +45,16 @@ class AuthCubit extends Cubit<AuthState> {
       );
       emit(state);
     }, onError: (error) {
-      final errorState = state.whenOrNull(
+      final errorState = state.maybeWhen(
         verifyPhoneNumberLoading: () => AuthState.verifyPhoneNumberError(
           error.toString(),
         ),
         confirmSmsCodeLoading: () => AuthState.confirmSmsCodeError(
           error.toString(),
         ),
+        orElse: () => throw error,
       );
-      if (errorState != null) {
-        emit(errorState);
-      }
+      emit(errorState);
     });
   }
 

@@ -73,7 +73,7 @@ class _SendPhonePageState extends State<SendPhonePage> {
                     child: FieldWrapper(
                       label: 'Digite seu telefone',
                       child: TextFormField(
-                        //controller: _phoneController,
+                        controller: _phoneController,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
                           errorText: state.mapOrNull(
