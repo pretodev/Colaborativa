@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
-import '../../../domain/auth/phone_status.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../app/auth/confirm_sms_code.dart';
 import '../../../app/auth/get_auth_status.dart';
 import '../../../app/auth/send_phone_number.dart';
+import '../../../domain/auth/phone_status.dart';
 
 part 'auth_cubit.freezed.dart';
 part 'auth_state.dart';
@@ -25,7 +25,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   void listenUser() {
     _checkUser().listen((userStatus) {
-      print(userStatus);
       final state = userStatus.when(
         none: () {
           return const AuthState.none();
@@ -71,5 +70,12 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(const AuthState.confirmSmsCodeLoading());
     await _confirmSmsCode(smsCode: smsCode, verificationId: verificationId);
+  }
+
+  Future<void> requestNewCode({
+    required String phoneNumber,
+  }) async {
+    emit(const AuthState.confirmSmsCodeNewCode());
+    await _sendPhoneNumber(phoneNumber);
   }
 }

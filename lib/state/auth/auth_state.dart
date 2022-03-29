@@ -18,6 +18,8 @@ class AuthState with _$AuthState {
 
   const factory AuthState.confirmSmsCodeLoading() = _ConfirmSmsCodeLoading;
 
+  const factory AuthState.confirmSmsCodeNewCode() = _ConfirmSmsCodeNewCode;
+
   const factory AuthState.confirmSmsCodeError(String errorMsg) =
       _ConfirmSmsCodeError;
 
@@ -26,4 +28,6 @@ class AuthState with _$AuthState {
   const factory AuthState.authenticated() = _Authenticated;
 
   bool get isVerifyPhoneNumberLoading => this is _VerifyPhoneNumberLoading;
+
+  bool get isConfirmSmsCode => this is _ConfirmSmsCode;
 }

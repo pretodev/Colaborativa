@@ -46,6 +46,10 @@ class _$AuthStateTearOff {
     return const _ConfirmSmsCodeLoading();
   }
 
+  _ConfirmSmsCodeNewCode confirmSmsCodeNewCode() {
+    return const _ConfirmSmsCodeNewCode();
+  }
+
   _ConfirmSmsCodeError confirmSmsCodeError(String errorMsg) {
     return _ConfirmSmsCodeError(
       errorMsg,
@@ -74,6 +78,7 @@ mixin _$AuthState {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -87,6 +92,7 @@ mixin _$AuthState {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -100,6 +106,7 @@ mixin _$AuthState {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -117,6 +124,8 @@ mixin _$AuthState {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -130,6 +139,7 @@ mixin _$AuthState {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -143,6 +153,7 @@ mixin _$AuthState {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -210,6 +221,7 @@ class _$_None extends _None {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -226,6 +238,7 @@ class _$_None extends _None {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -242,6 +255,7 @@ class _$_None extends _None {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -265,6 +279,8 @@ class _$_None extends _None {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -281,6 +297,7 @@ class _$_None extends _None {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -297,6 +314,7 @@ class _$_None extends _None {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -361,6 +379,7 @@ class _$_VerifyPhoneNumber extends _VerifyPhoneNumber {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -377,6 +396,7 @@ class _$_VerifyPhoneNumber extends _VerifyPhoneNumber {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -393,6 +413,7 @@ class _$_VerifyPhoneNumber extends _VerifyPhoneNumber {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -416,6 +437,8 @@ class _$_VerifyPhoneNumber extends _VerifyPhoneNumber {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -432,6 +455,7 @@ class _$_VerifyPhoneNumber extends _VerifyPhoneNumber {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -448,6 +472,7 @@ class _$_VerifyPhoneNumber extends _VerifyPhoneNumber {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -514,6 +539,7 @@ class _$_VerifyPhoneNumberLoading extends _VerifyPhoneNumberLoading {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -530,6 +556,7 @@ class _$_VerifyPhoneNumberLoading extends _VerifyPhoneNumberLoading {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -546,6 +573,7 @@ class _$_VerifyPhoneNumberLoading extends _VerifyPhoneNumberLoading {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -569,6 +597,8 @@ class _$_VerifyPhoneNumberLoading extends _VerifyPhoneNumberLoading {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -585,6 +615,7 @@ class _$_VerifyPhoneNumberLoading extends _VerifyPhoneNumberLoading {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -601,6 +632,7 @@ class _$_VerifyPhoneNumberLoading extends _VerifyPhoneNumberLoading {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -690,6 +722,7 @@ class _$_VerifyPhoneNumberError extends _VerifyPhoneNumberError {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -706,6 +739,7 @@ class _$_VerifyPhoneNumberError extends _VerifyPhoneNumberError {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -722,6 +756,7 @@ class _$_VerifyPhoneNumberError extends _VerifyPhoneNumberError {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -745,6 +780,8 @@ class _$_VerifyPhoneNumberError extends _VerifyPhoneNumberError {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -761,6 +798,7 @@ class _$_VerifyPhoneNumberError extends _VerifyPhoneNumberError {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -777,6 +815,7 @@ class _$_VerifyPhoneNumberError extends _VerifyPhoneNumberError {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -879,6 +918,7 @@ class _$_ConfirmSmsCode extends _ConfirmSmsCode {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -895,6 +935,7 @@ class _$_ConfirmSmsCode extends _ConfirmSmsCode {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -911,6 +952,7 @@ class _$_ConfirmSmsCode extends _ConfirmSmsCode {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -934,6 +976,8 @@ class _$_ConfirmSmsCode extends _ConfirmSmsCode {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -950,6 +994,7 @@ class _$_ConfirmSmsCode extends _ConfirmSmsCode {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -966,6 +1011,7 @@ class _$_ConfirmSmsCode extends _ConfirmSmsCode {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -1035,6 +1081,7 @@ class _$_ConfirmSmsCodeLoading extends _ConfirmSmsCodeLoading {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -1051,6 +1098,7 @@ class _$_ConfirmSmsCodeLoading extends _ConfirmSmsCodeLoading {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -1067,6 +1115,7 @@ class _$_ConfirmSmsCodeLoading extends _ConfirmSmsCodeLoading {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -1090,6 +1139,8 @@ class _$_ConfirmSmsCodeLoading extends _ConfirmSmsCodeLoading {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -1106,6 +1157,7 @@ class _$_ConfirmSmsCodeLoading extends _ConfirmSmsCodeLoading {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -1122,6 +1174,7 @@ class _$_ConfirmSmsCodeLoading extends _ConfirmSmsCodeLoading {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -1137,6 +1190,164 @@ class _$_ConfirmSmsCodeLoading extends _ConfirmSmsCodeLoading {
 abstract class _ConfirmSmsCodeLoading extends AuthState {
   const factory _ConfirmSmsCodeLoading() = _$_ConfirmSmsCodeLoading;
   const _ConfirmSmsCodeLoading._() : super._();
+}
+
+/// @nodoc
+abstract class _$ConfirmSmsCodeNewCodeCopyWith<$Res> {
+  factory _$ConfirmSmsCodeNewCodeCopyWith(_ConfirmSmsCodeNewCode value,
+          $Res Function(_ConfirmSmsCodeNewCode) then) =
+      __$ConfirmSmsCodeNewCodeCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$ConfirmSmsCodeNewCodeCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res>
+    implements _$ConfirmSmsCodeNewCodeCopyWith<$Res> {
+  __$ConfirmSmsCodeNewCodeCopyWithImpl(_ConfirmSmsCodeNewCode _value,
+      $Res Function(_ConfirmSmsCodeNewCode) _then)
+      : super(_value, (v) => _then(v as _ConfirmSmsCodeNewCode));
+
+  @override
+  _ConfirmSmsCodeNewCode get _value => super._value as _ConfirmSmsCodeNewCode;
+}
+
+/// @nodoc
+
+class _$_ConfirmSmsCodeNewCode extends _ConfirmSmsCodeNewCode {
+  const _$_ConfirmSmsCodeNewCode() : super._();
+
+  @override
+  String toString() {
+    return 'AuthState.confirmSmsCodeNewCode()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _ConfirmSmsCodeNewCode);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() none,
+    required TResult Function() verifyPhoneNumber,
+    required TResult Function() verifyPhoneNumberLoading,
+    required TResult Function(String errorMsg) verifyPhoneNumberError,
+    required TResult Function(PhoneStatus status) confirmSmsCode,
+    required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
+    required TResult Function(String errorMsg) confirmSmsCodeError,
+    required TResult Function() waitingRegister,
+    required TResult Function() authenticated,
+  }) {
+    return confirmSmsCodeNewCode();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function()? verifyPhoneNumber,
+    TResult Function()? verifyPhoneNumberLoading,
+    TResult Function(String errorMsg)? verifyPhoneNumberError,
+    TResult Function(PhoneStatus status)? confirmSmsCode,
+    TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
+    TResult Function(String errorMsg)? confirmSmsCodeError,
+    TResult Function()? waitingRegister,
+    TResult Function()? authenticated,
+  }) {
+    return confirmSmsCodeNewCode?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function()? verifyPhoneNumber,
+    TResult Function()? verifyPhoneNumberLoading,
+    TResult Function(String errorMsg)? verifyPhoneNumberError,
+    TResult Function(PhoneStatus status)? confirmSmsCode,
+    TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
+    TResult Function(String errorMsg)? confirmSmsCodeError,
+    TResult Function()? waitingRegister,
+    TResult Function()? authenticated,
+    required TResult orElse(),
+  }) {
+    if (confirmSmsCodeNewCode != null) {
+      return confirmSmsCodeNewCode();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_None value) none,
+    required TResult Function(_VerifyPhoneNumber value) verifyPhoneNumber,
+    required TResult Function(_VerifyPhoneNumberLoading value)
+        verifyPhoneNumberLoading,
+    required TResult Function(_VerifyPhoneNumberError value)
+        verifyPhoneNumberError,
+    required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
+    required TResult Function(_ConfirmSmsCodeLoading value)
+        confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
+    required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
+    required TResult Function(_WaitingSmsRegister value) waitingRegister,
+    required TResult Function(_Authenticated value) authenticated,
+  }) {
+    return confirmSmsCodeNewCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_None value)? none,
+    TResult Function(_VerifyPhoneNumber value)? verifyPhoneNumber,
+    TResult Function(_VerifyPhoneNumberLoading value)? verifyPhoneNumberLoading,
+    TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
+    TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
+    TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
+    TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
+    TResult Function(_WaitingSmsRegister value)? waitingRegister,
+    TResult Function(_Authenticated value)? authenticated,
+  }) {
+    return confirmSmsCodeNewCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_None value)? none,
+    TResult Function(_VerifyPhoneNumber value)? verifyPhoneNumber,
+    TResult Function(_VerifyPhoneNumberLoading value)? verifyPhoneNumberLoading,
+    TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
+    TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
+    TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
+    TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
+    TResult Function(_WaitingSmsRegister value)? waitingRegister,
+    TResult Function(_Authenticated value)? authenticated,
+    required TResult orElse(),
+  }) {
+    if (confirmSmsCodeNewCode != null) {
+      return confirmSmsCodeNewCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ConfirmSmsCodeNewCode extends AuthState {
+  const factory _ConfirmSmsCodeNewCode() = _$_ConfirmSmsCodeNewCode;
+  const _ConfirmSmsCodeNewCode._() : super._();
 }
 
 /// @nodoc
@@ -1211,6 +1422,7 @@ class _$_ConfirmSmsCodeError extends _ConfirmSmsCodeError {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -1227,6 +1439,7 @@ class _$_ConfirmSmsCodeError extends _ConfirmSmsCodeError {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -1243,6 +1456,7 @@ class _$_ConfirmSmsCodeError extends _ConfirmSmsCodeError {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -1266,6 +1480,8 @@ class _$_ConfirmSmsCodeError extends _ConfirmSmsCodeError {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -1282,6 +1498,7 @@ class _$_ConfirmSmsCodeError extends _ConfirmSmsCodeError {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -1298,6 +1515,7 @@ class _$_ConfirmSmsCodeError extends _ConfirmSmsCodeError {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -1367,6 +1585,7 @@ class _$_WaitingSmsRegister extends _WaitingSmsRegister {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -1383,6 +1602,7 @@ class _$_WaitingSmsRegister extends _WaitingSmsRegister {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -1399,6 +1619,7 @@ class _$_WaitingSmsRegister extends _WaitingSmsRegister {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -1422,6 +1643,8 @@ class _$_WaitingSmsRegister extends _WaitingSmsRegister {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -1438,6 +1661,7 @@ class _$_WaitingSmsRegister extends _WaitingSmsRegister {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -1454,6 +1678,7 @@ class _$_WaitingSmsRegister extends _WaitingSmsRegister {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -1517,6 +1742,7 @@ class _$_Authenticated extends _Authenticated {
     required TResult Function(String errorMsg) verifyPhoneNumberError,
     required TResult Function(PhoneStatus status) confirmSmsCode,
     required TResult Function() confirmSmsCodeLoading,
+    required TResult Function() confirmSmsCodeNewCode,
     required TResult Function(String errorMsg) confirmSmsCodeError,
     required TResult Function() waitingRegister,
     required TResult Function() authenticated,
@@ -1533,6 +1759,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -1549,6 +1776,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function(String errorMsg)? verifyPhoneNumberError,
     TResult Function(PhoneStatus status)? confirmSmsCode,
     TResult Function()? confirmSmsCodeLoading,
+    TResult Function()? confirmSmsCodeNewCode,
     TResult Function(String errorMsg)? confirmSmsCodeError,
     TResult Function()? waitingRegister,
     TResult Function()? authenticated,
@@ -1572,6 +1800,8 @@ class _$_Authenticated extends _Authenticated {
     required TResult Function(_ConfirmSmsCode value) confirmSmsCode,
     required TResult Function(_ConfirmSmsCodeLoading value)
         confirmSmsCodeLoading,
+    required TResult Function(_ConfirmSmsCodeNewCode value)
+        confirmSmsCodeNewCode,
     required TResult Function(_ConfirmSmsCodeError value) confirmSmsCodeError,
     required TResult Function(_WaitingSmsRegister value) waitingRegister,
     required TResult Function(_Authenticated value) authenticated,
@@ -1588,6 +1818,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,
@@ -1604,6 +1835,7 @@ class _$_Authenticated extends _Authenticated {
     TResult Function(_VerifyPhoneNumberError value)? verifyPhoneNumberError,
     TResult Function(_ConfirmSmsCode value)? confirmSmsCode,
     TResult Function(_ConfirmSmsCodeLoading value)? confirmSmsCodeLoading,
+    TResult Function(_ConfirmSmsCodeNewCode value)? confirmSmsCodeNewCode,
     TResult Function(_ConfirmSmsCodeError value)? confirmSmsCodeError,
     TResult Function(_WaitingSmsRegister value)? waitingRegister,
     TResult Function(_Authenticated value)? authenticated,

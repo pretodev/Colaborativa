@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/auth/phone_status.dart';
 import '../../state/auth/auth_cubit.dart';
 import '../_commons/controllers/timeout_controller.dart';
 import '../_commons/field_wrapper.dart';
@@ -11,10 +10,7 @@ import 'widgets/sms_instructions_widget.dart';
 class ConfirmCodePage extends StatefulWidget {
   const ConfirmCodePage({
     Key? key,
-    required this.phoneStatus,
   }) : super(key: key);
-
-  final PhoneStatus phoneStatus;
 
   @override
   State<ConfirmCodePage> createState() => _ConfirmCodePageState();
@@ -25,12 +21,18 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
   final _codeFocus = FocusNode();
 
   late AuthCubit _authCubit;
+  late String _phoneNumber;
+  late String _verificationId;
 
   @override
   void initState() {
     super.initState();
     _authCubit = context.read<AuthCubit>();
-    _timeoutController.startFromDateTime(widget.phoneStatus.timestamp);
+    _authCubit.state.whenOrNull(confirmSmsCode: (status) {
+      _phoneNumber = status.phoneNumber;
+      _verificationId = status.verificationId;
+      _timeoutController.startFromDateTime(status.timestamp);
+    });
   }
 
   @override
@@ -40,7 +42,9 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
   }
 
   void requestNewCode() {
-    _authCubit.verifyPhoneNumber(phoneNumber: widget.phoneStatus.phoneNumber);
+    _authCubit.requestNewCode(
+      phoneNumber: _phoneNumber,
+    );
   }
 
   void sendCode(String code) {
@@ -48,7 +52,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
       _codeFocus.unfocus();
       _authCubit.confirmSmsCode(
         smsCode: code,
-        verificationId: widget.phoneStatus.verificationId,
+        verificationId: _verificationId,
       );
     }
   }
@@ -62,7 +66,14 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: BlocBuilder<AuthCubit, AuthState>(
+          child: BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {
+              _authCubit.state.whenOrNull(confirmSmsCode: (status) {
+                _phoneNumber = status.phoneNumber;
+                _verificationId = status.verificationId;
+                _timeoutController.startFromDateTime(status.timestamp);
+              });
+            },
             builder: (_, state) => Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
