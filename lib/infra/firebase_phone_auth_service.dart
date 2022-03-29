@@ -3,17 +3,23 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/adapters/phone_auth.dart';
-import '../data/entities/phone_auth_status.dart';
-import '../data/entities/phone_preferences.dart';
+import '../domain/auth/phone_auth_service.dart';
+import '../domain/auth/phone_status.dart';
 
-class FirebasePhoneAuth implements PhoneAuth {
+class FirebasePhoneAuthService implements PhoneAuthService {
+  static const _phoneNumber = 'phone_number';
+  static const _verificationId = 'verification_id';
+  static const _timestamp = 'timestamp';
+
   FirebaseAuth get _auth => FirebaseAuth.instance;
 
-  final _controller = StreamController<PhoneAuthStatus>();
+  final _controller = StreamController<PhoneStatus?>();
 
   @override
-  Stream<PhoneAuthStatus> get status => _controller.stream;
+  Stream<PhoneStatus?> get status {
+    _loadStatus();
+    return _controller.stream;
+  }
 
   @override
   Future<void> verifyPhoneNumber(
@@ -26,19 +32,18 @@ class FirebasePhoneAuth implements PhoneAuth {
         timeout: Duration(seconds: timeoutSeconds),
         verificationCompleted: (authCredential) async {
           await _auth.signInWithCredential(authCredential);
-          _controller.add(const PhoneAuthStatus.success());
         },
         verificationFailed: (authException) {
           _controller.addError(authException);
         },
         codeSent: (verificationId, [code]) async {
-          final preferences = PhonePreferences(
+          final status = PhoneStatus(
             verificationId: verificationId,
             phoneNumber: phoneNumber,
             timestamp: DateTime.now(),
           );
-          await _savePreferences(preferences);
-          _controller.add(PhoneAuthStatus.waitingCode(preferences));
+          await _saveStatus(status);
+          _controller.add(status);
         },
         codeAutoRetrievalTimeout: (verificationId) {
           //_controller.add(const PhoneAuthStatus.timeout());
@@ -55,45 +60,43 @@ class FirebasePhoneAuth implements PhoneAuth {
     required String verificationId,
     required String smsCode,
   }) async {
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId, smsCode: smsCode);
-    await _auth.signInWithCredential(credential);
-    _controller.add(const PhoneAuthStatus.success());
+    await _auth.signInWithCredential(PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: smsCode,
+    ));
   }
 
-  @override
-  Future<void> loadPreferences() async {
+  Future<void> _loadStatus() async {
     final prefs = await SharedPreferences.getInstance();
-    final phoneNumber = prefs.getString('phoneNumber');
-    final verificationId = prefs.getString('verificationId');
-    final timestamp = prefs.getInt('timestamp');
+    final phoneNumber = prefs.getString(_phoneNumber);
+    final verificationId = prefs.getString(_verificationId);
+    final timestamp = prefs.getInt(_timestamp);
     if (phoneNumber == null || verificationId == null || timestamp == null) {
-      return _controller.add(const PhoneAuthStatus.none());
+      return _controller.add(null);
     }
-    final preferences = PhonePreferences(
+    _controller.add(PhoneStatus(
       verificationId: verificationId,
       phoneNumber: phoneNumber,
       timestamp: DateTime.fromMillisecondsSinceEpoch(timestamp),
-    );
-    _controller.add(PhoneAuthStatus.waitingCode(preferences));
+    ));
   }
 
-  Future<void> _savePreferences(PhonePreferences preferences) async {
+  Future<void> _saveStatus(PhoneStatus preferences) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('phoneNumber', preferences.phoneNumber);
-    await prefs.setString('verificationId', preferences.verificationId);
+    await prefs.setString(_phoneNumber, preferences.phoneNumber);
+    await prefs.setString(_verificationId, preferences.verificationId);
     await prefs.setInt(
-      'timestamp',
+      _timestamp,
       preferences.timestamp.millisecondsSinceEpoch,
     );
   }
 
   @override
-  Future<void> clearPreferences() async {
+  Future<void> reset() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('phoneNumber');
-    await prefs.remove('verificationId');
-    await prefs.remove('timestamp');
-    _controller.add(const PhoneAuthStatus.none());
+    await prefs.remove(_phoneNumber);
+    await prefs.remove(_verificationId);
+    await prefs.remove(_timestamp);
+    _controller.add(null);
   }
 }

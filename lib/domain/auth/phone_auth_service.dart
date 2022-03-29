@@ -1,7 +1,7 @@
-import '../entities/phone_auth_status.dart';
+import 'phone_status.dart';
 
-abstract class PhoneAuth {
-  const PhoneAuth();
+abstract class PhoneAuthService {
+  const PhoneAuthService();
 
   static const timeoutSeconds = 60 * 2;
 
@@ -15,9 +15,7 @@ abstract class PhoneAuth {
     required String smsCode,
   });
 
-  Future<void> loadPreferences();
+  Future<void> reset();
 
-  Future<void> clearPreferences();
-
-  Stream<PhoneAuthStatus> get status;
+  Stream<PhoneStatus?> get status;
 }

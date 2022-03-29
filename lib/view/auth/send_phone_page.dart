@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../../../../app/widgets/field_wrapper.dart';
-import '../../../../utils/strings/strings.dart';
-import '../../../../utils/validation/validation.dart';
-import '../../viewmodels/phone_auth_viewmodel.dart';
-import '../widgets/user_terms_widget.dart';
+import '../../state/auth/auth_cubit.dart';
+import '../../utils/strings/strings.dart' as strings;
+import '../../utils/validation/validation.dart';
+import '../_commons/field_wrapper.dart';
+import 'widgets/user_terms_widget.dart';
 
 class SendPhonePage extends StatefulWidget {
   const SendPhonePage({
@@ -21,7 +21,7 @@ class SendPhonePage extends StatefulWidget {
 class _SendPhonePageState extends State<SendPhonePage> {
   final formKey = GlobalKey<FormState>();
 
-  final phoneController = TextEditingController();
+  final _phoneController = TextEditingController();
 
   var maskFormatter = MaskTextInputFormatter(
     mask: '(##) # ####-####',
@@ -29,18 +29,16 @@ class _SendPhonePageState extends State<SendPhonePage> {
     type: MaskAutoCompletionType.lazy,
   );
 
-  final phoneAuth = PhoneAuthViewmodel.instance;
-
   @override
   void dispose() {
-    phoneController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
   void _submit() {
     if (formKey.currentState!.validate()) {
-      final phoneNumber = extractNumbers(phoneController.text);
-      phoneAuth.verifyPhoneNumber('+55$phoneNumber');
+      final phoneNumber = strings.extractNumbers(_phoneController.text);
+      context.read<AuthCubit>().verifyPhoneNumber(phoneNumber: phoneNumber);
     }
   }
 
@@ -54,10 +52,8 @@ class _SendPhonePageState extends State<SendPhonePage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: formKey,
-            child: Observer(builder: (_) {
-              print(phoneAuth.isLoading);
+          child: BlocBuilder<AuthCubit, AuthState>(
+            builder: (_, state) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -72,25 +68,30 @@ class _SendPhonePageState extends State<SendPhonePage> {
                     style: theme.textTheme.headline5,
                   ),
                   const Spacer(),
-                  FieldWrapper(
-                    label: 'Digite seu telefone',
-                    child: TextFormField(
-                      controller: phoneController,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        errorText: phoneAuth.error?.toString(),
+                  Form(
+                    key: formKey,
+                    child: FieldWrapper(
+                      label: 'Digite seu telefone',
+                      child: TextFormField(
+                        //controller: _phoneController,
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                          errorText: state.mapOrNull(
+                            verifyPhoneNumberError: (state) => state.errorMsg,
+                          ),
+                        ),
+                        inputFormatters: [maskFormatter],
+                        validator: useValidates([
+                          isRequired('Por favor, digite seu telefone'),
+                        ]),
                       ),
-                      inputFormatters: [maskFormatter],
-                      validator: useValidates([
-                        isRequired('Por favor, digite seu telefone'),
-                      ]),
                     ),
                   ),
                   const Spacer(),
                   const SendPhoneTermsWidget(),
                   const SizedBox(height: 28),
                   Visibility(
-                    visible: !phoneAuth.isLoading,
+                    visible: !state.isVerifyPhoneNumberLoading,
                     child: ElevatedButton(
                       child: const Text('Confirmar'),
                       onPressed: _submit,
@@ -102,7 +103,7 @@ class _SendPhonePageState extends State<SendPhonePage> {
                   ),
                 ],
               );
-            }),
+            },
           ),
         ),
       ),

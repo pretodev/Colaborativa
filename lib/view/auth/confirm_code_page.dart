@@ -1,20 +1,20 @@
-import 'package:colaborativa_app/modules/user/viewmodels/phone_auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../app/widgets/field_wrapper.dart';
-import '../../data/entities/phone_preferences.dart';
-import '../controllers/timeout_controller.dart';
-import '../widgets/sms_instructions_widget.dart';
+import '../../domain/auth/phone_status.dart';
+import '../../state/auth/auth_cubit.dart';
+import '../_commons/controllers/timeout_controller.dart';
+import '../_commons/field_wrapper.dart';
+import 'widgets/sms_instructions_widget.dart';
 
 class ConfirmCodePage extends StatefulWidget {
   const ConfirmCodePage({
     Key? key,
-    required this.preferences,
+    required this.phoneStatus,
   }) : super(key: key);
 
-  final PhonePreferences preferences;
+  final PhoneStatus phoneStatus;
 
   @override
   State<ConfirmCodePage> createState() => _ConfirmCodePageState();
@@ -24,12 +24,13 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
   final _timeoutController = TimeoutController();
   final _codeFocus = FocusNode();
 
-  final _phoneAuth = PhoneAuthViewmodel.instance;
+  late AuthCubit _authCubit;
 
   @override
   void initState() {
     super.initState();
-    _timeoutController.startFromDateTime(widget.preferences.timestamp);
+    _authCubit = context.read<AuthCubit>();
+    _timeoutController.startFromDateTime(widget.phoneStatus.timestamp);
   }
 
   @override
@@ -39,15 +40,15 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
   }
 
   void requestNewCode() {
-    _phoneAuth.verifyPhoneNumber(widget.preferences.phoneNumber);
+    _authCubit.verifyPhoneNumber(phoneNumber: widget.phoneStatus.phoneNumber);
   }
 
   void sendCode(String code) {
     if (code.length == 6) {
       _codeFocus.unfocus();
-      _phoneAuth.confirmCode(
+      _authCubit.confirmSmsCode(
         smsCode: code,
-        verificationId: widget.preferences.verificationId,
+        verificationId: widget.phoneStatus.verificationId,
       );
     }
   }
@@ -61,8 +62,8 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Observer(
-            builder: (_) => Column(
+          child: BlocBuilder<AuthCubit, AuthState>(
+            builder: (_, state) => Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
@@ -71,11 +72,11 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
                 ),
                 const SizedBox(height: 48.0),
                 SmsInstructionsWidget(
-                  phone: _phoneAuth.state.maybeMap(
+                  phone: state.maybeWhen(
                     orElse: () => 'Sem Número',
-                    waitingCode: (data) => data.preferences.phoneNumber,
+                    confirmSmsCode: (status) => status.phoneNumber,
                   ),
-                  onWrongNumberClicked: _phoneAuth.reset,
+                  onWrongNumberClicked: requestNewCode,
                 ),
                 const SizedBox(height: 48.0),
                 FieldWrapper(
@@ -88,11 +89,13 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
                         ? 'O código de confirmação é obrigatório'
                         : null,
                     decoration: InputDecoration(
-                      errorText: _phoneAuth.error?.toString(),
-                      helperText: _phoneAuth.isLoading
-                          ? 'Verificando o código, aguarde por favor...'
-                          : null,
-                    ),
+                        errorText: state.whenOrNull(
+                          confirmSmsCodeError: (errorMsg) => errorMsg,
+                        ),
+                        helperText: state.whenOrNull(
+                          confirmSmsCodeLoading: () =>
+                              'Verificando o código, aguarde por favor...',
+                        )),
                     focusNode: _codeFocus,
                   ),
                 ),

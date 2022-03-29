@@ -1,16 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'phone_preferences.freezed.dart';
+part 'phone_status.freezed.dart';
 
 @freezed
-class PhonePreferences with _$PhonePreferences {
-  const PhonePreferences._();
+class PhoneStatus with _$PhoneStatus {
+  const PhoneStatus._();
 
-  const factory PhonePreferences({
+  const factory PhoneStatus({
     required String verificationId,
     required String phoneNumber,
     required DateTime timestamp,
-  }) = _PhonePreferences;
+  }) = _PhoneStatus;
 
   static const maxSecondsTimeout = 60 * 2;
 }
