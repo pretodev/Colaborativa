@@ -1,11 +1,11 @@
 import 'package:go_router/go_router.dart';
 
 import '../bloc/app_bloc.dart';
-import '../pages/confirm_code/confirm_code_page.dart';
-import '../pages/home/home_page.dart';
-import '../pages/profile/profile_page.dart';
-import '../pages/splash_page.dart';
-import '../pages/verify_phone/verify_phone_page.dart';
+import '../views/confirm_code/confirm_code_page.dart';
+import '../views/home/home_page.dart';
+import '../views/profile/profile_page.dart';
+import '../views/splash_page.dart';
+import '../views/verify_phone/verify_phone_page.dart';
 
 class Routes {
   static const splash = '/';

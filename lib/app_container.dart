@@ -10,8 +10,8 @@ import 'domain/auth/phone_auth_service.dart';
 import 'domain/user/user_repository.dart';
 import 'infra/firebase_phone_auth_service.dart';
 import 'infra/firebase_user_repository.dart';
-import 'view/bloc/app_bloc.dart';
-import 'view/pages/profile/bloc/profile_bloc.dart';
+import 'presenter/bloc/app_bloc.dart';
+import 'presenter/views/profile/bloc/profile_bloc.dart';
 
 class AppContainer extends StatelessWidget {
   final Widget child;
