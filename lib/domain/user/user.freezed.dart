@@ -24,12 +24,10 @@ class _$UserTearOff {
     );
   }
 
-  UserRegistered registered(
-      {required String id, required String name, required String email}) {
+  UserRegistered registered({required String id, required String name}) {
     return UserRegistered(
       id: id,
       name: name,
-      email: email,
     );
   }
 }
@@ -44,19 +42,19 @@ mixin _$User {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) unregistered,
-    required TResult Function(String id, String name, String email) registered,
+    required TResult Function(String id, String name) registered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String id)? unregistered,
-    TResult Function(String id, String name, String email)? registered,
+    TResult Function(String id, String name)? registered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? unregistered,
-    TResult Function(String id, String name, String email)? registered,
+    TResult Function(String id, String name)? registered,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -178,7 +176,7 @@ class _$UserUnregistered extends UserUnregistered {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) unregistered,
-    required TResult Function(String id, String name, String email) registered,
+    required TResult Function(String id, String name) registered,
   }) {
     return unregistered(id);
   }
@@ -187,7 +185,7 @@ class _$UserUnregistered extends UserUnregistered {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String id)? unregistered,
-    TResult Function(String id, String name, String email)? registered,
+    TResult Function(String id, String name)? registered,
   }) {
     return unregistered?.call(id);
   }
@@ -196,7 +194,7 @@ class _$UserUnregistered extends UserUnregistered {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? unregistered,
-    TResult Function(String id, String name, String email)? registered,
+    TResult Function(String id, String name)? registered,
     required TResult orElse(),
   }) {
     if (unregistered != null) {
@@ -255,7 +253,7 @@ abstract class $UserRegisteredCopyWith<$Res> implements $UserCopyWith<$Res> {
           UserRegistered value, $Res Function(UserRegistered) then) =
       _$UserRegisteredCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, String email});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -272,7 +270,6 @@ class _$UserRegisteredCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? email = freezed,
   }) {
     return _then(UserRegistered(
       id: id == freezed
@@ -283,10 +280,6 @@ class _$UserRegisteredCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -294,20 +287,16 @@ class _$UserRegisteredCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserRegistered extends UserRegistered {
-  const _$UserRegistered(
-      {required this.id, required this.name, required this.email})
-      : super._();
+  const _$UserRegistered({required this.id, required this.name}) : super._();
 
   @override
   final String id;
   @override
   final String name;
-  @override
-  final String email;
 
   @override
   String toString() {
-    return 'User.registered(id: $id, name: $name, email: $email)';
+    return 'User.registered(id: $id, name: $name)';
   }
 
   @override
@@ -316,16 +305,14 @@ class _$UserRegistered extends UserRegistered {
         (other.runtimeType == runtimeType &&
             other is UserRegistered &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.email, email));
+            const DeepCollectionEquality().equals(other.name, name));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(email));
+      const DeepCollectionEquality().hash(name));
 
   @JsonKey(ignore: true)
   @override
@@ -336,29 +323,29 @@ class _$UserRegistered extends UserRegistered {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) unregistered,
-    required TResult Function(String id, String name, String email) registered,
+    required TResult Function(String id, String name) registered,
   }) {
-    return registered(id, name, email);
+    return registered(id, name);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String id)? unregistered,
-    TResult Function(String id, String name, String email)? registered,
+    TResult Function(String id, String name)? registered,
   }) {
-    return registered?.call(id, name, email);
+    return registered?.call(id, name);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? unregistered,
-    TResult Function(String id, String name, String email)? registered,
+    TResult Function(String id, String name)? registered,
     required TResult orElse(),
   }) {
     if (registered != null) {
-      return registered(id, name, email);
+      return registered(id, name);
     }
     return orElse();
   }
@@ -396,16 +383,13 @@ class _$UserRegistered extends UserRegistered {
 }
 
 abstract class UserRegistered extends User {
-  const factory UserRegistered(
-      {required String id,
-      required String name,
-      required String email}) = _$UserRegistered;
+  const factory UserRegistered({required String id, required String name}) =
+      _$UserRegistered;
   const UserRegistered._() : super._();
 
   @override
   String get id;
   String get name;
-  String get email;
   @override
   @JsonKey(ignore: true)
   $UserRegisteredCopyWith<UserRegistered> get copyWith =>

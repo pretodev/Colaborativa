@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../bloc/app_bloc.dart';
@@ -11,6 +12,7 @@ class Routes {
   static const sendPhone = '/auth/send-phone';
   static const confirmCode = '/auth/confirm-code';
   static const register = '/auth/register';
+  static const home = '/home';
 }
 
 class AppRouter {
@@ -22,6 +24,7 @@ class AppRouter {
           unauthenticated: () => Routes.sendPhone,
           waitingSmsCode: (_) => Routes.confirmCode,
           unregistered: (_) => Routes.register,
+          authenticated: (_) => Routes.home,
         );
         return route != null && state.subloc != route ? route : null;
       },
@@ -41,6 +44,10 @@ class AppRouter {
         GoRoute(
           path: Routes.register,
           builder: (_, state) => const ProfilePage(),
+        ),
+        GoRoute(
+          path: Routes.home,
+          builder: (_, state) => const Scaffold(),
         ),
       ],
     );

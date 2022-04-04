@@ -13,7 +13,6 @@ class User with _$User {
   const factory User.registered({
     required String id,
     required String name,
-    required String email,
   }) = UserRegistered;
 
   bool get isUnregistered => this is UserUnregistered;
