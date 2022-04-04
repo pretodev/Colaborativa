@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../bloc/app_bloc.dart';
 import '../pages/confirm_code/confirm_code_page.dart';
+import '../pages/home/home_page.dart';
 import '../pages/profile/profile_page.dart';
 import '../pages/splash_page.dart';
 import '../pages/verify_phone/verify_phone_page.dart';
@@ -47,7 +47,7 @@ class AppRouter {
         ),
         GoRoute(
           path: Routes.home,
-          builder: (_, state) => const Scaffold(),
+          builder: (_, state) => const HomePage(),
         ),
       ],
     );
