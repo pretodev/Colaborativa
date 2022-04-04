@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
 
 import '../state/auth/auth_cubit.dart';
-import 'auth/confirm_code_page.dart';
-import 'auth/send_phone_page.dart';
-import 'auth/splash_page.dart';
+import 'pages/confirm_code/confirm_code_page.dart';
 import 'pages/profile/profile_page.dart';
+import 'pages/splash_page.dart';
+import 'pages/verify_phone/verify_phone_page.dart';
 
 class Routes {
   static const splash = '/';
@@ -37,7 +37,7 @@ class AppRouter {
         ),
         GoRoute(
           path: Routes.sendPhone,
-          builder: (_, state) => const SendPhonePage(),
+          builder: (_, state) => const VerifyPhonePage(),
         ),
         GoRoute(
           path: Routes.confirmCode,

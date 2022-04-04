@@ -3,22 +3,22 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../../state/auth/auth_cubit.dart';
-import '../../utils/strings/strings.dart' as strings;
-import '../../utils/validation/validation.dart';
-import '../_commons/field_wrapper.dart';
+import '../../../state/auth/auth_cubit.dart';
+import '../../../utils/strings/strings.dart' as strings;
+import '../../../utils/validation/validation.dart';
+import '../../_commons/field_wrapper.dart';
 import 'widgets/user_terms_widget.dart';
 
-class SendPhonePage extends StatefulWidget {
-  const SendPhonePage({
+class VerifyPhonePage extends StatefulWidget {
+  const VerifyPhonePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<SendPhonePage> createState() => _SendPhonePageState();
+  State<VerifyPhonePage> createState() => _VerifyPhonePageState();
 }
 
-class _SendPhonePageState extends State<SendPhonePage> {
+class _VerifyPhonePageState extends State<VerifyPhonePage> {
   final formKey = GlobalKey<FormState>();
 
   final _phoneController = TextEditingController();
