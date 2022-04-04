@@ -1,6 +1,5 @@
-import 'package:colaborativa_app/domain/user/user_profile.dart';
-
 import 'user.dart';
+import 'user_profile.dart';
 
 abstract class UserRepository {
   const UserRepository();

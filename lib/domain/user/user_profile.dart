@@ -1,5 +1,5 @@
-import 'package:colaborativa_app/domain/user/breed.dart';
-import 'package:colaborativa_app/domain/user/gender.dart';
+import 'breed.dart';
+import 'gender.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_profile.freezed.dart';

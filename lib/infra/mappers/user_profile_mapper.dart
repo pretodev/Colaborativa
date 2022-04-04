@@ -1,4 +1,4 @@
-import 'package:colaborativa_app/domain/user/user_profile.dart';
+import '../../domain/user/user_profile.dart';
 
 class UserProfileMapper {
   static Map<String, dynamic> toFirestore(UserProfile profile) {
