@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 
-import '../../state/auth/auth_cubit.dart';
+import '../bloc/app_bloc.dart';
 import '../pages/confirm_code/confirm_code_page.dart';
 import '../pages/profile/profile_page.dart';
 import '../pages/splash_page.dart';
@@ -14,19 +14,14 @@ class Routes {
 }
 
 class AppRouter {
-  static GoRouter build(AuthCubit authCubit) {
+  static GoRouter build(AppBloc appBloc) {
     return GoRouter(
-      refreshListenable: GoRouterRefreshStream(authCubit.stream),
+      refreshListenable: GoRouterRefreshStream(appBloc.stream),
       redirect: (state) {
-        final route = authCubit.state.whenOrNull(
-          verifyPhoneNumber: () => Routes.sendPhone,
-          verifyPhoneNumberError: (_) => Routes.sendPhone,
-          verifyPhoneNumberLoading: () => Routes.sendPhone,
-          confirmSmsCode: (_) => Routes.confirmCode,
-          confirmSmsCodeError: (_) => Routes.confirmCode,
-          confirmSmsCodeLoading: () => Routes.confirmCode,
-          confirmSmsCodeNewCode: () => Routes.confirmCode,
-          waitingRegister: () => Routes.register,
+        final route = appBloc.state.whenOrNull(
+          unauthenticated: () => Routes.sendPhone,
+          waitingSmsCode: (_) => Routes.confirmCode,
+          unregistered: (_) => Routes.register,
         );
         return route != null && state.subloc != route ? route : null;
       },

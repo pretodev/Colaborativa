@@ -10,7 +10,7 @@ import 'domain/auth/phone_auth_service.dart';
 import 'domain/user/user_repository.dart';
 import 'infra/firebase_phone_auth_service.dart';
 import 'infra/firebase_user_repository.dart';
-import 'state/auth/auth_cubit.dart';
+import 'view/bloc/app_bloc.dart';
 import 'view/pages/profile/bloc/profile_bloc.dart';
 
 class AppContainer extends StatelessWidget {
@@ -56,11 +56,9 @@ class AppContainer extends StatelessWidget {
           create: (ctx) => SaveProfile(),
           lazy: true,
         ),
-        BlocProvider<AuthCubit>(
-          create: (ctx) => AuthCubit(
-            checkUser: ctx.read(),
-            sendPhoneNumber: ctx.read(),
-            confirmSmsCode: ctx.read(),
+        BlocProvider<AppBloc>(
+          create: (ctx) => AppBloc(
+            getAuthStatus: ctx.read(),
           ),
         ),
         BlocProvider<ProfileBloc>(
