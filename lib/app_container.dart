@@ -53,7 +53,9 @@ class AppContainer extends StatelessWidget {
           lazy: true,
         ),
         Provider<SaveProfile>(
-          create: (ctx) => SaveProfile(),
+          create: (ctx) => SaveProfile(
+            userRepository: ctx.read(),
+          ),
           lazy: true,
         ),
         BlocProvider<AppBloc>(
@@ -63,6 +65,7 @@ class AppContainer extends StatelessWidget {
         ),
         BlocProvider<ProfileBloc>(
           create: (ctx) => ProfileBloc(
+            userId: ctx.read<AppBloc>().userId,
             saveProfile: ctx.read(),
           ),
           lazy: true,
