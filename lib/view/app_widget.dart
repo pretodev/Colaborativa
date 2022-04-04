@@ -1,8 +1,9 @@
-import 'package:colaborativa_app/state/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '_commons/theme/theme.dart';
-import 'app_router.dart';
+
+import '../state/auth/auth_cubit.dart';
+import 'router/router.dart';
+import 'theme/theme.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({Key? key}) : super(key: key);

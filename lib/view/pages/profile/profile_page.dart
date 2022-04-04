@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/user/user_profile.dart';
-import '../../_commons/page_body.dart';
+import '../../widgets/page_body.dart';
 import 'bloc/profile_bloc.dart';
 import 'widgets/profile_avatar.dart';
 import 'widgets/profile_form.dart';

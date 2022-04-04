@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../_commons/theme/colors.dart';
-import '../../../_commons/theme/typography.dart';
+import '../../../theme/colors.dart';
+import '../../../theme/typography.dart';
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({Key? key}) : super(key: key);

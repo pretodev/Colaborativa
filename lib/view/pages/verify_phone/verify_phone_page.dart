@@ -6,7 +6,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../state/auth/auth_cubit.dart';
 import '../../../utils/strings/strings.dart' as strings;
 import '../../../utils/validation/validation.dart';
-import '../../_commons/field_wrapper.dart';
+import '../../widgets/field_wrapper.dart';
 import 'widgets/user_terms_widget.dart';
 
 class VerifyPhonePage extends StatefulWidget {

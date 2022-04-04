@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../domain/user/breed.dart';
 import '../../../../domain/user/gender.dart';
 import '../../../../domain/user/user_profile.dart';
-import '../../../_commons/date_form_field.dart';
-import '../../../_commons/dropdown_field.dart';
-import '../../../_commons/field_wrapper.dart';
+import '../../../widgets/date_form_field.dart';
+import '../../../widgets/dropdown_field.dart';
+import '../../../widgets/field_wrapper.dart';
 
 class ProfileForm extends StatefulWidget {
   final void Function(UserProfile) onSubmit;

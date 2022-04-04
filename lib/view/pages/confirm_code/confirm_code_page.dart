@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../state/auth/auth_cubit.dart';
-import '../../_commons/controllers/timeout_controller.dart';
-import '../../_commons/field_wrapper.dart';
+import '../../controllers/timeout_controller.dart';
+import '../../widgets/field_wrapper.dart';
 import 'widgets/sms_instructions_widget.dart';
 
 class ConfirmCodePage extends StatefulWidget {
