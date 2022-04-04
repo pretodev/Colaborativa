@@ -4,11 +4,13 @@ import '../state/auth/auth_cubit.dart';
 import 'auth/confirm_code_page.dart';
 import 'auth/send_phone_page.dart';
 import 'auth/splash_page.dart';
+import 'pages/profile/profile_page.dart';
 
 class Routes {
   static const splash = '/';
-  static const sendPhone = '/send-phone';
-  static const confirmCode = '/confirm-code';
+  static const sendPhone = '/auth/send-phone';
+  static const confirmCode = '/auth/confirm-code';
+  static const register = '/auth/register';
 }
 
 class AppRouter {
@@ -24,6 +26,7 @@ class AppRouter {
           confirmSmsCodeError: (_) => Routes.confirmCode,
           confirmSmsCodeLoading: () => Routes.confirmCode,
           confirmSmsCodeNewCode: () => Routes.confirmCode,
+          waitingRegister: () => Routes.register,
         );
         return route != null && state.subloc != route ? route : null;
       },
@@ -39,6 +42,10 @@ class AppRouter {
         GoRoute(
           path: Routes.confirmCode,
           builder: (_, state) => const ConfirmCodePage(),
+        ),
+        GoRoute(
+          path: Routes.register,
+          builder: (_, state) => const ProfilePage(),
         ),
       ],
     );

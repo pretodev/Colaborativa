@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:colaborativa_app/domain/user/user_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fa;
 
 import '../domain/user/user.dart';
-import '../domain/user/user_datasource.dart';
+import '../domain/user/user_repository.dart';
+import 'mappers/user_profile_mapper.dart';
 
 class FirebaseUserRepository implements UserRepository {
   final fa.FirebaseAuth _auth = fa.FirebaseAuth.instance;
@@ -21,5 +23,16 @@ class FirebaseUserRepository implements UserRepository {
         email: userData.get('email') as String,
       );
     });
+  }
+
+  @override
+  Future<void> save({
+    required UserProfile profile,
+    required String userId,
+  }) {
+    return _firestore.doc('users/$userId').set(
+          UserProfileMapper.toFirestore(profile),
+          SetOptions(merge: true),
+        );
   }
 }

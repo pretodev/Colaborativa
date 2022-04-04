@@ -5,11 +5,13 @@ import 'package:provider/provider.dart';
 import 'app/auth/confirm_sms_code.dart';
 import 'app/auth/get_auth_status.dart';
 import 'app/auth/send_phone_number.dart';
+import 'app/user/save_profile.dart';
 import 'domain/auth/phone_auth_service.dart';
-import 'domain/user/user_datasource.dart';
+import 'domain/user/user_repository.dart';
 import 'infra/firebase_phone_auth_service.dart';
 import 'infra/firebase_user_repository.dart';
 import 'state/auth/auth_cubit.dart';
+import 'view/pages/profile/bloc/profile_bloc.dart';
 
 class AppContainer extends StatelessWidget {
   final Widget child;
@@ -50,12 +52,22 @@ class AppContainer extends StatelessWidget {
           ),
           lazy: true,
         ),
+        Provider<SaveProfile>(
+          create: (ctx) => SaveProfile(),
+          lazy: true,
+        ),
         BlocProvider<AuthCubit>(
           create: (ctx) => AuthCubit(
             checkUser: ctx.read(),
             sendPhoneNumber: ctx.read(),
             confirmSmsCode: ctx.read(),
           ),
+        ),
+        BlocProvider<ProfileBloc>(
+          create: (ctx) => ProfileBloc(
+            saveProfile: ctx.read(),
+          ),
+          lazy: true,
         ),
       ],
       child: child,

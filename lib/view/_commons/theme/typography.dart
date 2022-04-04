@@ -4,6 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'colors.dart';
 
 class AppTextTheme extends TextTheme {
+  static final link = GoogleFonts.nunito(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primary,
+    letterSpacing: 0.25,
+  );
+
   AppTextTheme()
       : super(
           headline3: const TextStyle(
@@ -44,11 +51,4 @@ class AppTextTheme extends TextTheme {
             letterSpacing: 0.25,
           ),
         );
-
-  final link = GoogleFonts.nunito(
-    fontSize: 14.0,
-    fontWeight: FontWeight.w700,
-    backgroundColor: AppColors.primary,
-    letterSpacing: 0.25,
-  );
 }

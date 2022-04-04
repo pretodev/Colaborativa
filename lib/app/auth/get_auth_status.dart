@@ -2,7 +2,7 @@ import 'dart:async';
 
 import '../../domain/auth/auth_status.dart';
 import '../../domain/auth/phone_auth_service.dart';
-import '../../domain/user/user_datasource.dart';
+import '../../domain/user/user_repository.dart';
 
 class GetAuthStatus {
   final UserRepository _userRepository;
