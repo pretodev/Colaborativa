@@ -75,11 +75,13 @@ class FirebasePhoneAuthService implements PhoneAuthService {
     if (phoneNumber == null || verificationId == null || timestamp == null) {
       return _controller.add(null);
     }
-    _controller.add(PhoneStatus(
-      verificationId: verificationId,
-      phoneNumber: phoneNumber,
-      timestamp: DateTime.fromMillisecondsSinceEpoch(timestamp),
-    ));
+    _controller.add(
+      PhoneStatus(
+        verificationId: verificationId,
+        phoneNumber: phoneNumber,
+        timestamp: DateTime.fromMillisecondsSinceEpoch(timestamp),
+      ),
+    );
   }
 
   Future<void> _saveStatus(PhoneStatus preferences) async {

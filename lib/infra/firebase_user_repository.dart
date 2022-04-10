@@ -22,7 +22,6 @@ class FirebaseUserRepository implements UserRepository {
         return;
       }
       _firestore.doc('users/${faUser.uid}').snapshots().listen((doc) {
-        print('UPDATED');
         if (!doc.exists) {
           controller.add(User.unregistered(id: faUser.uid));
           return;

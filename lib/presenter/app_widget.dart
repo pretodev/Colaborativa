@@ -1,36 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modx/modx.dart';
 
-import 'bloc/app_bloc.dart';
-import 'router/router.dart';
+import '../app/auth/get_auth_status.dart';
+import '../domain/auth/phone_auth_service.dart';
+import '../domain/user/user_repository.dart';
+import '../infra/firebase_phone_auth_service.dart';
+import '../infra/firebase_user_repository.dart';
+import 'app_controller.dart';
+import 'app_store.dart';
+import 'pages/confirm_sms_code/confirm_sms_code_page.dart';
+import 'pages/home/home_page.dart';
+import 'pages/menu/menu_page.dart';
+import 'pages/profile/profile_page.dart';
+import 'pages/splash/splash_page.dart';
+import 'pages/verify_phone_number/verify_phone_number_page.dart';
 import 'theme/theme.dart';
 
-class AppWidget extends StatefulWidget {
+class AppWidget extends ModxApp<AppController> {
   const AppWidget({Key? key}) : super(key: key);
 
   @override
-  State<AppWidget> createState() => _AppWidgetState();
-}
-
-class _AppWidgetState extends State<AppWidget> {
-  late AppBloc _bloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _bloc = context.read<AppBloc>();
-    _bloc.add(const AppEvent.loadUser());
-  }
+  get appWidget => MaterialApp(
+        title: 'ColaborAtiva',
+        theme: AppTheme.instance,
+      );
 
   @override
-  Widget build(BuildContext context) {
-    final router = AppRouter.build(_bloc);
+  get pages => [
+        SplashPage(),
+        VerifyPhoneNumberPage(),
+        ConfirmSmsCodePage(),
+        ProfilePage(),
+        HomePage(),
+        MenuPage(),
+      ];
 
-    return MaterialApp.router(
-      title: 'ColaborAtiva',
-      theme: AppTheme.instance,
-      routerDelegate: router.routerDelegate,
-      routeInformationParser: router.routeInformationParser,
+  @override
+  void binding(i) {
+    lazyBind<UserRepository>(
+      () => FirebaseUserRepository(),
+      fenix: true,
+    );
+    lazyBind<PhoneAuthService>(
+      () => FirebasePhoneAuthService(),
+      fenix: true,
+    );
+    lazyBind<GetAuthStatus>(
+      () => GetAuthStatus(
+        phoneAuth: i(),
+        userRepository: i(),
+      ),
+      fenix: true,
+    );
+    bind(
+      AppStore(),
+      permanent: true,
+    );
+    bind(
+      AppController(getAuthStatus: i()),
+      permanent: true,
     );
   }
 }
