@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/presenter/theme/typography.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class SmsInstructionsWidget extends StatelessWidget {
           ),
           TextSpan(
             text: 'Número errado?',
-            style: theme.textTheme.bodyText1,
+            style: AppTextTheme.link.copyWith(fontSize: 20.0),
             recognizer: TapGestureRecognizer()..onTap = onWrongNumberClicked,
           )
         ],

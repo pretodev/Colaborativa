@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/presenter/views/share_feeling_diary/share_feeling_diary_page.dart';
 import 'package:flutter/material.dart';
 import 'package:modx/modx.dart';
 
@@ -33,6 +34,7 @@ class AppWidget extends ModxApp<AppController> {
         ProfilePage(),
         HomePage(),
         MenuPage(),
+        ShareFeelingDiaryPage(),
       ];
 
   @override

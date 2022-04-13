@@ -5,4 +5,5 @@ class Routes {
   static const register = '/auth/register';
   static const home = '/home';
   static const menu = '/menu';
+  static const fellingDiary = '/felling/diary';
 }

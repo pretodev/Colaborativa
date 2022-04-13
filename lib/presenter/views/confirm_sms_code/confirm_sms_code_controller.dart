@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colaborativa_app/app/auth/clear_phone_number.dart';
 import 'package:flutter/material.dart';
 import 'package:modx/modx.dart';
 
@@ -11,11 +12,14 @@ class ConfirmSmsCodeController extends ModxController<ConfirmSmsCodeStore> {
   ConfirmSmsCodeController({
     required SendPhoneNumber sendPhoneNumber,
     required ConfirmSmsCode confirmSmsCode,
+    required ClearPhoneNumber clearPhoneNumber,
   })  : _sendPhoneNumber = sendPhoneNumber,
-        _confirmSmsCode = confirmSmsCode;
+        _confirmSmsCode = confirmSmsCode,
+        _clearPhoneNumber = clearPhoneNumber;
 
   final SendPhoneNumber _sendPhoneNumber;
   final ConfirmSmsCode _confirmSmsCode;
+  final ClearPhoneNumber _clearPhoneNumber;
 
   Timer? timer;
   final smsCode = TextEditingController();
@@ -68,5 +72,7 @@ class ConfirmSmsCodeController extends ModxController<ConfirmSmsCodeStore> {
     await _sendPhoneNumber(store.phoneStatus.phoneNumber);
   }
 
-  void resetPhoneNumber() async {}
+  void resetPhoneNumber() async {
+    await _clearPhoneNumber();
+  }
 }

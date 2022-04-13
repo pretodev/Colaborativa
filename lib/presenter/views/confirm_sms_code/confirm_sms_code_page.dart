@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/app/auth/clear_phone_number.dart';
 import 'package:modx/modx.dart';
 
 import '../../../app/auth/confirm_sms_code.dart';
@@ -20,7 +21,12 @@ class ConfirmSmsCodePage extends ModxPage<AppStore> {
     // Add others dependencies
     bind(SendPhoneNumber(phoneAuth: i()));
     bind(ConfirmSmsCode(phoneAuth: i()));
+    bind(ClearPhoneNumber(phoneAuth: i()));
     bind(ConfirmSmsCodeStore(rxPhoneStatus: app.rxPhoneStatus));
-    bind(ConfirmSmsCodeController(sendPhoneNumber: i(), confirmSmsCode: i()));
+    bind(ConfirmSmsCodeController(
+      sendPhoneNumber: i(),
+      confirmSmsCode: i(),
+      clearPhoneNumber: i(),
+    ));
   }
 }
