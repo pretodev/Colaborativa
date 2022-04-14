@@ -1,7 +1,7 @@
-import 'package:colaborativa_app/app/feeling/register_day_feeling.dart';
-import 'package:colaborativa_app/domain/feeling/feeling_repository.dart';
-import 'package:colaborativa_app/infra/firebase_feeling_repository.dart';
-import 'package:colaborativa_app/presenter/routes/routes.dart';
+import '../../../app/feeling/register_day_feeling.dart';
+import '../../../domain/feeling/feeling_repository.dart';
+import '../../../infra/firebase_feeling_repository.dart';
+import '../../routes/routes.dart';
 import 'package:modx/modx.dart';
 
 import 'share_feeling_diary_store.dart';

@@ -1,4 +1,4 @@
-import 'package:colaborativa_app/domain/auth/phone_auth_service.dart';
+import '../../domain/auth/phone_auth_service.dart';
 
 class ClearPhoneNumber {
   final PhoneAuthService _phoneAuth;

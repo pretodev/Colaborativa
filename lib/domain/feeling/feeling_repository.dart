@@ -1,4 +1,4 @@
-import 'package:colaborativa_app/domain/feeling/editing_feeling_diary.dart';
+import 'editing_feeling_diary.dart';
 
 abstract class FeelingRepository {
   const FeelingRepository();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modx/modx.dart';
 
+import '../activities_checking/activities_checking_widget.dart';
 import '../share_feeling/share_feeling_widget.dart';
 import 'home_controller.dart';
 import 'home_store.dart';
@@ -31,6 +32,7 @@ class HomeView extends ModxView<HomeController, HomeStore> {
             padding: EdgeInsets.all(16.0),
             child: ShareFeelingWidget(),
           ),
+          ActivitiesCheckingWidget(),
         ],
       ),
     );

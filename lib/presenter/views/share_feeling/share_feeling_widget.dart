@@ -8,7 +8,7 @@ import 'share_feeling_controller.dart';
 import 'share_feeling_store.dart';
 import 'share_feeling_view.dart';
 
-class ShareFeelingWidget extends WidgetModule {
+class ShareFeelingWidget extends ModxWidget {
   const ShareFeelingWidget({Key? key}) : super(key: key);
 
   @override

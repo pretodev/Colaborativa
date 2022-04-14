@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:colaborativa_app/app/auth/clear_phone_number.dart';
+import '../../../app/auth/clear_phone_number.dart';
 import 'package:flutter/material.dart';
 import 'package:modx/modx.dart';
 

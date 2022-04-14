@@ -1,6 +1,7 @@
-import 'package:colaborativa_app/presenter/theme/typography.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import '../../../theme/typography.dart';
 
 class SmsInstructionsWidget extends StatelessWidget {
   final String phone;

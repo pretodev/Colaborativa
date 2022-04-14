@@ -1,4 +1,4 @@
-import 'package:colaborativa_app/domain/feeling/feeling.dart';
+import '../../domain/feeling/feeling.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
