@@ -1,4 +1,3 @@
-import 'views/share_feeling_diary/share_feeling_diary_page.dart';
 import 'package:flutter/material.dart';
 import 'package:modx/modx.dart';
 
@@ -9,13 +8,15 @@ import '../infra/firebase_phone_auth_service.dart';
 import '../infra/firebase_user_repository.dart';
 import 'app_controller.dart';
 import 'app_store.dart';
+import 'theme/theme.dart';
+import 'views/chat/chat_page.dart';
 import 'views/confirm_sms_code/confirm_sms_code_page.dart';
 import 'views/home/home_page.dart';
 import 'views/menu/menu_page.dart';
 import 'views/profile/profile_page.dart';
+import 'views/share_feeling_diary/share_feeling_diary_page.dart';
 import 'views/splash/splash_page.dart';
 import 'views/verify_phone_number/verify_phone_number_page.dart';
-import 'theme/theme.dart';
 
 class AppWidget extends ModxApp<AppController> {
   const AppWidget({Key? key}) : super(key: key);
@@ -35,6 +36,7 @@ class AppWidget extends ModxApp<AppController> {
         HomePage(),
         MenuPage(),
         ShareFeelingDiaryPage(),
+        ChatPage(),
       ];
 
   @override

@@ -16,7 +16,7 @@ class HomePage extends ModxPage<AppStore> {
 
   @override
   void binding(i) {
-    bind(HomeStore(rxUser: app.rxUserRegistered));
+    bind(HomeStore());
     bind(HomeController());
   }
 }

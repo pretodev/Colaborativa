@@ -1,23 +1,17 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:modx/modx.dart';
 
 import '../../../../domain/activities/activity.dart';
+import '../activities_checking_controller.dart';
+import '../activities_checking_store.dart';
 
-class ActivityCheckModal extends StatelessWidget {
-  final Activity activity;
-  final FutureOr<void> Function() onCheckClicked;
-
-  const ActivityCheckModal({
-    Key? key,
-    required this.activity,
-    required this.onCheckClicked,
-  }) : super(key: key);
-
+class ActivityCheckModal
+    extends ModxModal<ActivitiesCheckingController, ActivitiesCheckingStore> {
   @override
-  Widget build(BuildContext context) {
+  Widget buildView(BuildContext context, args) {
     final theme = Theme.of(context);
+    final activity = args as Activity;
     return Container(
       height: 425,
       width: double.maxFinite,
@@ -49,8 +43,8 @@ class ActivityCheckModal extends StatelessWidget {
           ElevatedButton(
             child: const Text('Marcar como feito'),
             onPressed: () async {
-              await onCheckClicked();
-              Navigator.pop(context);
+              await controller.checkActivity(activity);
+              close();
             },
           )
         ],

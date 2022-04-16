@@ -5,19 +5,21 @@ import '../../../app/activity/get_activities.dart';
 import '../../../domain/activities/activity.dart';
 import '../../app_store.dart';
 import 'activities_checking_store.dart';
-import 'widgets/activity_checkout_modal.dart';
+import 'modals/activity_checkout_modal.dart';
 
 class ActivitiesCheckingController
     extends ModxController<ActivitiesCheckingStore>
     with ModxAppStoreMixin<AppStore> {
-  final GetActivities _getActivities;
-  final CheckActivity _checkActivity;
-
   ActivitiesCheckingController({
     required GetActivities getActivities,
     required CheckActivity checkActivity,
   })  : _getActivities = getActivities,
         _checkActivity = checkActivity;
+
+  final GetActivities _getActivities;
+  final CheckActivity _checkActivity;
+
+  final activityCheckoutModal = ActivityCheckModal();
 
   @override
   void onInit() {
@@ -33,12 +35,7 @@ class ActivitiesCheckingController
   }
 
   void showActiviyCheckout(Activity activity) async {
-    openBottomSheetModal(
-      ActivityCheckModal(
-        activity: activity,
-        onCheckClicked: () => checkActivity(activity),
-      ),
-    );
+    activityCheckoutModal.showBottomSheet();
   }
 
   Future<void> checkActivity(Activity activity) async {

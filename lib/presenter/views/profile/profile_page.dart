@@ -18,7 +18,7 @@ class ProfilePage extends ModxPage<AppStore> {
   void binding(i) {
     // Add others dependencies
     bind(SaveProfile(userRepository: i()));
-    bind(ProfileStore(rxUser: app.rxUserUnregistered));
+    bind(ProfileStore());
     bind(ProfileController(saveProfile: i()));
   }
 }

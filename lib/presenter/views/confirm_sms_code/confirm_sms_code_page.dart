@@ -1,6 +1,6 @@
-import '../../../app/auth/clear_phone_number.dart';
 import 'package:modx/modx.dart';
 
+import '../../../app/auth/clear_phone_number.dart';
 import '../../../app/auth/confirm_sms_code.dart';
 import '../../../app/auth/send_phone_number.dart';
 import '../../app_store.dart';
@@ -22,7 +22,7 @@ class ConfirmSmsCodePage extends ModxPage<AppStore> {
     bind(SendPhoneNumber(phoneAuth: i()));
     bind(ConfirmSmsCode(phoneAuth: i()));
     bind(ClearPhoneNumber(phoneAuth: i()));
-    bind(ConfirmSmsCodeStore(rxPhoneStatus: app.rxPhoneStatus));
+    bind(ConfirmSmsCodeStore());
     bind(ConfirmSmsCodeController(
       sendPhoneNumber: i(),
       confirmSmsCode: i(),

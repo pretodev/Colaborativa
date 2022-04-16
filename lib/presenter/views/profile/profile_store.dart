@@ -1,17 +1,13 @@
 import 'package:modx/modx.dart';
 
 import '../../../domain/user/user.dart';
+import '../../app_store.dart';
 
-class ProfileStore {
-  ProfileStore({
-    required Rxn<UserUnregistered> rxUser,
-  }) : _rxUser = rxUser;
-
+class ProfileStore with ModxAppStoreMixin<AppStore> {
   final _rxSavingProfile = RxBool(false);
-  final Rxn<UserUnregistered> _rxUser;
 
   bool get isSavingProfile => _rxSavingProfile.value;
   set savingProfile(bool value) => _rxSavingProfile.value = value;
 
-  UserUnregistered get user => _rxUser.value!;
+  UserUnregistered get user => app.userUnregistered!;
 }

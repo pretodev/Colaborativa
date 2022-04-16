@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:modx/modx.dart';
 
+import '../../theme/pictures.dart';
 import '../activities_checking/activities_checking_widget.dart';
 import '../share_feeling/share_feeling_widget.dart';
 import 'home_controller.dart';
@@ -20,8 +22,20 @@ class HomeView extends ModxView<HomeController, HomeStore> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.grid_view_outlined),
+          TextButton(
+            child: SvgPicture.asset(
+              SvgPictures.messenger,
+              width: 32.0,
+              height: 32.0,
+            ),
+            onPressed: controller.openChat,
+          ),
+          TextButton(
+            child: SvgPicture.asset(
+              SvgPictures.menu,
+              width: 32.0,
+              height: 32.0,
+            ),
             onPressed: controller.openMenu,
           ),
         ],
