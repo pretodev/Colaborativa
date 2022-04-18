@@ -14,7 +14,7 @@ class MenuView extends ModxView<MenuController, MenuStore> {
         actions: [
           IconButton(
             icon: const Icon(Icons.exit_to_app_outlined),
-            onPressed: () {},
+            onPressed: controller.signout,
           ),
         ],
       ),

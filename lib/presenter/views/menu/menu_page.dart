@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/app/auth/signout.dart';
 import 'package:modx/modx.dart';
 
 import '../../routes/routes.dart';
@@ -15,7 +16,8 @@ class MenuPage extends ModxPage {
   @override
   void binding(i) {
     // Add others dependencies
+    bind(Signout(phoneAuth: i(), userRepository: i()));
     bind(MenuStore());
-    bind(MenuController());
+    bind(MenuController(signout: i()));
   }
 }

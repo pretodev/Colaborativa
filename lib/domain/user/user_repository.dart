@@ -10,4 +10,6 @@ abstract class UserRepository {
     required UserProfile profile,
     required String userId,
   });
+
+  Future<void> logout();
 }

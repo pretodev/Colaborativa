@@ -60,4 +60,9 @@ class FirebaseUserRepository implements UserRepository {
           SetOptions(merge: true),
         );
   }
+
+  @override
+  Future<void> logout() {
+    return _auth.signOut();
+  }
 }
