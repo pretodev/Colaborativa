@@ -19,8 +19,9 @@ class VerifyPhoneNumberController
     if (!form.currentState!.validate()) {
       return;
     }
-    store.rxPhoneNumberChecking.value = true;
+    store.phoneNumberChecking = true;
     final phoneNumber = strings.extractNumbers(phone.text);
+    once(store.rxAuthError, (_) => store.phoneNumberChecking = false);
     await _sendPhoneNumber(phoneNumber);
   }
 }

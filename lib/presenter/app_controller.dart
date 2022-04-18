@@ -34,6 +34,8 @@ class AppController extends ModxController<AppStore> {
           view.offAndToNamed(Routes.register);
         },
       );
+    }, onError: (error) {
+      store.authError = error;
     });
   }
 }

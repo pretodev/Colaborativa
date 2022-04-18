@@ -48,7 +48,8 @@ class VerifyPhoneNumberView
                     controller: controller.phone,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
-                      errorText: store.error?.toString(),
+                      errorText: store.authError?.message,
+                      errorMaxLines: 2,
                     ),
                     inputFormatters: [maskFormatter],
                     validator: useValidates([
@@ -60,15 +61,17 @@ class VerifyPhoneNumberView
               const Spacer(),
               const SendPhoneTermsWidget(),
               const SizedBox(height: 28),
-              Visibility(
-                visible: !store.isPhoneNumberChecking,
-                child: ElevatedButton(
-                  child: const Text('Confirmar'),
-                  onPressed: controller.verifyPhoneNumber,
-                ),
-                replacement: const ElevatedButton(
-                  child: Text('Aguarde um instance'),
-                  onPressed: null,
+              Obx(
+                () => Visibility(
+                  visible: !store.isPhoneNumberChecking,
+                  child: ElevatedButton(
+                    child: const Text('Confirmar'),
+                    onPressed: controller.verifyPhoneNumber,
+                  ),
+                  replacement: const ElevatedButton(
+                    child: Text('Aguarde um instance'),
+                    onPressed: null,
+                  ),
                 ),
               ),
             ],

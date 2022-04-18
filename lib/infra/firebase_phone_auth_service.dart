@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:colaborativa_app/domain/auth/failures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,34 +27,29 @@ class FirebasePhoneAuthService implements PhoneAuthService {
     String phoneNumber, {
     timeoutSeconds = 60,
   }) async {
-    try {
-      final phoneNumberRaw = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
-      await _auth.verifyPhoneNumber(
-        phoneNumber: '+55$phoneNumberRaw',
-        timeout: Duration(seconds: timeoutSeconds),
-        verificationCompleted: (authCredential) async {
-          await _auth.signInWithCredential(authCredential);
-        },
-        verificationFailed: (authException) {
-          _controller.addError(authException);
-        },
-        codeSent: (verificationId, [code]) async {
-          final status = PhoneStatus(
-            verificationId: verificationId,
-            phoneNumber: phoneNumber,
-            timestamp: DateTime.now(),
-          );
-          await _saveStatus(status);
-          _controller.add(status);
-        },
-        codeAutoRetrievalTimeout: (verificationId) {
-          //_controller.add(const PhoneAuthStatus.timeout());
-        },
-      );
-    } catch (error) {
-      _controller.addError(error);
-      rethrow;
-    }
+    final phoneNumberRaw = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
+    await _auth.verifyPhoneNumber(
+      phoneNumber: '+55$phoneNumberRaw',
+      timeout: Duration(seconds: timeoutSeconds),
+      verificationCompleted: (authCredential) async {
+        await _auth.signInWithCredential(authCredential);
+      },
+      verificationFailed: (_) {
+        _controller.addError(PhoneAuthFailure());
+      },
+      codeSent: (verificationId, [code]) async {
+        final status = PhoneStatus(
+          verificationId: verificationId,
+          phoneNumber: phoneNumber,
+          timestamp: DateTime.now(),
+        );
+        await _saveStatus(status);
+        _controller.add(status);
+      },
+      codeAutoRetrievalTimeout: (verificationId) {
+        //_controller.add(const PhoneAuthStatus.timeout());
+      },
+    );
   }
 
   @override
