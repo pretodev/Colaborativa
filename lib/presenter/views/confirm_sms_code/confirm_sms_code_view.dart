@@ -39,8 +39,9 @@ class ConfirmSmsCodeView
                     maxLength: 6,
                     keyboardType: TextInputType.phone,
                     controller: controller.smsCode,
+                    readOnly: store.isSmsCodeChecking,
                     decoration: InputDecoration(
-                      errorText: store.isSmsCodeChecking
+                      helperText: store.isSmsCodeChecking
                           ? 'Verificando o código, aguarde por favor...'
                           : null,
                     ),
