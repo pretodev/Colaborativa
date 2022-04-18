@@ -18,20 +18,20 @@ class AppController extends ModxController<AppStore> {
       status.whenOrNull(
         authenticated: (user) {
           store.userRegistered = user;
-          view.offAndToNamed(Routes.home);
+          view.offAllNamed(Routes.home);
         },
         unauthenticated: () {
-          view.offAndToNamed(Routes.verifyPhoneNumber);
+          view.offAllNamed(Routes.verifyPhoneNumber);
         },
         waitingSmsCode: (phoneStatus) {
           store.phoneStatus = phoneStatus;
           if (view.currentRoute != Routes.confirmSmsCode) {
-            view.offAndToNamed(Routes.confirmSmsCode);
+            view.offAllNamed(Routes.confirmSmsCode);
           }
         },
         unregistered: (user) {
           store.userUnregistered = user;
-          view.offAndToNamed(Routes.register);
+          view.offAllNamed(Routes.register);
         },
       );
     }, onError: (error) {

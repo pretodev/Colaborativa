@@ -30,7 +30,8 @@ class ConfirmSmsCodeView
                 const SizedBox(height: 48.0),
                 SmsInstructionsWidget(
                   phone: store.phoneStatus.phoneNumber,
-                  onWrongNumberClicked: controller.resetPhoneNumber,
+                  onWrongNumberClicked:
+                      store.isTimeout ? controller.resetPhoneNumber : null,
                 ),
                 const SizedBox(height: 48.0),
                 FieldWrapper(

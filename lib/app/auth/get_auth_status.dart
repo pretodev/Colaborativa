@@ -14,20 +14,39 @@ class GetAuthStatus {
   })  : _userRepository = userRepository,
         _phoneAuth = phoneAuth;
 
+  final _controller = StreamController<AuthStatus>();
+
   Stream<AuthStatus> call() {
-    StreamSubscription? _phoneSub;
-    return _userRepository.user.asyncExpand((user) async* {
-      if (user == null) {
-        yield* _phoneAuth.status.map((status) => status != null
-            ? AuthStatus.waitingSmsCode(status)
-            : const AuthStatus.unauthenticated());
-        return;
-      }
-      _phoneSub?.cancel();
-      yield user.map(
-        unregistered: (unregistered) => AuthStatus.unregistered(unregistered),
-        registered: (registered) => AuthStatus.authenticated(registered),
-      );
-    });
+    StreamSubscription? phoneSub;
+    final sub = _userRepository.user.listen(
+      (user) async {
+        if (user == null) {
+          phoneSub = _phoneAuth.status.listen(
+            (status) => status != null
+                ? _controller.add(AuthStatus.waitingSmsCode(status))
+                : _controller.add(const AuthStatus.unauthenticated()),
+            onError: _controller.addError,
+          );
+          return;
+        }
+        await phoneSub?.cancel();
+        user.map(
+          unregistered: (unregistered) => _controller.add(
+            AuthStatus.unregistered(unregistered),
+          ),
+          registered: (registered) => _controller.add(
+            AuthStatus.authenticated(registered),
+          ),
+        );
+      },
+      onError: _controller.addError,
+    );
+
+    _controller.onCancel = () {
+      phoneSub?.cancel();
+      sub.cancel();
+    };
+
+    return _controller.stream;
   }
 }

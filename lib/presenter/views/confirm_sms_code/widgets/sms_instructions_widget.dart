@@ -5,7 +5,7 @@ import '../../../theme/typography.dart';
 
 class SmsInstructionsWidget extends StatelessWidget {
   final String phone;
-  final VoidCallback onWrongNumberClicked;
+  final VoidCallback? onWrongNumberClicked;
 
   const SmsInstructionsWidget({
     Key? key,
@@ -24,11 +24,14 @@ class SmsInstructionsWidget extends StatelessWidget {
             text:
                 'Aguarde o SMS com seu código de confirmação enviado para o número $phone. ',
           ),
-          TextSpan(
-            text: 'Número errado?',
-            style: AppTextTheme.link.copyWith(fontSize: 20.0),
-            recognizer: TapGestureRecognizer()..onTap = onWrongNumberClicked,
-          )
+          onWrongNumberClicked != null
+              ? TextSpan(
+                  text: 'Número errado?',
+                  style: AppTextTheme.link.copyWith(fontSize: 20.0),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = onWrongNumberClicked,
+                )
+              : const TextSpan(),
         ],
       ),
     );

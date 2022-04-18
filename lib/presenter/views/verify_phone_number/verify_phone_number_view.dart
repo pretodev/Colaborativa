@@ -44,17 +44,20 @@ class VerifyPhoneNumberView
                 key: controller.form,
                 child: FieldWrapper(
                   label: 'Digite seu telefone',
-                  child: TextFormField(
-                    controller: controller.phone,
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                      errorText: store.authError?.message,
-                      errorMaxLines: 2,
+                  child: Obx(
+                    () => TextFormField(
+                      controller: controller.phone,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        errorText: store.authError?.message,
+                        errorMaxLines: 2,
+                      ),
+                      readOnly: store.isPhoneNumberChecking,
+                      inputFormatters: [maskFormatter],
+                      validator: useValidates([
+                        isRequired('Por favor, digite seu telefone'),
+                      ]),
                     ),
-                    inputFormatters: [maskFormatter],
-                    validator: useValidates([
-                      isRequired('Por favor, digite seu telefone'),
-                    ]),
                   ),
                 ),
               ),

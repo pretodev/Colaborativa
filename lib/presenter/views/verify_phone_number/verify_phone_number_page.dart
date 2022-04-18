@@ -18,8 +18,6 @@ class VerifyPhoneNumberPage extends ModxPage<VerifyPhoneNumberController> {
     // Add others dependencies
     bind(SendPhoneNumber(phoneAuth: i()));
     bind(VerifyPhoneNumberStore());
-    bind(VerifyPhoneNumberController(
-      sendPhoneNumber: i(),
-    ));
+    bind(VerifyPhoneNumberController(sendPhoneNumber: i()));
   }
 }

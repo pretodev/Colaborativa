@@ -22,13 +22,14 @@ class ConfirmSmsCodeController extends ModxController<ConfirmSmsCodeStore> {
   final ClearPhoneNumber _clearPhoneNumber;
 
   Timer? timer;
+  Worker? _worker;
   final smsCode = TextEditingController();
   final smsCodeFocus = FocusNode();
 
   @override
   void onInit() {
     super.onInit();
-    ever(store.rxPhoneStatus, (_) {
+    _worker = ever(store.rxPhoneStatus, (_) {
       setTimeout(store.phoneStatus.timestamp);
     });
     setTimeout(store.phoneStatus.timestamp);
@@ -37,7 +38,9 @@ class ConfirmSmsCodeController extends ModxController<ConfirmSmsCodeStore> {
 
   @override
   void onClose() {
+    _worker?.dispose();
     smsCode.dispose();
+    smsCodeFocus.dispose();
     timer?.cancel();
     super.onClose();
   }

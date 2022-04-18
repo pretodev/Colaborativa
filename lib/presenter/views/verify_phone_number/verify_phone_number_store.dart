@@ -11,6 +11,5 @@ class VerifyPhoneNumberStore with ModxAppStoreMixin<AppStore> {
   set phoneNumberChecking(bool value) => rxPhoneNumberChecking.value = value;
   bool get isPhoneNumberChecking => rxPhoneNumberChecking.value;
 
-  Rxn<Failure> get rxAuthError => app.rxAuthError;
-  Failure? get authError => rxAuthError.value;
+  Failure? get authError => app.authError;
 }

@@ -28,6 +28,7 @@ class FirebasePhoneAuthService implements PhoneAuthService {
     timeoutSeconds = 60,
   }) async {
     final phoneNumberRaw = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
+    print('verify phone number $phoneNumberRaw');
     await _auth.verifyPhoneNumber(
       phoneNumber: '+55$phoneNumberRaw',
       timeout: Duration(seconds: timeoutSeconds),
@@ -38,6 +39,7 @@ class FirebasePhoneAuthService implements PhoneAuthService {
         _controller.addError(PhoneAuthFailure());
       },
       codeSent: (verificationId, [code]) async {
+        print('verify phone number');
         final status = PhoneStatus(
           verificationId: verificationId,
           phoneNumber: phoneNumber,
@@ -96,6 +98,8 @@ class FirebasePhoneAuthService implements PhoneAuthService {
     await prefs.remove(_phoneNumber);
     await prefs.remove(_verificationId);
     await prefs.remove(_timestamp);
-    _controller.add(null);
+    if (_controller.hasListener) {
+      _controller.add(null);
+    }
   }
 }

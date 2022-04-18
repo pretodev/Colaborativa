@@ -8,7 +8,7 @@ class AppStore {
   final rxPhoneStatus = Rxn<PhoneStatus>();
   final rxUserRegistered = Rxn<UserRegistered>();
   final rxUserUnregistered = Rxn<UserUnregistered>();
-  final rxAuthError = Rxn<Failure>();
+  final _rxAuthError = Rxn<Failure>();
 
   PhoneStatus? get phoneStatus => rxPhoneStatus.value;
   set phoneStatus(PhoneStatus? value) => rxPhoneStatus.value = value;
@@ -20,6 +20,8 @@ class AppStore {
   set userUnregistered(UserUnregistered? value) =>
       rxUserUnregistered.value = value;
 
-  Failure? get authError => rxAuthError.value;
-  set authError(Failure? value) => rxAuthError.value = value;
+  Failure? get authError => _rxAuthError.value;
+  set authError(Failure? value) => _rxAuthError.value = value;
+  void clearAuthError() => _rxAuthError.value = null;
+  RxInterface get rxAuthError => _rxAuthError;
 }
