@@ -4,7 +4,7 @@ import 'package:modx/modx.dart';
 import '../../widgets/page_body.dart';
 import 'profile_controller.dart';
 import 'profile_store.dart';
-import 'widgets/profile_avatar.dart';
+import '../../widgets/profile_avatar.dart';
 import 'widgets/profile_form.dart';
 
 class ProfileView extends ModxView<ProfileController, ProfileStore> {

@@ -8,6 +8,7 @@ class AppColors {
   static const backgroundDark = Color(0xFFEBF2F5);
   static const primaryLight = Color(0xFF00C6FF);
   static const primaryText = Color(0xFF8FA7B2);
+  static const text2 = Color(0xFF4D6F80);
   static const inputBackground = Color(0xFFF5F8FA);
   static const lineOnWhite = Color(0xFFD3E2E5);
   static const error = Color(0xFFA01D2E);
