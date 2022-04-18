@@ -25,10 +25,13 @@ class ShareFeelingController extends ModxController<ShareFeelingStore>
     );
   }
 
-  void describeFelling(Feeling feeling) {
-    view.toNamed(
+  void describeFelling(Feeling feeling) async {
+    final response = await view.toNamed(
       Routes.fellingDiary,
       arguments: {'feeling': feeling},
     );
+    if (response != null && response) {
+      loadStatus();
+    }
   }
 }

@@ -4,7 +4,6 @@ import 'package:modx/modx.dart';
 import '../../../app/feeling/register_day_feeling.dart';
 import '../../../domain/feeling/editing_feeling_diary.dart';
 import '../../app_store.dart';
-import '../../routes/routes.dart';
 import 'share_feeling_diary_store.dart';
 
 class ShareFeelingDiaryController extends ModxController<ShareFeelingDiaryStore>
@@ -21,7 +20,7 @@ class ShareFeelingDiaryController extends ModxController<ShareFeelingDiaryStore>
   void onInit() {
     super.onInit();
     text.addListener(() {
-      store.setSendDiary(text.text.isNotEmpty);
+      store.setSendDiary(text.text.length > 10);
     });
   }
 
@@ -33,6 +32,6 @@ class ShareFeelingDiaryController extends ModxController<ShareFeelingDiaryStore>
       ),
       userId: app.userRegistered!.id,
     );
-    view.offAndToNamed(Routes.home);
+    view.back(result: true);
   }
 }
