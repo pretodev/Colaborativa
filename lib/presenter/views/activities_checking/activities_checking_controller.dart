@@ -35,7 +35,7 @@ class ActivitiesCheckingController
   }
 
   void showActiviyCheckout(Activity activity) async {
-    activityCheckoutModal.showBottomSheet();
+    activityCheckoutModal.showBottomSheet(activity);
   }
 
   Future<void> checkActivity(Activity activity) async {
