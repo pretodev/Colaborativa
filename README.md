@@ -28,3 +28,9 @@ https://www.figma.com/file/QZlJJmixxW9CIiqBbawHzu/ColaborAtiva?node-id=0%3A1
 - [ ] Notificações de atividades
 
 ## Instalação
+
+A new Flutter project.
+
+## Colaboração
+
+A new Flutter project.
