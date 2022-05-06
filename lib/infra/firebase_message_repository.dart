@@ -45,7 +45,6 @@ class FirebaseMessageRepository implements MessageRepository {
     final result =
         await _db.ref('chat/1/messages').startAt(_storeMessages.length).get();
     final messages = result.children.map(MessageMapper.fromFirebase).toList();
-    messages.forEach(((element) => print(element.content)));
     _storeMessages.addAll(messages.reversed);
     _messageController.add(_storeMessages);
   }

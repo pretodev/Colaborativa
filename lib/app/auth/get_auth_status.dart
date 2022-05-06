@@ -20,7 +20,6 @@ class GetAuthStatus {
     StreamSubscription? phoneSub;
     final sub = _userRepository.user.listen(
       (user) async {
-        print('User: $user');
         if (user == null) {
           phoneSub = _phoneAuth.status.listen(
             (status) => status != null

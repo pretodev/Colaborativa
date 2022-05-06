@@ -17,13 +17,19 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -36,34 +42,12 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCY-CIPaM1cLgEpIIB6iL5NhyHM0MNWkPw',
-    appId: '1:725630552894:web:2f22667509bb1afaf07a6f',
-    messagingSenderId: '725630552894',
-    projectId: 'colaborativa-dda97',
-    authDomain: 'colaborativa-dda97.firebaseapp.com',
-    databaseURL: 'https://colaborativa-dda97-default-rtdb.firebaseio.com',
-    storageBucket: 'colaborativa-dda97.appspot.com',
-    measurementId: 'G-06VSDMDCX9',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCoGX3T6b1v8JaxYF5Nty09Jm8QPLAKfi0',
-    appId: '1:725630552894:android:9de206ddf307c721f07a6f',
+    appId: '1:725630552894:android:624b5515675d3112f07a6f',
     messagingSenderId: '725630552894',
     projectId: 'colaborativa-dda97',
     databaseURL: 'https://colaborativa-dda97-default-rtdb.firebaseio.com',
     storageBucket: 'colaborativa-dda97.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAD2xMnJ-WxWOz1cj3PTYNC0IFYPhuea5A',
-    appId: '1:725630552894:ios:022984f8a273b554f07a6f',
-    messagingSenderId: '725630552894',
-    projectId: 'colaborativa-dda97',
-    databaseURL: 'https://colaborativa-dda97-default-rtdb.firebaseio.com',
-    storageBucket: 'colaborativa-dda97.appspot.com',
-    iosClientId: '725630552894-31qpn6e6htgc93mk12idmp3l3oodii6v.apps.googleusercontent.com',
-    iosBundleId: 'com.example.colaborativaApp',
   );
 }
