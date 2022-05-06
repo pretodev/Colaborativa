@@ -1,16 +1,30 @@
-# colaborativa_app
+# ColaborAtiva
 
 A new Flutter project.
 
-## Getting Started
+## Motivação
 
-This project is a starting point for a Flutter application.
+A new Flutter project.
 
-A few resources to get you started if this is your first Flutter project:
+## Layout do Projeto
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+O Layout do projeto está localizado no Figma: 
+https://www.figma.com/file/QZlJJmixxW9CIiqBbawHzu/ColaborAtiva?node-id=0%3A1
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Atividades
+
+- [x] Autenticação de usuários por telefone
+- [x] Editar perfil 
+- [x] Checking de atividades
+- [x] Diário de sentimentos
+- [x] Chat
+- [x] Gamificação
+- [x] Conteúdos
+- [x] Crashlytics
+- [x] Analitics
+- [ ] Adicionar sistema de temporada
+- [ ] Manter imagem de perfil
+- [ ] Internacionalização
+- [ ] Notificações de atividades
+
+## Instalação

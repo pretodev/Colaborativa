@@ -20,6 +20,7 @@ class GetAuthStatus {
     StreamSubscription? phoneSub;
     final sub = _userRepository.user.listen(
       (user) async {
+        print('User: $user');
         if (user == null) {
           phoneSub = _phoneAuth.status.listen(
             (status) => status != null
@@ -30,6 +31,7 @@ class GetAuthStatus {
           return;
         }
         await phoneSub?.cancel();
+
         user.map(
           unregistered: (unregistered) => _controller.add(
             AuthStatus.unregistered(unregistered),

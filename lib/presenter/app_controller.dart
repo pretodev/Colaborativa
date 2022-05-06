@@ -14,6 +14,7 @@ class AppController extends ModxController<AppStore> {
   @override
   void onInit() {
     super.onInit();
+    print('INIT APP CONTROLLER');
     _getAuthStatus().listen((status) {
       status.whenOrNull(
         authenticated: (user) {
