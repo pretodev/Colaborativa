@@ -1,4 +1,4 @@
-package commands
+package domain
 
 type commandContext struct {
 	params map[string]interface{}

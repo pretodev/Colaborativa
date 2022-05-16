@@ -2,7 +2,7 @@ package functions
 
 import (
 	"encoding/json"
-	"github.com/pretodev/colaborativa/functions/commands"
+	"github.com/pretodev/colaborativa/functions/domain"
 	"net/http"
 )
 
@@ -23,7 +23,7 @@ func ExecCommand(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Escopo de execução incorretos. Verifique os parâmetros e tente novamente.", http.StatusBadRequest)
 		return
 	}
-	command := commands.Command{Name: data.Command, Args: data.Args, UserId: "123456"}
+	command := domain.Command{Name: data.Command, Args: data.Args, UserId: "123456"}
 	err = command.Run()
 
 	if err != nil {
