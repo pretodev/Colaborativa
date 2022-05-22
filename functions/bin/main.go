@@ -8,7 +8,7 @@ import (
 
 func main() {
 	routes := mux.NewRouter()
-	routes.HandleFunc("/execute", functions.ExecCommand)
+	routes.HandleFunc("/save-user", functions.SaveUser)
 	http.Handle("/", routes)
 	http.ListenAndServe(":8080", nil)
 }
