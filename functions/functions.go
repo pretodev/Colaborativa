@@ -42,7 +42,11 @@ func init() {
 	if err != nil {
 		log.Fatalf("app.Database: %v", err)
 	}
-	profileRepo = repositories.NewProfileRepo(database)
+	firestore, err := app.Firestore(ctx)
+	if err != nil {
+		log.Fatalf("app.Firestore: %v", err)
+	}
+	profileRepo = repositories.NewProfileRepo(firestore)
 	feelingRepo = repositories.NewFeelingRepo(database)
 	activityRepo = repositories.NewActivityRepo(database)
 	messageRepo = repositories.NewMessageRepo(database)

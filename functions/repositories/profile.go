@@ -1,40 +1,42 @@
 package repositories
 
 import (
+	"cloud.google.com/go/firestore"
 	"context"
 	"errors"
-	"firebase.google.com/go/db"
 	"github.com/pretodev/colaborativa/functions/models"
 )
 
 var ErrProfileNotFound = errors.New("profile not found")
 
 type ProfileRepo struct {
-	database *db.Client
+	firestore *firestore.Client
 }
 
-func NewProfileRepo(database *db.Client) *ProfileRepo {
+func NewProfileRepo(firestore *firestore.Client) *ProfileRepo {
 	return &ProfileRepo{
-		database: database,
+		firestore: firestore,
 	}
 }
 
 func (repo *ProfileRepo) SaveProfile(ctx context.Context, userId string, profile models.Profile) error {
-	ref := repo.database.NewRef("users/" + userId + "/profile")
-	err := ref.Set(ctx, profile)
+	ref := repo.firestore.Collection("users").Doc(userId)
+	_, err := ref.Set(ctx, profile)
 	return err
-
 }
 
 func (repo *ProfileRepo) FromId(ctx context.Context, userId string) (*models.Profile, error) {
-	ref := repo.database.NewRef("users/" + userId + "/profile")
-	var profile *models.Profile
-	err := ref.Get(ctx, &profile)
+	doc, err := repo.firestore.Collection("users").Doc(userId).Get(ctx)
 	if err != nil {
 		return nil, err
 	}
-	if profile == nil {
+	if !doc.Exists() {
 		return nil, ErrProfileNotFound
 	}
-	return profile, nil
+	profile := models.Profile{}
+	err = doc.DataTo(&profile)
+	if err != nil {
+		return nil, err
+	}
+	return &profile, nil
 }
