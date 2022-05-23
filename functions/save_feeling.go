@@ -9,7 +9,6 @@ import (
 )
 
 func SaveDailyFeeling(w http.ResponseWriter, r *http.Request) {
-
 	var feeling models.Feeling
 	if err, code := helpers.ParsePost(r, &feeling); code >= 400 {
 		http.Error(w, fmt.Sprintf("%s", err), code)
@@ -19,8 +18,12 @@ func SaveDailyFeeling(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusBadRequest)
 		return
 	}
+	var userId string
+	if err := helpers.UserId(r, &userId); err != nil {
+		http.Error(w, fmt.Sprintf("%s", err), http.StatusUnauthorized)
+		return
+	}
 	ctx := context.Background()
-	userId := "teste_user"
 	felling, err := feelingRepo.FromToday(ctx, userId)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
@@ -34,6 +37,5 @@ func SaveDailyFeeling(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%e", err), http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Comando executado com sucesso."))
+	helpers.Response(w, "Success", http.StatusCreated)
 }

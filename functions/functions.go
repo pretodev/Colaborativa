@@ -16,7 +16,7 @@ var ctx = context.Background()
 
 var database *db.Client
 
-var userRepo *repositories.UserRepo
+var userRepo *repositories.ProfileRepo
 var feelingRepo *repositories.FeelingRepo
 
 var validate = v10.New()
@@ -37,6 +37,6 @@ func init() {
 	if err != nil {
 		log.Fatalf("app.Database: %v", err)
 	}
-	userRepo = repositories.NewUserRepo(database)
+	userRepo = repositories.NewProfileRepo(database)
 	feelingRepo = repositories.NewFeelingRepo(database)
 }

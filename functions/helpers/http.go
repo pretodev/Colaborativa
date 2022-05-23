@@ -16,3 +16,18 @@ func ParsePost(r *http.Request, data interface{}) (error, int) {
 	}
 	return nil, 0
 }
+
+func UserId(r *http.Request, id *string) error {
+	userId := r.Header.Get("X-User-Id")
+	if userId == "" {
+		return errors.New("X-User-Id não encontrado")
+	}
+	*id = userId
+	return nil
+}
+
+func Response(w http.ResponseWriter, msg string, code int) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+	w.Write([]byte(msg))
+}

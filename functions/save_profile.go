@@ -8,9 +8,9 @@ import (
 	"net/http"
 )
 
-func SaveUser(w http.ResponseWriter, r *http.Request) {
+func SaveProfile(w http.ResponseWriter, r *http.Request) {
 	ctx := context.Background()
-	var editingUser models.EditingUser
+	var editingUser models.Profile
 	if err, code := helpers.ParsePost(r, &editingUser); code >= 400 {
 		http.Error(w, fmt.Sprintf("%s", err), code)
 		return
@@ -19,10 +19,14 @@ func SaveUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusBadRequest)
 		return
 	}
-	if err := userRepo.SaveUser(ctx, editingUser); err != nil {
+	var userId string
+	if err := helpers.UserId(r, &userId); err != nil {
+		http.Error(w, fmt.Sprintf("%s", err), http.StatusUnauthorized)
+		return
+	}
+	if err := userRepo.SaveProfile(ctx, userId, editingUser); err != nil {
 		http.Error(w, fmt.Sprintf("%e", err), http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Comando executado com sucesso."))
+	helpers.Response(w, "Success", http.StatusOK)
 }
