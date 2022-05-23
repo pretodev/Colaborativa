@@ -8,14 +8,13 @@ import (
 	"net/http"
 )
 
-func SaveProfile(w http.ResponseWriter, r *http.Request) {
-	ctx := context.Background()
-	var editingUser models.User
-	if err, code := helpers.ParsePost(r, &editingUser); code >= 400 {
+func RegisterAccess(w http.ResponseWriter, r *http.Request) {
+	var access models.UserAccess
+	if err, code := helpers.ParsePost(r, &access); code >= 400 {
 		http.Error(w, fmt.Sprintf("%s", err), code)
 		return
 	}
-	if err := validate.Struct(editingUser); err != nil {
+	if err := validate.Struct(access); err != nil {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusBadRequest)
 		return
 	}
@@ -24,9 +23,15 @@ func SaveProfile(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusUnauthorized)
 		return
 	}
-	if err := userRepo.Save(ctx, userId, editingUser); err != nil {
+	ctx := context.Background()
+	if err := userRepo.AddDeviceToken(ctx, userId, access.DeviceToken); err != nil {
 		http.Error(w, fmt.Sprintf("%e", err), http.StatusInternalServerError)
 		return
 	}
-	helpers.Response(w, "Success", http.StatusOK)
+	if err := userRepo.AddAccess(ctx, userId); err != nil {
+		http.Error(w, fmt.Sprintf("%e", err), http.StatusInternalServerError)
+		return
+	}
+
+	helpers.Response(w, "Success", http.StatusCreated)
 }

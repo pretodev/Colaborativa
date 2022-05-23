@@ -8,3 +8,7 @@ type User struct {
 	Ethnicity string    `json:"ethnicity" validate:"oneof='white' 'black' 'brown' 'yellow' 'indigenous'" firestore:"ethnicity"`
 	Birthday  time.Time `json:"birthday" validate:"required" firestore:"birthday"`
 }
+
+type UserAccess struct {
+	DeviceToken string `json:"deviceToken" validate:"required"`
+}

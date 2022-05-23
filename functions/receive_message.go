@@ -24,13 +24,13 @@ func ReceiveMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	ctx := context.Background()
-	profile, err := profileRepo.FromId(ctx, userId)
+	user, err := userRepo.FromId(ctx, userId)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
 		return
 	}
-	if profile == nil {
-		http.Error(w, "profile not found", http.StatusUnauthorized)
+	if user == nil {
+		http.Error(w, "user not found", http.StatusUnauthorized)
 		return
 	}
 	if err := saveMessage(ctx, userId, userMessage.Content); err != nil {

@@ -17,7 +17,7 @@ var ctx = context.Background()
 
 var database *db.Client
 
-var profileRepo *repositories.UserRepo
+var userRepo *repositories.UserRepo
 var feelingRepo *repositories.FeelingRepo
 var activityRepo *repositories.ActivityRepo
 var messageRepo *repositories.MessageRepo
@@ -46,9 +46,9 @@ func init() {
 	if err != nil {
 		log.Fatalf("app.Firestore: %v", err)
 	}
-	profileRepo = repositories.NewUserRepo(firestore)
+	userRepo = repositories.NewUserRepo(firestore, database)
 	feelingRepo = repositories.NewFeelingRepo(database)
 	activityRepo = repositories.NewActivityRepo(database)
 	messageRepo = repositories.NewMessageRepo(database)
-	saveMessage = commands.NewSaveMessageCommand(messageRepo, profileRepo)
+	saveMessage = commands.NewSaveMessageCommand(messageRepo, userRepo)
 }
