@@ -7,6 +7,8 @@ import (
 	"github.com/pretodev/colaborativa/functions/models"
 )
 
+var ErrProfileNotFound = errors.New("profile not found")
+
 type ProfileRepo struct {
 	database *db.Client
 }
@@ -32,7 +34,7 @@ func (repo *ProfileRepo) FromId(ctx context.Context, userId string) (*models.Pro
 		return nil, err
 	}
 	if profile == nil {
-		return nil, errors.New("profile not found")
+		return nil, ErrProfileNotFound
 	}
 	return profile, nil
 }

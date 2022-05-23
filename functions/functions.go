@@ -5,6 +5,7 @@ import (
 	firebase "firebase.google.com/go"
 	"firebase.google.com/go/db"
 	v10 "github.com/go-playground/validator/v10"
+	"github.com/pretodev/colaborativa/functions/commands"
 	"github.com/pretodev/colaborativa/functions/constants"
 	"github.com/pretodev/colaborativa/functions/repositories"
 	"google.golang.org/api/option"
@@ -20,6 +21,8 @@ var profileRepo *repositories.ProfileRepo
 var feelingRepo *repositories.FeelingRepo
 var activityRepo *repositories.ActivityRepo
 var messageRepo *repositories.MessageRepo
+
+var saveMessage commands.SaveMessageCommand
 
 var validate = v10.New()
 
@@ -43,4 +46,5 @@ func init() {
 	feelingRepo = repositories.NewFeelingRepo(database)
 	activityRepo = repositories.NewActivityRepo(database)
 	messageRepo = repositories.NewMessageRepo(database)
+	saveMessage = commands.NewSaveMessageCommand(messageRepo, profileRepo)
 }

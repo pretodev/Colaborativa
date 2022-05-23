@@ -6,7 +6,6 @@ import (
 	"github.com/pretodev/colaborativa/functions/helpers"
 	"github.com/pretodev/colaborativa/functions/models"
 	"net/http"
-	"time"
 )
 
 func ReceiveMessage(w http.ResponseWriter, r *http.Request) {
@@ -34,15 +33,7 @@ func ReceiveMessage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "profile not found", http.StatusUnauthorized)
 		return
 	}
-	message := models.Message{
-		Content: userMessage.Content,
-		Emitter: models.MessageEmitter{
-			Id:   userId,
-			Name: profile.Name,
-		},
-		Timestamp: time.Now(),
-	}
-	if err := messageRepo.Add(ctx, message); err != nil {
+	if err := saveMessage(ctx, userId, userMessage.Content); err != nil {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
 		return
 	}
