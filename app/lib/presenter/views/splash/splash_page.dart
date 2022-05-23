@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/presenter/views/splash/splash_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:modx/modx.dart';
 
@@ -10,4 +11,9 @@ class SplashPage extends ModxPage {
 
   @override
   Widget get view => const SplashView();
+
+  @override
+  void binding(i) {
+    bind(SplashController(userRepository: i()));
+  }
 }

@@ -12,26 +12,7 @@ part of 'phone_status.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$PhoneStatusTearOff {
-  const _$PhoneStatusTearOff();
-
-  _PhoneStatus call(
-      {required String verificationId,
-      required String phoneNumber,
-      required DateTime timestamp}) {
-    return _PhoneStatus(
-      verificationId: verificationId,
-      phoneNumber: phoneNumber,
-      timestamp: timestamp,
-    );
-  }
-}
-
-/// @nodoc
-const $PhoneStatus = _$PhoneStatusTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$PhoneStatus {
@@ -84,24 +65,24 @@ class _$PhoneStatusCopyWithImpl<$Res> implements $PhoneStatusCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PhoneStatusCopyWith<$Res>
+abstract class _$$_PhoneStatusCopyWith<$Res>
     implements $PhoneStatusCopyWith<$Res> {
-  factory _$PhoneStatusCopyWith(
-          _PhoneStatus value, $Res Function(_PhoneStatus) then) =
-      __$PhoneStatusCopyWithImpl<$Res>;
+  factory _$$_PhoneStatusCopyWith(
+          _$_PhoneStatus value, $Res Function(_$_PhoneStatus) then) =
+      __$$_PhoneStatusCopyWithImpl<$Res>;
   @override
   $Res call({String verificationId, String phoneNumber, DateTime timestamp});
 }
 
 /// @nodoc
-class __$PhoneStatusCopyWithImpl<$Res> extends _$PhoneStatusCopyWithImpl<$Res>
-    implements _$PhoneStatusCopyWith<$Res> {
-  __$PhoneStatusCopyWithImpl(
-      _PhoneStatus _value, $Res Function(_PhoneStatus) _then)
-      : super(_value, (v) => _then(v as _PhoneStatus));
+class __$$_PhoneStatusCopyWithImpl<$Res> extends _$PhoneStatusCopyWithImpl<$Res>
+    implements _$$_PhoneStatusCopyWith<$Res> {
+  __$$_PhoneStatusCopyWithImpl(
+      _$_PhoneStatus _value, $Res Function(_$_PhoneStatus) _then)
+      : super(_value, (v) => _then(v as _$_PhoneStatus));
 
   @override
-  _PhoneStatus get _value => super._value as _PhoneStatus;
+  _$_PhoneStatus get _value => super._value as _$_PhoneStatus;
 
   @override
   $Res call({
@@ -109,7 +90,7 @@ class __$PhoneStatusCopyWithImpl<$Res> extends _$PhoneStatusCopyWithImpl<$Res>
     Object? phoneNumber = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(_PhoneStatus(
+    return _then(_$_PhoneStatus(
       verificationId: verificationId == freezed
           ? _value.verificationId
           : verificationId // ignore: cast_nullable_to_non_nullable
@@ -151,7 +132,7 @@ class _$_PhoneStatus extends _PhoneStatus {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PhoneStatus &&
+            other is _$_PhoneStatus &&
             const DeepCollectionEquality()
                 .equals(other.verificationId, verificationId) &&
             const DeepCollectionEquality()
@@ -168,25 +149,25 @@ class _$_PhoneStatus extends _PhoneStatus {
 
   @JsonKey(ignore: true)
   @override
-  _$PhoneStatusCopyWith<_PhoneStatus> get copyWith =>
-      __$PhoneStatusCopyWithImpl<_PhoneStatus>(this, _$identity);
+  _$$_PhoneStatusCopyWith<_$_PhoneStatus> get copyWith =>
+      __$$_PhoneStatusCopyWithImpl<_$_PhoneStatus>(this, _$identity);
 }
 
 abstract class _PhoneStatus extends PhoneStatus {
   const factory _PhoneStatus(
-      {required String verificationId,
-      required String phoneNumber,
-      required DateTime timestamp}) = _$_PhoneStatus;
+      {required final String verificationId,
+      required final String phoneNumber,
+      required final DateTime timestamp}) = _$_PhoneStatus;
   const _PhoneStatus._() : super._();
 
   @override
-  String get verificationId;
+  String get verificationId => throw _privateConstructorUsedError;
   @override
-  String get phoneNumber;
+  String get phoneNumber => throw _privateConstructorUsedError;
   @override
-  DateTime get timestamp;
+  DateTime get timestamp => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PhoneStatusCopyWith<_PhoneStatus> get copyWith =>
+  _$$_PhoneStatusCopyWith<_$_PhoneStatus> get copyWith =>
       throw _privateConstructorUsedError;
 }

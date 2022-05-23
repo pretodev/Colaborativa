@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fa;
 
 import '../domain/user/user.dart';
@@ -12,6 +13,21 @@ class FirebaseUserRepository implements UserRepository {
   final fa.FirebaseAuth _auth = fa.FirebaseAuth.instance;
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<User> currentUser() async {
+    final faUser = _auth.currentUser;
+    if (faUser == null) {
+      return const User.unauthenticated();
+    }
+    final snap = await _firestore.doc('users/${faUser.uid}').get();
+    if (!snap.exists) {
+      return User.unregistered(id: faUser.uid);
+    }
+    return User.registered(
+      id: faUser.uid,
+      name: snap.get('name') as String,
+    );
+  }
 
   @override
   Stream<User?> get user {
@@ -36,20 +52,6 @@ class FirebaseUserRepository implements UserRepository {
     return controller.stream;
   }
 
-  // @override
-  // Stream<User?> get user {
-  //   return _auth.authStateChanges().asyncMap((faUser) async {
-  //     if (faUser == null) return null;
-  //     final userData = await _firestore.doc('users/${faUser.uid}').get();
-  //     if (!userData.exists) return User.unregistered(id: faUser.uid);
-  //     return User.registered(
-  //       id: faUser.uid,
-  //       name: userData.get('name') as String,
-  //       email: userData.get('email') as String,
-  //     );
-  //   });
-  // }
-
   @override
   Future<void> save({
     required UserProfile profile,
@@ -64,5 +66,25 @@ class FirebaseUserRepository implements UserRepository {
   @override
   Future<void> logout() {
     return _auth.signOut();
+  }
+
+  @override
+  Future<void> registerAccess() async {
+    try {
+      await Dio().post(
+        'https://southamerica-east1-colaborativa-dda97.cloudfunctions.net/register-access',
+        data: {'deviceToken': '12345'},
+        options: Options(
+          headers: {
+            'X-User-Id': _auth.currentUser!.uid,
+          },
+        ),
+      );
+    } on DioError catch (error) {
+      if (error.response != null) {
+        print('Error ${error.response!.statusCode}: ${error.response!.data}');
+      }
+      print(error);
+    }
   }
 }

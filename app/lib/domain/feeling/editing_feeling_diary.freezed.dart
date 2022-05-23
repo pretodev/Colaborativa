@@ -12,22 +12,7 @@ part of 'editing_feeling_diary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$EditingFeelingDiaryTearOff {
-  const _$EditingFeelingDiaryTearOff();
-
-  _EditingFeelingDiary call({required Feeling feeling, required String text}) {
-    return _EditingFeelingDiary(
-      feeling: feeling,
-      text: text,
-    );
-  }
-}
-
-/// @nodoc
-const $EditingFeelingDiary = _$EditingFeelingDiaryTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$EditingFeelingDiary {
@@ -75,32 +60,32 @@ class _$EditingFeelingDiaryCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$EditingFeelingDiaryCopyWith<$Res>
+abstract class _$$_EditingFeelingDiaryCopyWith<$Res>
     implements $EditingFeelingDiaryCopyWith<$Res> {
-  factory _$EditingFeelingDiaryCopyWith(_EditingFeelingDiary value,
-          $Res Function(_EditingFeelingDiary) then) =
-      __$EditingFeelingDiaryCopyWithImpl<$Res>;
+  factory _$$_EditingFeelingDiaryCopyWith(_$_EditingFeelingDiary value,
+          $Res Function(_$_EditingFeelingDiary) then) =
+      __$$_EditingFeelingDiaryCopyWithImpl<$Res>;
   @override
   $Res call({Feeling feeling, String text});
 }
 
 /// @nodoc
-class __$EditingFeelingDiaryCopyWithImpl<$Res>
+class __$$_EditingFeelingDiaryCopyWithImpl<$Res>
     extends _$EditingFeelingDiaryCopyWithImpl<$Res>
-    implements _$EditingFeelingDiaryCopyWith<$Res> {
-  __$EditingFeelingDiaryCopyWithImpl(
-      _EditingFeelingDiary _value, $Res Function(_EditingFeelingDiary) _then)
-      : super(_value, (v) => _then(v as _EditingFeelingDiary));
+    implements _$$_EditingFeelingDiaryCopyWith<$Res> {
+  __$$_EditingFeelingDiaryCopyWithImpl(_$_EditingFeelingDiary _value,
+      $Res Function(_$_EditingFeelingDiary) _then)
+      : super(_value, (v) => _then(v as _$_EditingFeelingDiary));
 
   @override
-  _EditingFeelingDiary get _value => super._value as _EditingFeelingDiary;
+  _$_EditingFeelingDiary get _value => super._value as _$_EditingFeelingDiary;
 
   @override
   $Res call({
     Object? feeling = freezed,
     Object? text = freezed,
   }) {
-    return _then(_EditingFeelingDiary(
+    return _then(_$_EditingFeelingDiary(
       feeling: feeling == freezed
           ? _value.feeling
           : feeling // ignore: cast_nullable_to_non_nullable
@@ -133,7 +118,7 @@ class _$_EditingFeelingDiary extends _EditingFeelingDiary {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _EditingFeelingDiary &&
+            other is _$_EditingFeelingDiary &&
             const DeepCollectionEquality().equals(other.feeling, feeling) &&
             const DeepCollectionEquality().equals(other.text, text));
   }
@@ -146,23 +131,23 @@ class _$_EditingFeelingDiary extends _EditingFeelingDiary {
 
   @JsonKey(ignore: true)
   @override
-  _$EditingFeelingDiaryCopyWith<_EditingFeelingDiary> get copyWith =>
-      __$EditingFeelingDiaryCopyWithImpl<_EditingFeelingDiary>(
+  _$$_EditingFeelingDiaryCopyWith<_$_EditingFeelingDiary> get copyWith =>
+      __$$_EditingFeelingDiaryCopyWithImpl<_$_EditingFeelingDiary>(
           this, _$identity);
 }
 
 abstract class _EditingFeelingDiary extends EditingFeelingDiary {
   const factory _EditingFeelingDiary(
-      {required Feeling feeling,
-      required String text}) = _$_EditingFeelingDiary;
+      {required final Feeling feeling,
+      required final String text}) = _$_EditingFeelingDiary;
   const _EditingFeelingDiary._() : super._();
 
   @override
-  Feeling get feeling;
+  Feeling get feeling => throw _privateConstructorUsedError;
   @override
-  String get text;
+  String get text => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$EditingFeelingDiaryCopyWith<_EditingFeelingDiary> get copyWith =>
+  _$$_EditingFeelingDiaryCopyWith<_$_EditingFeelingDiary> get copyWith =>
       throw _privateConstructorUsedError;
 }

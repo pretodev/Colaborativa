@@ -12,28 +12,7 @@ part of 'user_profile.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$UserProfileTearOff {
-  const _$UserProfileTearOff();
-
-  _UserProfile call(
-      {required String name,
-      required DateTime bithday,
-      required Gender gender,
-      required Breed breed}) {
-    return _UserProfile(
-      name: name,
-      bithday: bithday,
-      gender: gender,
-      breed: breed,
-    );
-  }
-}
-
-/// @nodoc
-const $UserProfile = _$UserProfileTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$UserProfile {
@@ -92,24 +71,24 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$UserProfileCopyWith<$Res>
+abstract class _$$_UserProfileCopyWith<$Res>
     implements $UserProfileCopyWith<$Res> {
-  factory _$UserProfileCopyWith(
-          _UserProfile value, $Res Function(_UserProfile) then) =
-      __$UserProfileCopyWithImpl<$Res>;
+  factory _$$_UserProfileCopyWith(
+          _$_UserProfile value, $Res Function(_$_UserProfile) then) =
+      __$$_UserProfileCopyWithImpl<$Res>;
   @override
   $Res call({String name, DateTime bithday, Gender gender, Breed breed});
 }
 
 /// @nodoc
-class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
-    implements _$UserProfileCopyWith<$Res> {
-  __$UserProfileCopyWithImpl(
-      _UserProfile _value, $Res Function(_UserProfile) _then)
-      : super(_value, (v) => _then(v as _UserProfile));
+class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
+    implements _$$_UserProfileCopyWith<$Res> {
+  __$$_UserProfileCopyWithImpl(
+      _$_UserProfile _value, $Res Function(_$_UserProfile) _then)
+      : super(_value, (v) => _then(v as _$_UserProfile));
 
   @override
-  _UserProfile get _value => super._value as _UserProfile;
+  _$_UserProfile get _value => super._value as _$_UserProfile;
 
   @override
   $Res call({
@@ -118,7 +97,7 @@ class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
     Object? gender = freezed,
     Object? breed = freezed,
   }) {
-    return _then(_UserProfile(
+    return _then(_$_UserProfile(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -167,7 +146,7 @@ class _$_UserProfile extends _UserProfile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserProfile &&
+            other is _$_UserProfile &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.bithday, bithday) &&
             const DeepCollectionEquality().equals(other.gender, gender) &&
@@ -184,28 +163,28 @@ class _$_UserProfile extends _UserProfile {
 
   @JsonKey(ignore: true)
   @override
-  _$UserProfileCopyWith<_UserProfile> get copyWith =>
-      __$UserProfileCopyWithImpl<_UserProfile>(this, _$identity);
+  _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>
+      __$$_UserProfileCopyWithImpl<_$_UserProfile>(this, _$identity);
 }
 
 abstract class _UserProfile extends UserProfile {
   const factory _UserProfile(
-      {required String name,
-      required DateTime bithday,
-      required Gender gender,
-      required Breed breed}) = _$_UserProfile;
+      {required final String name,
+      required final DateTime bithday,
+      required final Gender gender,
+      required final Breed breed}) = _$_UserProfile;
   const _UserProfile._() : super._();
 
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  DateTime get bithday;
+  DateTime get bithday => throw _privateConstructorUsedError;
   @override
-  Gender get gender;
+  Gender get gender => throw _privateConstructorUsedError;
   @override
-  Breed get breed;
+  Breed get breed => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$UserProfileCopyWith<_UserProfile> get copyWith =>
+  _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>
       throw _privateConstructorUsedError;
 }

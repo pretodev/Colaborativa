@@ -12,23 +12,7 @@ part of 'emitter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$EmitterTearOff {
-  const _$EmitterTearOff();
-
-  _Emitter call({required String id, required String name, String? photoUrl}) {
-    return _Emitter(
-      id: id,
-      name: name,
-      photoUrl: photoUrl,
-    );
-  }
-}
-
-/// @nodoc
-const $Emitter = _$EmitterTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Emitter {
@@ -79,21 +63,22 @@ class _$EmitterCopyWithImpl<$Res> implements $EmitterCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$EmitterCopyWith<$Res> implements $EmitterCopyWith<$Res> {
-  factory _$EmitterCopyWith(_Emitter value, $Res Function(_Emitter) then) =
-      __$EmitterCopyWithImpl<$Res>;
+abstract class _$$_EmitterCopyWith<$Res> implements $EmitterCopyWith<$Res> {
+  factory _$$_EmitterCopyWith(
+          _$_Emitter value, $Res Function(_$_Emitter) then) =
+      __$$_EmitterCopyWithImpl<$Res>;
   @override
   $Res call({String id, String name, String? photoUrl});
 }
 
 /// @nodoc
-class __$EmitterCopyWithImpl<$Res> extends _$EmitterCopyWithImpl<$Res>
-    implements _$EmitterCopyWith<$Res> {
-  __$EmitterCopyWithImpl(_Emitter _value, $Res Function(_Emitter) _then)
-      : super(_value, (v) => _then(v as _Emitter));
+class __$$_EmitterCopyWithImpl<$Res> extends _$EmitterCopyWithImpl<$Res>
+    implements _$$_EmitterCopyWith<$Res> {
+  __$$_EmitterCopyWithImpl(_$_Emitter _value, $Res Function(_$_Emitter) _then)
+      : super(_value, (v) => _then(v as _$_Emitter));
 
   @override
-  _Emitter get _value => super._value as _Emitter;
+  _$_Emitter get _value => super._value as _$_Emitter;
 
   @override
   $Res call({
@@ -101,7 +86,7 @@ class __$EmitterCopyWithImpl<$Res> extends _$EmitterCopyWithImpl<$Res>
     Object? name = freezed,
     Object? photoUrl = freezed,
   }) {
-    return _then(_Emitter(
+    return _then(_$_Emitter(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -140,7 +125,7 @@ class _$_Emitter extends _Emitter {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Emitter &&
+            other is _$_Emitter &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.photoUrl, photoUrl));
@@ -155,25 +140,25 @@ class _$_Emitter extends _Emitter {
 
   @JsonKey(ignore: true)
   @override
-  _$EmitterCopyWith<_Emitter> get copyWith =>
-      __$EmitterCopyWithImpl<_Emitter>(this, _$identity);
+  _$$_EmitterCopyWith<_$_Emitter> get copyWith =>
+      __$$_EmitterCopyWithImpl<_$_Emitter>(this, _$identity);
 }
 
 abstract class _Emitter extends Emitter {
   const factory _Emitter(
-      {required String id,
-      required String name,
-      String? photoUrl}) = _$_Emitter;
+      {required final String id,
+      required final String name,
+      final String? photoUrl}) = _$_Emitter;
   const _Emitter._() : super._();
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  String? get photoUrl;
+  String? get photoUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$EmitterCopyWith<_Emitter> get copyWith =>
+  _$$_EmitterCopyWith<_$_Emitter> get copyWith =>
       throw _privateConstructorUsedError;
 }

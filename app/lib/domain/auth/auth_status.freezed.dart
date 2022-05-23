@@ -12,41 +12,7 @@ part of 'auth_status.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$AuthStatusTearOff {
-  const _$AuthStatusTearOff();
-
-  _None none() {
-    return const _None();
-  }
-
-  _Authenticated authenticated(UserRegistered user) {
-    return _Authenticated(
-      user,
-    );
-  }
-
-  _Unregistered unregistered(UserUnregistered user) {
-    return _Unregistered(
-      user,
-    );
-  }
-
-  _Unauthenticated unauthenticated() {
-    return const _Unauthenticated();
-  }
-
-  _WaitingSmsCode waitingSmsCode(PhoneStatus status) {
-    return _WaitingSmsCode(
-      status,
-    );
-  }
-}
-
-/// @nodoc
-const $AuthStatus = _$AuthStatusTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$AuthStatus {
@@ -125,19 +91,19 @@ class _$AuthStatusCopyWithImpl<$Res> implements $AuthStatusCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$NoneCopyWith<$Res> {
-  factory _$NoneCopyWith(_None value, $Res Function(_None) then) =
-      __$NoneCopyWithImpl<$Res>;
+abstract class _$$_NoneCopyWith<$Res> {
+  factory _$$_NoneCopyWith(_$_None value, $Res Function(_$_None) then) =
+      __$$_NoneCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$NoneCopyWithImpl<$Res> extends _$AuthStatusCopyWithImpl<$Res>
-    implements _$NoneCopyWith<$Res> {
-  __$NoneCopyWithImpl(_None _value, $Res Function(_None) _then)
-      : super(_value, (v) => _then(v as _None));
+class __$$_NoneCopyWithImpl<$Res> extends _$AuthStatusCopyWithImpl<$Res>
+    implements _$$_NoneCopyWith<$Res> {
+  __$$_NoneCopyWithImpl(_$_None _value, $Res Function(_$_None) _then)
+      : super(_value, (v) => _then(v as _$_None));
 
   @override
-  _None get _value => super._value as _None;
+  _$_None get _value => super._value as _$_None;
 }
 
 /// @nodoc
@@ -153,7 +119,7 @@ class _$_None extends _None {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _None);
+        (other.runtimeType == runtimeType && other is _$_None);
   }
 
   @override
@@ -246,28 +212,29 @@ abstract class _None extends AuthStatus {
 }
 
 /// @nodoc
-abstract class _$AuthenticatedCopyWith<$Res> {
-  factory _$AuthenticatedCopyWith(
-          _Authenticated value, $Res Function(_Authenticated) then) =
-      __$AuthenticatedCopyWithImpl<$Res>;
+abstract class _$$_AuthenticatedCopyWith<$Res> {
+  factory _$$_AuthenticatedCopyWith(
+          _$_Authenticated value, $Res Function(_$_Authenticated) then) =
+      __$$_AuthenticatedCopyWithImpl<$Res>;
   $Res call({UserRegistered user});
 }
 
 /// @nodoc
-class __$AuthenticatedCopyWithImpl<$Res> extends _$AuthStatusCopyWithImpl<$Res>
-    implements _$AuthenticatedCopyWith<$Res> {
-  __$AuthenticatedCopyWithImpl(
-      _Authenticated _value, $Res Function(_Authenticated) _then)
-      : super(_value, (v) => _then(v as _Authenticated));
+class __$$_AuthenticatedCopyWithImpl<$Res>
+    extends _$AuthStatusCopyWithImpl<$Res>
+    implements _$$_AuthenticatedCopyWith<$Res> {
+  __$$_AuthenticatedCopyWithImpl(
+      _$_Authenticated _value, $Res Function(_$_Authenticated) _then)
+      : super(_value, (v) => _then(v as _$_Authenticated));
 
   @override
-  _Authenticated get _value => super._value as _Authenticated;
+  _$_Authenticated get _value => super._value as _$_Authenticated;
 
   @override
   $Res call({
     Object? user = freezed,
   }) {
-    return _then(_Authenticated(
+    return _then(_$_Authenticated(
       user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -293,7 +260,7 @@ class _$_Authenticated extends _Authenticated {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Authenticated &&
+            other is _$_Authenticated &&
             const DeepCollectionEquality().equals(other.user, user));
   }
 
@@ -303,8 +270,8 @@ class _$_Authenticated extends _Authenticated {
 
   @JsonKey(ignore: true)
   @override
-  _$AuthenticatedCopyWith<_Authenticated> get copyWith =>
-      __$AuthenticatedCopyWithImpl<_Authenticated>(this, _$identity);
+  _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
+      __$$_AuthenticatedCopyWithImpl<_$_Authenticated>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -388,38 +355,38 @@ class _$_Authenticated extends _Authenticated {
 }
 
 abstract class _Authenticated extends AuthStatus {
-  const factory _Authenticated(UserRegistered user) = _$_Authenticated;
+  const factory _Authenticated(final UserRegistered user) = _$_Authenticated;
   const _Authenticated._() : super._();
 
-  UserRegistered get user;
+  UserRegistered get user => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$AuthenticatedCopyWith<_Authenticated> get copyWith =>
+  _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$UnregisteredCopyWith<$Res> {
-  factory _$UnregisteredCopyWith(
-          _Unregistered value, $Res Function(_Unregistered) then) =
-      __$UnregisteredCopyWithImpl<$Res>;
+abstract class _$$_UnregisteredCopyWith<$Res> {
+  factory _$$_UnregisteredCopyWith(
+          _$_Unregistered value, $Res Function(_$_Unregistered) then) =
+      __$$_UnregisteredCopyWithImpl<$Res>;
   $Res call({UserUnregistered user});
 }
 
 /// @nodoc
-class __$UnregisteredCopyWithImpl<$Res> extends _$AuthStatusCopyWithImpl<$Res>
-    implements _$UnregisteredCopyWith<$Res> {
-  __$UnregisteredCopyWithImpl(
-      _Unregistered _value, $Res Function(_Unregistered) _then)
-      : super(_value, (v) => _then(v as _Unregistered));
+class __$$_UnregisteredCopyWithImpl<$Res> extends _$AuthStatusCopyWithImpl<$Res>
+    implements _$$_UnregisteredCopyWith<$Res> {
+  __$$_UnregisteredCopyWithImpl(
+      _$_Unregistered _value, $Res Function(_$_Unregistered) _then)
+      : super(_value, (v) => _then(v as _$_Unregistered));
 
   @override
-  _Unregistered get _value => super._value as _Unregistered;
+  _$_Unregistered get _value => super._value as _$_Unregistered;
 
   @override
   $Res call({
     Object? user = freezed,
   }) {
-    return _then(_Unregistered(
+    return _then(_$_Unregistered(
       user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -445,7 +412,7 @@ class _$_Unregistered extends _Unregistered {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Unregistered &&
+            other is _$_Unregistered &&
             const DeepCollectionEquality().equals(other.user, user));
   }
 
@@ -455,8 +422,8 @@ class _$_Unregistered extends _Unregistered {
 
   @JsonKey(ignore: true)
   @override
-  _$UnregisteredCopyWith<_Unregistered> get copyWith =>
-      __$UnregisteredCopyWithImpl<_Unregistered>(this, _$identity);
+  _$$_UnregisteredCopyWith<_$_Unregistered> get copyWith =>
+      __$$_UnregisteredCopyWithImpl<_$_Unregistered>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -540,32 +507,32 @@ class _$_Unregistered extends _Unregistered {
 }
 
 abstract class _Unregistered extends AuthStatus {
-  const factory _Unregistered(UserUnregistered user) = _$_Unregistered;
+  const factory _Unregistered(final UserUnregistered user) = _$_Unregistered;
   const _Unregistered._() : super._();
 
-  UserUnregistered get user;
+  UserUnregistered get user => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$UnregisteredCopyWith<_Unregistered> get copyWith =>
+  _$$_UnregisteredCopyWith<_$_Unregistered> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$UnauthenticatedCopyWith<$Res> {
-  factory _$UnauthenticatedCopyWith(
-          _Unauthenticated value, $Res Function(_Unauthenticated) then) =
-      __$UnauthenticatedCopyWithImpl<$Res>;
+abstract class _$$_UnauthenticatedCopyWith<$Res> {
+  factory _$$_UnauthenticatedCopyWith(
+          _$_Unauthenticated value, $Res Function(_$_Unauthenticated) then) =
+      __$$_UnauthenticatedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$UnauthenticatedCopyWithImpl<$Res>
+class __$$_UnauthenticatedCopyWithImpl<$Res>
     extends _$AuthStatusCopyWithImpl<$Res>
-    implements _$UnauthenticatedCopyWith<$Res> {
-  __$UnauthenticatedCopyWithImpl(
-      _Unauthenticated _value, $Res Function(_Unauthenticated) _then)
-      : super(_value, (v) => _then(v as _Unauthenticated));
+    implements _$$_UnauthenticatedCopyWith<$Res> {
+  __$$_UnauthenticatedCopyWithImpl(
+      _$_Unauthenticated _value, $Res Function(_$_Unauthenticated) _then)
+      : super(_value, (v) => _then(v as _$_Unauthenticated));
 
   @override
-  _Unauthenticated get _value => super._value as _Unauthenticated;
+  _$_Unauthenticated get _value => super._value as _$_Unauthenticated;
 }
 
 /// @nodoc
@@ -581,7 +548,7 @@ class _$_Unauthenticated extends _Unauthenticated {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Unauthenticated);
+        (other.runtimeType == runtimeType && other is _$_Unauthenticated);
   }
 
   @override
@@ -674,30 +641,31 @@ abstract class _Unauthenticated extends AuthStatus {
 }
 
 /// @nodoc
-abstract class _$WaitingSmsCodeCopyWith<$Res> {
-  factory _$WaitingSmsCodeCopyWith(
-          _WaitingSmsCode value, $Res Function(_WaitingSmsCode) then) =
-      __$WaitingSmsCodeCopyWithImpl<$Res>;
+abstract class _$$_WaitingSmsCodeCopyWith<$Res> {
+  factory _$$_WaitingSmsCodeCopyWith(
+          _$_WaitingSmsCode value, $Res Function(_$_WaitingSmsCode) then) =
+      __$$_WaitingSmsCodeCopyWithImpl<$Res>;
   $Res call({PhoneStatus status});
 
   $PhoneStatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
-class __$WaitingSmsCodeCopyWithImpl<$Res> extends _$AuthStatusCopyWithImpl<$Res>
-    implements _$WaitingSmsCodeCopyWith<$Res> {
-  __$WaitingSmsCodeCopyWithImpl(
-      _WaitingSmsCode _value, $Res Function(_WaitingSmsCode) _then)
-      : super(_value, (v) => _then(v as _WaitingSmsCode));
+class __$$_WaitingSmsCodeCopyWithImpl<$Res>
+    extends _$AuthStatusCopyWithImpl<$Res>
+    implements _$$_WaitingSmsCodeCopyWith<$Res> {
+  __$$_WaitingSmsCodeCopyWithImpl(
+      _$_WaitingSmsCode _value, $Res Function(_$_WaitingSmsCode) _then)
+      : super(_value, (v) => _then(v as _$_WaitingSmsCode));
 
   @override
-  _WaitingSmsCode get _value => super._value as _WaitingSmsCode;
+  _$_WaitingSmsCode get _value => super._value as _$_WaitingSmsCode;
 
   @override
   $Res call({
     Object? status = freezed,
   }) {
-    return _then(_WaitingSmsCode(
+    return _then(_$_WaitingSmsCode(
       status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -730,7 +698,7 @@ class _$_WaitingSmsCode extends _WaitingSmsCode {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _WaitingSmsCode &&
+            other is _$_WaitingSmsCode &&
             const DeepCollectionEquality().equals(other.status, status));
   }
 
@@ -740,8 +708,8 @@ class _$_WaitingSmsCode extends _WaitingSmsCode {
 
   @JsonKey(ignore: true)
   @override
-  _$WaitingSmsCodeCopyWith<_WaitingSmsCode> get copyWith =>
-      __$WaitingSmsCodeCopyWithImpl<_WaitingSmsCode>(this, _$identity);
+  _$$_WaitingSmsCodeCopyWith<_$_WaitingSmsCode> get copyWith =>
+      __$$_WaitingSmsCodeCopyWithImpl<_$_WaitingSmsCode>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -825,11 +793,11 @@ class _$_WaitingSmsCode extends _WaitingSmsCode {
 }
 
 abstract class _WaitingSmsCode extends AuthStatus {
-  const factory _WaitingSmsCode(PhoneStatus status) = _$_WaitingSmsCode;
+  const factory _WaitingSmsCode(final PhoneStatus status) = _$_WaitingSmsCode;
   const _WaitingSmsCode._() : super._();
 
-  PhoneStatus get status;
+  PhoneStatus get status => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$WaitingSmsCodeCopyWith<_WaitingSmsCode> get copyWith =>
+  _$$_WaitingSmsCodeCopyWith<_$_WaitingSmsCode> get copyWith =>
       throw _privateConstructorUsedError;
 }

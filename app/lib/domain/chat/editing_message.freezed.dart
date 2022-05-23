@@ -12,22 +12,7 @@ part of 'editing_message.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$EditingMessageTearOff {
-  const _$EditingMessageTearOff();
-
-  _EditingMessage call({required String content, required Emitter emitter}) {
-    return _EditingMessage(
-      content: content,
-      emitter: emitter,
-    );
-  }
-}
-
-/// @nodoc
-const $EditingMessage = _$EditingMessageTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$EditingMessage {
@@ -84,11 +69,11 @@ class _$EditingMessageCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$EditingMessageCopyWith<$Res>
+abstract class _$$_EditingMessageCopyWith<$Res>
     implements $EditingMessageCopyWith<$Res> {
-  factory _$EditingMessageCopyWith(
-          _EditingMessage value, $Res Function(_EditingMessage) then) =
-      __$EditingMessageCopyWithImpl<$Res>;
+  factory _$$_EditingMessageCopyWith(
+          _$_EditingMessage value, $Res Function(_$_EditingMessage) then) =
+      __$$_EditingMessageCopyWithImpl<$Res>;
   @override
   $Res call({String content, Emitter emitter});
 
@@ -97,22 +82,22 @@ abstract class _$EditingMessageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$EditingMessageCopyWithImpl<$Res>
+class __$$_EditingMessageCopyWithImpl<$Res>
     extends _$EditingMessageCopyWithImpl<$Res>
-    implements _$EditingMessageCopyWith<$Res> {
-  __$EditingMessageCopyWithImpl(
-      _EditingMessage _value, $Res Function(_EditingMessage) _then)
-      : super(_value, (v) => _then(v as _EditingMessage));
+    implements _$$_EditingMessageCopyWith<$Res> {
+  __$$_EditingMessageCopyWithImpl(
+      _$_EditingMessage _value, $Res Function(_$_EditingMessage) _then)
+      : super(_value, (v) => _then(v as _$_EditingMessage));
 
   @override
-  _EditingMessage get _value => super._value as _EditingMessage;
+  _$_EditingMessage get _value => super._value as _$_EditingMessage;
 
   @override
   $Res call({
     Object? content = freezed,
     Object? emitter = freezed,
   }) {
-    return _then(_EditingMessage(
+    return _then(_$_EditingMessage(
       content: content == freezed
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -145,7 +130,7 @@ class _$_EditingMessage extends _EditingMessage {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _EditingMessage &&
+            other is _$_EditingMessage &&
             const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality().equals(other.emitter, emitter));
   }
@@ -158,21 +143,22 @@ class _$_EditingMessage extends _EditingMessage {
 
   @JsonKey(ignore: true)
   @override
-  _$EditingMessageCopyWith<_EditingMessage> get copyWith =>
-      __$EditingMessageCopyWithImpl<_EditingMessage>(this, _$identity);
+  _$$_EditingMessageCopyWith<_$_EditingMessage> get copyWith =>
+      __$$_EditingMessageCopyWithImpl<_$_EditingMessage>(this, _$identity);
 }
 
 abstract class _EditingMessage extends EditingMessage {
   const factory _EditingMessage(
-      {required String content, required Emitter emitter}) = _$_EditingMessage;
+      {required final String content,
+      required final Emitter emitter}) = _$_EditingMessage;
   const _EditingMessage._() : super._();
 
   @override
-  String get content;
+  String get content => throw _privateConstructorUsedError;
   @override
-  Emitter get emitter;
+  Emitter get emitter => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$EditingMessageCopyWith<_EditingMessage> get copyWith =>
+  _$$_EditingMessageCopyWith<_$_EditingMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }

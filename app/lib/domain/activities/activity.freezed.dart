@@ -12,30 +12,7 @@ part of 'activity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ActivityTearOff {
-  const _$ActivityTearOff();
-
-  _Activity call(
-      {required String id,
-      required String iconUrl,
-      required String name,
-      required String description,
-      DateTime? lastChecking}) {
-    return _Activity(
-      id: id,
-      iconUrl: iconUrl,
-      name: name,
-      description: description,
-      lastChecking: lastChecking,
-    );
-  }
-}
-
-/// @nodoc
-const $Activity = _$ActivityTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Activity {
@@ -104,9 +81,10 @@ class _$ActivityCopyWithImpl<$Res> implements $ActivityCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ActivityCopyWith<$Res> implements $ActivityCopyWith<$Res> {
-  factory _$ActivityCopyWith(_Activity value, $Res Function(_Activity) then) =
-      __$ActivityCopyWithImpl<$Res>;
+abstract class _$$_ActivityCopyWith<$Res> implements $ActivityCopyWith<$Res> {
+  factory _$$_ActivityCopyWith(
+          _$_Activity value, $Res Function(_$_Activity) then) =
+      __$$_ActivityCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -117,13 +95,14 @@ abstract class _$ActivityCopyWith<$Res> implements $ActivityCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ActivityCopyWithImpl<$Res> extends _$ActivityCopyWithImpl<$Res>
-    implements _$ActivityCopyWith<$Res> {
-  __$ActivityCopyWithImpl(_Activity _value, $Res Function(_Activity) _then)
-      : super(_value, (v) => _then(v as _Activity));
+class __$$_ActivityCopyWithImpl<$Res> extends _$ActivityCopyWithImpl<$Res>
+    implements _$$_ActivityCopyWith<$Res> {
+  __$$_ActivityCopyWithImpl(
+      _$_Activity _value, $Res Function(_$_Activity) _then)
+      : super(_value, (v) => _then(v as _$_Activity));
 
   @override
-  _Activity get _value => super._value as _Activity;
+  _$_Activity get _value => super._value as _$_Activity;
 
   @override
   $Res call({
@@ -133,7 +112,7 @@ class __$ActivityCopyWithImpl<$Res> extends _$ActivityCopyWithImpl<$Res>
     Object? description = freezed,
     Object? lastChecking = freezed,
   }) {
-    return _then(_Activity(
+    return _then(_$_Activity(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -189,7 +168,7 @@ class _$_Activity extends _Activity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Activity &&
+            other is _$_Activity &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.iconUrl, iconUrl) &&
             const DeepCollectionEquality().equals(other.name, name) &&
@@ -210,31 +189,31 @@ class _$_Activity extends _Activity {
 
   @JsonKey(ignore: true)
   @override
-  _$ActivityCopyWith<_Activity> get copyWith =>
-      __$ActivityCopyWithImpl<_Activity>(this, _$identity);
+  _$$_ActivityCopyWith<_$_Activity> get copyWith =>
+      __$$_ActivityCopyWithImpl<_$_Activity>(this, _$identity);
 }
 
 abstract class _Activity extends Activity {
   const factory _Activity(
-      {required String id,
-      required String iconUrl,
-      required String name,
-      required String description,
-      DateTime? lastChecking}) = _$_Activity;
+      {required final String id,
+      required final String iconUrl,
+      required final String name,
+      required final String description,
+      final DateTime? lastChecking}) = _$_Activity;
   const _Activity._() : super._();
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String get iconUrl;
+  String get iconUrl => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  String get description;
+  String get description => throw _privateConstructorUsedError;
   @override
-  DateTime? get lastChecking;
+  DateTime? get lastChecking => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ActivityCopyWith<_Activity> get copyWith =>
+  _$$_ActivityCopyWith<_$_Activity> get copyWith =>
       throw _privateConstructorUsedError;
 }
