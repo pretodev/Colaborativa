@@ -10,7 +10,7 @@ import (
 
 func SaveProfile(w http.ResponseWriter, r *http.Request) {
 	ctx := context.Background()
-	var editingUser models.Profile
+	var editingUser models.User
 	if err, code := helpers.ParsePost(r, &editingUser); code >= 400 {
 		http.Error(w, fmt.Sprintf("%s", err), code)
 		return
@@ -24,7 +24,7 @@ func SaveProfile(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusUnauthorized)
 		return
 	}
-	if err := profileRepo.SaveProfile(ctx, userId, editingUser); err != nil {
+	if err := profileRepo.Save(ctx, userId, editingUser); err != nil {
 		http.Error(w, fmt.Sprintf("%e", err), http.StatusInternalServerError)
 		return
 	}
