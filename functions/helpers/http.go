@@ -27,7 +27,7 @@ func UserId(r *http.Request, id *string) error {
 }
 
 func Response(w http.ResponseWriter, msg string, code int) {
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", "plain/text")
 	w.WriteHeader(code)
 	w.Write([]byte(msg))
 }
