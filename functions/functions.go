@@ -2,15 +2,15 @@ package functions
 
 import (
 	"context"
-	firebase "firebase.google.com/go"
-	"firebase.google.com/go/db"
-	v10 "github.com/go-playground/validator/v10"
-	"github.com/pretodev/colaborativa/functions/commands"
-	"github.com/pretodev/colaborativa/functions/constants"
-	"github.com/pretodev/colaborativa/functions/repositories"
-	"google.golang.org/api/option"
 	"log"
 	"os"
+
+	firebase "firebase.google.com/go"
+	"firebase.google.com/go/db"
+	_ "github.com/GoogleCloudPlatform/functions-framework-go/funcframework"
+	v10 "github.com/go-playground/validator/v10"
+	"github.com/pretodev/colaborativa/functions/commands"
+	"github.com/pretodev/colaborativa/functions/repositories"
 )
 
 var ctx = context.Background()
@@ -33,8 +33,8 @@ func init() {
 	conf := &firebase.Config{
 		DatabaseURL: "https://colaborativa-dda97-default-rtdb.firebaseio.com",
 	}
-	opt := option.WithCredentialsFile(constants.FirebaseCredentialsFile)
-	app, err := firebase.NewApp(ctx, conf, opt)
+	//opt := option.WithCredentialsFile(constants.FirebaseCredentialsFile)
+	app, err := firebase.NewApp(ctx, conf)
 	if err != nil {
 		log.Fatalf("firebase.NewApp: %v", err)
 	}
