@@ -10,6 +10,7 @@ func main() {
 	routes := mux.NewRouter()
 	routes.HandleFunc("/save-user", functions.SaveProfile)
 	routes.HandleFunc("/save-feeling", functions.SaveDailyFeeling)
+	routes.HandleFunc("/check-activity", functions.CheckActivity)
 	http.Handle("/", routes)
 	http.ListenAndServe(":8080", nil)
 }

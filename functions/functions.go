@@ -18,6 +18,7 @@ var database *db.Client
 
 var userRepo *repositories.ProfileRepo
 var feelingRepo *repositories.FeelingRepo
+var activityRepo *repositories.ActivityRepo
 
 var validate = v10.New()
 
@@ -39,4 +40,5 @@ func init() {
 	}
 	userRepo = repositories.NewProfileRepo(database)
 	feelingRepo = repositories.NewFeelingRepo(database)
+	activityRepo = repositories.NewActivityRepo(database)
 }

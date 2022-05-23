@@ -20,7 +20,7 @@ func ParsePost(r *http.Request, data interface{}) (error, int) {
 func UserId(r *http.Request, id *string) error {
 	userId := r.Header.Get("X-User-Id")
 	if userId == "" {
-		return errors.New("X-User-Id não encontrado")
+		return errors.New("X-User-ActivityId não encontrado")
 	}
 	*id = userId
 	return nil
