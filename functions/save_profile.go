@@ -24,7 +24,7 @@ func SaveProfile(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusUnauthorized)
 		return
 	}
-	if err := userRepo.SaveProfile(ctx, userId, editingUser); err != nil {
+	if err := profileRepo.SaveProfile(ctx, userId, editingUser); err != nil {
 		http.Error(w, fmt.Sprintf("%e", err), http.StatusInternalServerError)
 		return
 	}
