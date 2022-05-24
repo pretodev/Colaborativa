@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../domain/user/breed.dart';
 import '../../../../domain/user/gender.dart';
 import '../../../../domain/user/user_profile.dart';
-import '../../../widgets/date_form_field.dart';
-import '../../../widgets/dropdown_field.dart';
-import '../../../widgets/field_wrapper.dart';
+import '../../../../presenter/widgets/date_form_field.dart';
+import '../../../../presenter/widgets/dropdown_field.dart';
+import '../../../../presenter/widgets/field_wrapper.dart';
 
 class ProfileForm extends StatefulWidget {
   final void Function(UserProfile) onSubmit;
@@ -129,8 +129,8 @@ class _ProfileFormState extends State<ProfileForm> {
           ),
           const SizedBox(height: 32),
           ElevatedButton(
-            child: const Text('Salvar'),
             onPressed: widget.saving ? null : _submit,
+            child: const Text('Salvar'),
           ),
         ],
       ),

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'phone_status.dart';
+part of 'phone_preferences.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,31 +15,32 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$PhoneStatus {
+mixin _$PhonePreferences {
   String get verificationId => throw _privateConstructorUsedError;
   String get phoneNumber => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PhoneStatusCopyWith<PhoneStatus> get copyWith =>
+  $PhonePreferencesCopyWith<PhonePreferences> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PhoneStatusCopyWith<$Res> {
-  factory $PhoneStatusCopyWith(
-          PhoneStatus value, $Res Function(PhoneStatus) then) =
-      _$PhoneStatusCopyWithImpl<$Res>;
+abstract class $PhonePreferencesCopyWith<$Res> {
+  factory $PhonePreferencesCopyWith(
+          PhonePreferences value, $Res Function(PhonePreferences) then) =
+      _$PhonePreferencesCopyWithImpl<$Res>;
   $Res call({String verificationId, String phoneNumber, DateTime timestamp});
 }
 
 /// @nodoc
-class _$PhoneStatusCopyWithImpl<$Res> implements $PhoneStatusCopyWith<$Res> {
-  _$PhoneStatusCopyWithImpl(this._value, this._then);
+class _$PhonePreferencesCopyWithImpl<$Res>
+    implements $PhonePreferencesCopyWith<$Res> {
+  _$PhonePreferencesCopyWithImpl(this._value, this._then);
 
-  final PhoneStatus _value;
+  final PhonePreferences _value;
   // ignore: unused_field
-  final $Res Function(PhoneStatus) _then;
+  final $Res Function(PhonePreferences) _then;
 
   @override
   $Res call({
@@ -65,24 +66,25 @@ class _$PhoneStatusCopyWithImpl<$Res> implements $PhoneStatusCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_PhoneStatusCopyWith<$Res>
-    implements $PhoneStatusCopyWith<$Res> {
-  factory _$$_PhoneStatusCopyWith(
-          _$_PhoneStatus value, $Res Function(_$_PhoneStatus) then) =
-      __$$_PhoneStatusCopyWithImpl<$Res>;
+abstract class _$$_PhonePreferencesCopyWith<$Res>
+    implements $PhonePreferencesCopyWith<$Res> {
+  factory _$$_PhonePreferencesCopyWith(
+          _$_PhonePreferences value, $Res Function(_$_PhonePreferences) then) =
+      __$$_PhonePreferencesCopyWithImpl<$Res>;
   @override
   $Res call({String verificationId, String phoneNumber, DateTime timestamp});
 }
 
 /// @nodoc
-class __$$_PhoneStatusCopyWithImpl<$Res> extends _$PhoneStatusCopyWithImpl<$Res>
-    implements _$$_PhoneStatusCopyWith<$Res> {
-  __$$_PhoneStatusCopyWithImpl(
-      _$_PhoneStatus _value, $Res Function(_$_PhoneStatus) _then)
-      : super(_value, (v) => _then(v as _$_PhoneStatus));
+class __$$_PhonePreferencesCopyWithImpl<$Res>
+    extends _$PhonePreferencesCopyWithImpl<$Res>
+    implements _$$_PhonePreferencesCopyWith<$Res> {
+  __$$_PhonePreferencesCopyWithImpl(
+      _$_PhonePreferences _value, $Res Function(_$_PhonePreferences) _then)
+      : super(_value, (v) => _then(v as _$_PhonePreferences));
 
   @override
-  _$_PhoneStatus get _value => super._value as _$_PhoneStatus;
+  _$_PhonePreferences get _value => super._value as _$_PhonePreferences;
 
   @override
   $Res call({
@@ -90,7 +92,7 @@ class __$$_PhoneStatusCopyWithImpl<$Res> extends _$PhoneStatusCopyWithImpl<$Res>
     Object? phoneNumber = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(_$_PhoneStatus(
+    return _then(_$_PhonePreferences(
       verificationId: verificationId == freezed
           ? _value.verificationId
           : verificationId // ignore: cast_nullable_to_non_nullable
@@ -109,8 +111,8 @@ class __$$_PhoneStatusCopyWithImpl<$Res> extends _$PhoneStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PhoneStatus extends _PhoneStatus {
-  const _$_PhoneStatus(
+class _$_PhonePreferences extends _PhonePreferences {
+  const _$_PhonePreferences(
       {required this.verificationId,
       required this.phoneNumber,
       required this.timestamp})
@@ -125,14 +127,14 @@ class _$_PhoneStatus extends _PhoneStatus {
 
   @override
   String toString() {
-    return 'PhoneStatus(verificationId: $verificationId, phoneNumber: $phoneNumber, timestamp: $timestamp)';
+    return 'PhonePreferences(verificationId: $verificationId, phoneNumber: $phoneNumber, timestamp: $timestamp)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PhoneStatus &&
+            other is _$_PhonePreferences &&
             const DeepCollectionEquality()
                 .equals(other.verificationId, verificationId) &&
             const DeepCollectionEquality()
@@ -149,16 +151,16 @@ class _$_PhoneStatus extends _PhoneStatus {
 
   @JsonKey(ignore: true)
   @override
-  _$$_PhoneStatusCopyWith<_$_PhoneStatus> get copyWith =>
-      __$$_PhoneStatusCopyWithImpl<_$_PhoneStatus>(this, _$identity);
+  _$$_PhonePreferencesCopyWith<_$_PhonePreferences> get copyWith =>
+      __$$_PhonePreferencesCopyWithImpl<_$_PhonePreferences>(this, _$identity);
 }
 
-abstract class _PhoneStatus extends PhoneStatus {
-  const factory _PhoneStatus(
+abstract class _PhonePreferences extends PhonePreferences {
+  const factory _PhonePreferences(
       {required final String verificationId,
       required final String phoneNumber,
-      required final DateTime timestamp}) = _$_PhoneStatus;
-  const _PhoneStatus._() : super._();
+      required final DateTime timestamp}) = _$_PhonePreferences;
+  const _PhonePreferences._() : super._();
 
   @override
   String get verificationId => throw _privateConstructorUsedError;
@@ -168,6 +170,6 @@ abstract class _PhoneStatus extends PhoneStatus {
   DateTime get timestamp => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_PhoneStatusCopyWith<_$_PhoneStatus> get copyWith =>
+  _$$_PhonePreferencesCopyWith<_$_PhonePreferences> get copyWith =>
       throw _privateConstructorUsedError;
 }

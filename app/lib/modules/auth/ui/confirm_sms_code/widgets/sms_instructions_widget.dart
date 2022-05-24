@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../../theme/typography.dart';
+import '../../../../../presenter/theme/typography.dart';
 
 class SmsInstructionsWidget extends StatelessWidget {
   final String phone;

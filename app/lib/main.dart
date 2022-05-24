@@ -6,6 +6,7 @@ import 'app_model.dart';
 import 'app_widget.dart';
 import 'firebase_options.dart';
 import 'modules/activities/core/activities_repository.dart';
+import 'modules/auth/core/auth_service.dart';
 import 'modules/chat/core/chat_service.dart';
 import 'modules/feeling/core/feeling_repository.dart';
 import 'modules/user/core/user_repository.dart';
@@ -31,6 +32,10 @@ void main() async {
         ),
         Provider(
           create: (context) => ChatService(),
+          lazy: true,
+        ),
+        Provider(
+          create: (context) => AuthService(),
           lazy: true,
         ),
         ChangeNotifierProvider(create: (context) => AppModel()),

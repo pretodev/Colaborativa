@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../app_model.dart';
-import '../../../../presenter/routes/routes.dart';
-import '../../../user/core/user_repository.dart';
+import '../../../app_model.dart';
+import '../../../presenter/routes/routes.dart';
+import '../../user/core/user_repository.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+class SplashView extends StatefulWidget {
+  const SplashView({Key? key}) : super(key: key);
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashViewState extends State<SplashView> {
   void loadUser() async {
     final userRepo = context.read<UserRepository>();
     final appVM = context.read<AppModel>();
@@ -37,7 +37,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    loadUser();
+    // loadUser();
   }
 
   @override
