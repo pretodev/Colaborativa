@@ -1,24 +1,26 @@
-import 'package:colaborativa_app/presenter/widgets/page_body.dart';
-import 'package:colaborativa_app/presenter/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:modx/modx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../theme/colors.dart';
-import 'menu_controller.dart';
-import 'menu_store.dart';
+import '../../../../app_model.dart';
+import '../../../../presenter/theme/colors.dart';
+import '../../../../presenter/widgets/page_body.dart';
+import '../../../../presenter/widgets/profile_avatar.dart';
 
-class MenuView extends ModxView<MenuController, MenuStore> {
-  const MenuView({Key? key}) : super(key: key);
+class MenuPage extends StatelessWidget {
+  const MenuPage({Key? key}) : super(key: key);
+
+  void signout() {}
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final app = context.read<AppModel>();
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
             icon: const Icon(Icons.exit_to_app_outlined),
-            onPressed: controller.signout,
+            onPressed: signout,
           ),
         ],
       ),
@@ -27,7 +29,7 @@ class MenuView extends ModxView<MenuController, MenuStore> {
           const ProfileAvatar(),
           const SizedBox(height: 8),
           Text(
-            store.user.name,
+            app.registeredUser.name,
             style: theme.textTheme.bodyText1?.copyWith(
               fontSize: 16.0,
               color: AppColors.text2,

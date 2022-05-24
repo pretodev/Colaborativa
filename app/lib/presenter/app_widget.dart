@@ -10,11 +10,8 @@ import 'app_store.dart';
 import 'theme/theme.dart';
 import 'views/chat/chat_page.dart';
 import 'views/confirm_sms_code/confirm_sms_code_page.dart';
-import 'views/home/home_page.dart';
-import 'views/menu/menu_page.dart';
 import 'views/profile/profile_page.dart';
 import 'views/share_feeling_diary/share_feeling_diary_page.dart';
-import 'views/splash/splash_page.dart';
 import 'views/verify_phone_number/verify_phone_number_page.dart';
 
 class AppWidget extends ModxApp<AppController> {
@@ -28,12 +25,9 @@ class AppWidget extends ModxApp<AppController> {
 
   @override
   get pages => [
-        SplashPage(),
         VerifyPhoneNumberPage(),
         ConfirmSmsCodePage(),
         ProfilePage(),
-        HomePage(),
-        MenuPage(),
         ShareFeelingDiaryPage(),
         ChatPage(),
       ];
