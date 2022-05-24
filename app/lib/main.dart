@@ -2,14 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'app_model.dart';
-import 'app_widget.dart';
+import 'ui/app_model.dart';
+import 'ui/app_widget.dart';
 import 'firebase_options.dart';
-import 'modules/activities/core/activities_repository.dart';
-import 'modules/auth/core/auth_service.dart';
-import 'modules/chat/core/chat_service.dart';
-import 'modules/feeling/core/feeling_repository.dart';
-import 'modules/user/core/user_repository.dart';
+import 'core/activities_service.dart';
+import 'core/auth_service.dart';
+import 'core/chat_service.dart';
+import 'core/feeling_service.dart';
+import 'core/user_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,13 +21,13 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        Provider(create: (context) => UserRepository()),
+        Provider(create: (context) => UserService()),
         Provider(
-          create: (context) => FeelingRepository(),
+          create: (context) => FeelingService(),
           lazy: true,
         ),
         Provider(
-          create: (context) => ActivitiesRepository(),
+          create: (context) => ActivitiesServices(),
           lazy: true,
         ),
         Provider(
