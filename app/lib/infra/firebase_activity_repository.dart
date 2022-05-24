@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 
-import '../domain/activities/activity.dart';
+import '../modules/activities/core/models/activity.dart';
 import '../domain/activities/activity_repository.dart';
 import '../utils/date/date_utils.dart';
 import 'mappers/activity_mapper.dart';

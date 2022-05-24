@@ -1,4 +1,4 @@
-import 'modules/user/core/entity/user.dart';
+import 'modules/user/core/entities/user.dart';
 import 'utils/easy_notifier.dart';
 
 class AppModel extends EasyNotifier {

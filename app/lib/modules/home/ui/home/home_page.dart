@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app_model.dart';
 import '../../../../presenter/routes/routes.dart';
 import '../../../../presenter/theme/pictures.dart';
+import '../../../activities/ui/activities/activities_view.dart';
+import '../../../feeling/ui/share_feeling_view.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   void openMenu() {
-    Modular.to.pushNamed('/home/menu');
+    Navigator.of(context).pushNamed(Routes.menu);
   }
 
   void openChat() {
-    Modular.to.pushNamed(Routes.chat);
+    Navigator.of(context).pushNamed(Routes.chat);
   }
 
   @override
@@ -47,11 +54,11 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: const [
-          // Padding(
-          //   padding: EdgeInsets.all(16.0),
-          //   child: ShareFeelingWidget(),
-          // ),
-          //ActivitiesCheckingWidget(),
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: ShareFeelingView(),
+          ),
+          ActivitiesView(),
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 
-import '../../domain/chat/emitter.dart';
-import '../../domain/chat/message.dart';
+import '../../modules/chat/core/models/emitter.dart';
+import '../../modules/chat/core/models/message.dart';
 
 class MessageMapper {
   static Message fromFirebase(DataSnapshot data) {

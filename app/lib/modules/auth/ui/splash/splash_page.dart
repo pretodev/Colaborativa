@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app_model.dart';
 import '../../../../presenter/routes/routes.dart';
@@ -15,21 +15,21 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   void loadUser() async {
-    final userRepo = Modular.get<UserRepository>();
-    final appVM = Modular.get<AppModel>();
+    final userRepo = context.read<UserRepository>();
+    final appVM = context.read<AppModel>();
     final user = await userRepo.currentUser();
     user.mapOrNull(
       unauthenticated: (data) {
-        Modular.to.popAndPushNamed(Routes.verifyPhoneNumber);
+        Navigator.of(context).popAndPushNamed(Routes.verifyPhoneNumber);
       },
       unregistered: (data) {
         appVM.user = data;
-        Modular.to.popAndPushNamed(Routes.register);
+        Navigator.of(context).popAndPushNamed(Routes.register);
       },
       registered: (data) async {
         appVM.user = data;
         //userRepo.registerAccess();
-        Modular.to.pushNamedAndRemoveUntil('/home', (_) => false);
+        Navigator.of(context).popAndPushNamed(Routes.home);
       },
     );
   }

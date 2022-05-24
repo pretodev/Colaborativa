@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 
-import '../../domain/activities/activity.dart';
+import '../../modules/activities/core/models/activity.dart';
 
 class ActivityMapper {
   static const fieldName = 'name';

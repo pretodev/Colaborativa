@@ -1,4 +1,4 @@
-import 'activity.dart';
+import '../../modules/activities/core/models/activity.dart';
 
 abstract class ActivityRepository {
   Future<List<Activity>> allActivities(String userId);

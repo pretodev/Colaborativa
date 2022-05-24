@@ -1,4 +1,4 @@
-import '../../domain/chat/message.dart';
+import '../../modules/chat/core/models/message.dart';
 import '../../domain/chat/message_repository.dart';
 
 class SubscribeMessages {

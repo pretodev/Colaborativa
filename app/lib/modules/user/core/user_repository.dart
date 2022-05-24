@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fa;
 
-import 'entity/user.dart';
+import 'entities/user.dart';
 
 class UserRepository {
   final fa.FirebaseAuth _auth = fa.FirebaseAuth.instance;

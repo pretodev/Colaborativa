@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
+import 'modules/auth/auth.dart';
+import 'modules/chat/ui/chat/chat_view.dart';
+import 'modules/feeling/feeling.dart';
+import 'modules/home/home.dart';
+import 'presenter/routes/routes.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'Colaborativa',
-      routeInformationParser: Modular.routeInformationParser,
-      routerDelegate: Modular.routerDelegate,
+      initialRoute: Routes.splash,
+      routes: {
+        Routes.splash: splashPage,
+        Routes.home: homePage,
+        Routes.menu: menuPage,
+        Routes.fellingDiary: shareFeelingDiaryPage,
+        Routes.chat: (context) => const ChatView(),
+      },
     );
   }
 }

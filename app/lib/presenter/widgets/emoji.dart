@@ -1,6 +1,7 @@
-import '../../domain/feeling/feeling.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../modules/feeling/core/entities/feeling.dart';
 
 class Emoji extends StatelessWidget {
   const Emoji(

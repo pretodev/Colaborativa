@@ -1,4 +1,4 @@
-import '../../domain/activities/activity.dart';
+import '../../modules/activities/core/models/activity.dart';
 import '../../domain/activities/activity_repository.dart';
 
 class GetActivities {

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../domain/chat/editing_message.dart';
-import '../domain/chat/message.dart';
+import '../modules/chat/core/models/message.dart';
 import '../domain/chat/message_repository.dart';
 import 'mappers/editing_message_mapper.dart';
 import 'mappers/message_mapper.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app_model.dart';
 import '../../../../presenter/theme/colors.dart';

@@ -1,5 +1,5 @@
+import '../../modules/chat/core/models/message.dart';
 import 'editing_message.dart';
-import 'message.dart';
 
 abstract class MessageRepository {
   const MessageRepository();

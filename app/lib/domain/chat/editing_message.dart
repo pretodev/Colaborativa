@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'emitter.dart';
+import '../../modules/chat/core/models/emitter.dart';
 
 part 'editing_message.freezed.dart';
 
