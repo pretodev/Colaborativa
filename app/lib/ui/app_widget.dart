@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/utils/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +10,7 @@ import 'views/confirm_sms_code/confirm_sms_code_view.dart';
 import 'views/home_view.dart';
 import 'views/menu_view.dart';
 import 'views/rank/rank_view.dart';
-import 'views/share_feeling_diary/share_feeling_diary_view.dart';
+import 'views/share_feeling_diary_view.dart';
 import 'views/splash_view.dart';
 import 'views/verify_phone_number/verify_phone_number_view.dart';
 
@@ -61,14 +62,15 @@ class _AppWidgetState extends State<AppWidget> {
       navigatorKey: _navKey,
       theme: AppTheme.instance,
       routes: {
-        Routes.splash: (context) => const SplashView(),
-        Routes.verifyPhoneNumber: (context) => const VerifyPhoneNumberView(),
-        Routes.confirmSmsCode: (context) => const ConfirmSmsCodeView(),
-        Routes.home: (context) => const HomeView(),
-        Routes.menu: (context) => const MenuView(),
-        Routes.fellingDiary: (context) => const ShareFeelingDiaryView(),
-        Routes.chat: (context) => const ChatView(),
-        Routes.rank: (context) => const RankView(),
+        Routes.splash: (ctx) => const SplashView(),
+        Routes.verifyPhoneNumber: (ctx) => const VerifyPhoneNumberView(),
+        Routes.confirmSmsCode: (ctx) => const ConfirmSmsCodeView(),
+        Routes.home: (ctx) => const HomeView(),
+        Routes.menu: (ctx) => const MenuView(),
+        Routes.fellingDiary: (ctx) =>
+            ShareFeelingDiaryView(feeling: ctx.args()),
+        Routes.chat: (ctx) => const ChatView(),
+        Routes.rank: (ctx) => const RankView(),
       },
     );
   }
