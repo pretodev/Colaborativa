@@ -21,7 +21,7 @@ class _ConfirmSmsCodeViewState extends State<ConfirmSmsCodeView> {
 
   late final AuthController _authController;
 
-  Timer? timer;
+  Timer? _timer;
 
   var _isSmsCodeChecking = false;
   set smsCodeChecking(bool value) => setState(() => _isSmsCodeChecking = value);
@@ -39,8 +39,8 @@ class _ConfirmSmsCodeViewState extends State<ConfirmSmsCodeView> {
     final seconds =
         DateTime.now().difference(startTimestamp).inSeconds - maxSeconds;
     timeoutSeconds = seconds < maxSeconds ? seconds.abs() : 0;
-    timer?.cancel();
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       timeoutSeconds = _timeoutSeconds - 1;
       if (isTimeout) {
         timer.cancel();
@@ -54,6 +54,12 @@ class _ConfirmSmsCodeViewState extends State<ConfirmSmsCodeView> {
   }
 
   @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     _authController = context.read<AuthController>();
@@ -61,7 +67,9 @@ class _ConfirmSmsCodeViewState extends State<ConfirmSmsCodeView> {
       if (_authController.error != null) {
         smsCodeChecking = false;
       }
-      setTimeout(_authController.phonePreferences!.timestamp);
+      if (_authController.phonePreferences != null) {
+        setTimeout(_authController.phonePreferences!.timestamp);
+      }
     });
     setTimeout(_authController.phonePreferences!.timestamp);
     _smsCodeController.addListener(() {

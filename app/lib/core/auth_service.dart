@@ -69,6 +69,7 @@ class AuthService {
         } else {
           _serviceController.add(const AuthStatus.unregistered());
         }
+        await resetPhoneNumber();
       }
     });
 
@@ -134,5 +135,9 @@ class AuthService {
     if (_phoneController.hasListener) {
       _phoneController.add(null);
     }
+  }
+
+  Future<void> logout() {
+    return _auth.signOut();
   }
 }

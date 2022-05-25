@@ -52,4 +52,8 @@ class AuthController extends ChangeNotifier {
       verificationId: phonePreferences!.verificationId,
     );
   }
+
+  void logout() {
+    _authService.logout();
+  }
 }

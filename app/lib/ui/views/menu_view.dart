@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../controllers/auth_controller.dart';
 import '../theme/colors.dart';
 import '../widgets/page_body.dart';
 import '../widgets/profile_avatar.dart';
@@ -7,18 +9,16 @@ import '../widgets/profile_avatar.dart';
 class MenuView extends StatelessWidget {
   const MenuView({Key? key}) : super(key: key);
 
-  void signout() {}
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    //final app = context.read<AppModel>();
+    final auth = context.read<AuthController>();
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
             icon: const Icon(Icons.exit_to_app_outlined),
-            onPressed: signout,
+            onPressed: auth.logout,
           ),
         ],
       ),
