@@ -9,7 +9,7 @@ class ActivitiesServices {
   final _userId = FirebaseAuth.instance.currentUser!.uid;
 
   Stream<List<Activity>> get activities {
-    final ref = _db.ref('users/$_userId/activities/${DateUtils.todayKey}');
+    final ref = _db.ref('users/$_userId/activities/$todayKey');
     return ref.onValue.asyncMap((event) async {
       final activitiesSnap =
           await FirebaseDatabase.instance.ref('activities').get();

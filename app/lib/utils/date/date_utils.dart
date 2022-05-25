@@ -1,6 +1,6 @@
-class DateUtils {
-  static String get todayKey {
-    final today = DateTime.now();
-    return '${today.year}_${today.month}_${today.day}';
-  }
+import 'package:intl/intl.dart';
+
+String get todayKey {
+  final today = DateTime.now();
+  return DateFormat('yyy-MM-dd').format(today);
 }

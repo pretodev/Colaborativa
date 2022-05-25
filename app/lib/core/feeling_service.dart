@@ -11,7 +11,7 @@ class FeelingService {
   Future<void> save(FeelingDiary feelingDiary) async {}
 
   Stream<bool> isFeelingDiarySaved() {
-    final ref = _db.ref('users/$_userId/feelings/${DateUtils.todayKey}');
+    final ref = _db.ref('users/$_userId/feelings/$todayKey');
     return ref.onValue.map((event) => event.snapshot.exists);
   }
 }
