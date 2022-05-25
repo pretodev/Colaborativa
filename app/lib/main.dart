@@ -6,7 +6,6 @@ import 'core/activities_service.dart';
 import 'core/auth_service.dart';
 import 'core/chat_service.dart';
 import 'core/feeling_service.dart';
-import 'core/user_service.dart';
 import 'firebase_options.dart';
 import 'ui/app_widget.dart';
 import 'ui/controllers/auth_controller.dart';
@@ -21,7 +20,6 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        Provider(create: (context) => UserService()),
         Provider(
           create: (context) => FeelingService(),
           lazy: true,

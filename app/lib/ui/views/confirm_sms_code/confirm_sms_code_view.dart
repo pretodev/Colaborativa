@@ -101,7 +101,7 @@ class _ConfirmSmsCodeViewState extends State<ConfirmSmsCodeView> {
               ),
               const SizedBox(height: 48.0),
               SmsInstructionsWidget(
-                phone: phonePreferences!.phoneNumber,
+                phone: phonePreferences?.phoneNumber ?? 'Sem Número',
                 onWrongNumberClicked: _authController.resetNumber,
               ),
               const SizedBox(height: 48.0),

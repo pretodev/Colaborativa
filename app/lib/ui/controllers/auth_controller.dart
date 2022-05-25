@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import '../../core/auth_service.dart';
 import '../../core/entities/auth_status.dart';
 import '../../core/entities/phone_preferences.dart';
+import '../../core/entities/user.dart';
 import '../../utils/strings/strings.dart';
 
 class AuthController extends ChangeNotifier {
@@ -23,8 +24,13 @@ class AuthController extends ChangeNotifier {
         waitingSmsCode: (value) => value,
       );
 
+  User? get user => status.whenOrNull(
+        authenticated: (value) => value,
+      );
+
   void loadUser() {
     _authService.status.listen((status) {
+      _error = null;
       _status = status;
       notifyListeners();
     }, onError: (error) {

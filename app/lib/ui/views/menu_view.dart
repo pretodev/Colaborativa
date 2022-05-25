@@ -26,11 +26,13 @@ class MenuView extends StatelessWidget {
         children: [
           const ProfileAvatar(),
           const SizedBox(height: 8),
-          Text(
-            ' app.registeredUser.name',
-            style: theme.textTheme.bodyText1?.copyWith(
-              fontSize: 16.0,
-              color: AppColors.text2,
+          Consumer<AuthController>(
+            builder: (context, auth, child) => Text(
+              auth.user?.name ?? 'Sem nome',
+              style: theme.textTheme.bodyText1?.copyWith(
+                fontSize: 16.0,
+                color: AppColors.text2,
+              ),
             ),
           ),
           const SizedBox(height: 16),

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'phone_preferences.dart';
+import 'user.dart';
 
 part 'auth_status.freezed.dart';
 
@@ -10,7 +11,7 @@ class AuthStatus with _$AuthStatus {
 
   const factory AuthStatus.none() = _None;
 
-  const factory AuthStatus.authenticated() = _Authenticated;
+  const factory AuthStatus.authenticated(User user) = _Authenticated;
 
   const factory AuthStatus.unregistered() = _Unregistered;
 

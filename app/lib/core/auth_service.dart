@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fa;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'entities/auth_status.dart';
 import 'entities/phone_preferences.dart';
+import 'entities/user.dart';
 import 'errors/errors.dart';
 
 class AuthService {
@@ -13,12 +14,12 @@ class AuthService {
   static const _verificationId = 'verification_id';
   static const _timestamp = 'timestamp';
 
-  final _auth = FirebaseAuth.instance;
+  final _auth = fa.FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
-  final _phoneController = StreamController<PhonePreferences?>();
   final _serviceController = StreamController<AuthStatus>();
 
-  StreamSubscription? _phoneSuscription;
+  StreamController<PhonePreferences?>? _phoneController;
+  StreamSubscription? _phoneSubscription;
 
   Future<void> _loadPhonePreferences() async {
     final prefs = await SharedPreferences.getInstance();
@@ -26,9 +27,9 @@ class AuthService {
     final verificationId = prefs.getString(_verificationId);
     final timestamp = prefs.getInt(_timestamp);
     if (phoneNumber == null || verificationId == null || timestamp == null) {
-      return _phoneController.add(null);
+      return _phoneController?.add(null);
     }
-    _phoneController.add(
+    _phoneController?.add(
       PhonePreferences(
         verificationId: verificationId,
         phoneNumber: phoneNumber,
@@ -51,7 +52,8 @@ class AuthService {
     _auth.userChanges().listen((user) async {
       if (user == null) {
         _loadPhonePreferences();
-        _phoneSuscription = _phoneController.stream.listen(
+        _phoneController ??= StreamController<PhonePreferences?>();
+        _phoneSubscription = _phoneController?.stream.listen(
           (prefs) {
             if (prefs == null) {
               _serviceController.add(const AuthStatus.unauthenticated());
@@ -62,14 +64,20 @@ class AuthService {
           onError: _serviceController.addError,
         );
       } else {
-        _phoneSuscription?.cancel();
         final doc = await _firestore.doc('users/${user.uid}').get();
         if (doc.exists) {
-          _serviceController.add(const AuthStatus.authenticated());
+          final user = User(
+            id: doc.id,
+            name: doc.get('name') as String,
+          );
+          _serviceController.add(AuthStatus.authenticated(user));
         } else {
           _serviceController.add(const AuthStatus.unregistered());
         }
         await resetPhoneNumber();
+        await _phoneSubscription?.cancel();
+        await _phoneController?.close();
+        _phoneController = null;
       }
     });
 
@@ -101,7 +109,7 @@ class AuthService {
           timestamp: DateTime.now(),
         );
         await _savePhonePreferences(status);
-        _phoneController.add(status);
+        _phoneController?.add(status);
       },
       codeAutoRetrievalTimeout: (verificationId) {
         //_controller.add(const PhoneAuthStatus.timeout());
@@ -114,11 +122,11 @@ class AuthService {
     required String smsCode,
   }) async {
     try {
-      await _auth.signInWithCredential(PhoneAuthProvider.credential(
+      await _auth.signInWithCredential(fa.PhoneAuthProvider.credential(
         verificationId: verificationId,
         smsCode: smsCode,
       ));
-    } on FirebaseAuthException catch (e) {
+    } on fa.FirebaseAuthException catch (e) {
       if (e.code == 'invalid-verification-code') {
         _serviceController.addError(Errors.invalidSmsCode);
       } else {
@@ -132,9 +140,7 @@ class AuthService {
     await prefs.remove(_phoneNumber);
     await prefs.remove(_verificationId);
     await prefs.remove(_timestamp);
-    if (_phoneController.hasListener) {
-      _phoneController.add(null);
-    }
+    _phoneController?.add(null);
   }
 
   Future<void> logout() {

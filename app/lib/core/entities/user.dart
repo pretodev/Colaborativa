@@ -6,20 +6,8 @@ part 'user.freezed.dart';
 class User with _$User {
   const User._();
 
-  const factory User.none() = UserNone;
-
-  const factory User.unauthenticated() = UserUnauthenticated;
-
-  const factory User.unregistered({
-    required String id,
-  }) = UserUnregistered;
-
-  const factory User.registered({
+  const factory User({
     required String id,
     required String name,
   }) = UserRegistered;
-
-  bool get isUnregistered => this is UserUnregistered;
-
-  bool get isRegistered => this is UserRegistered;
 }

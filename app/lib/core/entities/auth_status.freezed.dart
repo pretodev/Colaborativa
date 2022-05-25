@@ -19,7 +19,7 @@ mixin _$AuthStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() none,
-    required TResult Function() authenticated,
+    required TResult Function(User user) authenticated,
     required TResult Function() unregistered,
     required TResult Function() unauthenticated,
     required TResult Function(PhonePreferences prefs) waitingSmsCode,
@@ -28,7 +28,7 @@ mixin _$AuthStatus {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
@@ -37,7 +37,7 @@ mixin _$AuthStatus {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
@@ -129,7 +129,7 @@ class _$_None extends _None {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() none,
-    required TResult Function() authenticated,
+    required TResult Function(User user) authenticated,
     required TResult Function() unregistered,
     required TResult Function() unauthenticated,
     required TResult Function(PhonePreferences prefs) waitingSmsCode,
@@ -141,7 +141,7 @@ class _$_None extends _None {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
@@ -153,7 +153,7 @@ class _$_None extends _None {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
@@ -216,6 +216,9 @@ abstract class _$$_AuthenticatedCopyWith<$Res> {
   factory _$$_AuthenticatedCopyWith(
           _$_Authenticated value, $Res Function(_$_Authenticated) then) =
       __$$_AuthenticatedCopyWithImpl<$Res>;
+  $Res call({User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -228,63 +231,93 @@ class __$$_AuthenticatedCopyWithImpl<$Res>
 
   @override
   _$_Authenticated get _value => super._value as _$_Authenticated;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(_$_Authenticated(
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Authenticated extends _Authenticated {
-  const _$_Authenticated() : super._();
+  const _$_Authenticated(this.user) : super._();
+
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'AuthStatus.authenticated()';
+    return 'AuthStatus.authenticated(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Authenticated);
+        (other.runtimeType == runtimeType &&
+            other is _$_Authenticated &&
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
+      __$$_AuthenticatedCopyWithImpl<_$_Authenticated>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() none,
-    required TResult Function() authenticated,
+    required TResult Function(User user) authenticated,
     required TResult Function() unregistered,
     required TResult Function() unauthenticated,
     required TResult Function(PhonePreferences prefs) waitingSmsCode,
   }) {
-    return authenticated();
+    return authenticated(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
   }) {
-    return authenticated?.call();
+    return authenticated?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated();
+      return authenticated(user);
     }
     return orElse();
   }
@@ -331,8 +364,13 @@ class _$_Authenticated extends _Authenticated {
 }
 
 abstract class _Authenticated extends AuthStatus {
-  const factory _Authenticated() = _$_Authenticated;
+  const factory _Authenticated(final User user) = _$_Authenticated;
   const _Authenticated._() : super._();
+
+  User get user => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -376,7 +414,7 @@ class _$_Unregistered extends _Unregistered {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() none,
-    required TResult Function() authenticated,
+    required TResult Function(User user) authenticated,
     required TResult Function() unregistered,
     required TResult Function() unauthenticated,
     required TResult Function(PhonePreferences prefs) waitingSmsCode,
@@ -388,7 +426,7 @@ class _$_Unregistered extends _Unregistered {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
@@ -400,7 +438,7 @@ class _$_Unregistered extends _Unregistered {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
@@ -500,7 +538,7 @@ class _$_Unauthenticated extends _Unauthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() none,
-    required TResult Function() authenticated,
+    required TResult Function(User user) authenticated,
     required TResult Function() unregistered,
     required TResult Function() unauthenticated,
     required TResult Function(PhonePreferences prefs) waitingSmsCode,
@@ -512,7 +550,7 @@ class _$_Unauthenticated extends _Unauthenticated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
@@ -524,7 +562,7 @@ class _$_Unauthenticated extends _Unauthenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
@@ -657,7 +695,7 @@ class _$_WaitingSmsCode extends _WaitingSmsCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() none,
-    required TResult Function() authenticated,
+    required TResult Function(User user) authenticated,
     required TResult Function() unregistered,
     required TResult Function() unauthenticated,
     required TResult Function(PhonePreferences prefs) waitingSmsCode,
@@ -669,7 +707,7 @@ class _$_WaitingSmsCode extends _WaitingSmsCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,
@@ -681,7 +719,7 @@ class _$_WaitingSmsCode extends _WaitingSmsCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
-    TResult Function()? authenticated,
+    TResult Function(User user)? authenticated,
     TResult Function()? unregistered,
     TResult Function()? unauthenticated,
     TResult Function(PhonePreferences prefs)? waitingSmsCode,

@@ -44,7 +44,7 @@ class _AppWidgetState extends State<AppWidget> {
           _navigateTo(Routes.confirmSmsCode);
         },
         unregistered: () {},
-        authenticated: () {
+        authenticated: (_) {
           _navigateTo(Routes.home);
         },
       );
