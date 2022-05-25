@@ -7,7 +7,7 @@ class ScoreService {
 
   Stream<int> get score {
     return _db
-        .ref('users/$_userId/score')
+        .ref('score/day/$_userId/total')
         .onValue
         .map((event) => event.snapshot.value as int);
   }
