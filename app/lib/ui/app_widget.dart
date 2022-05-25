@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'controllers/auth_controller.dart';
 import 'navigation/routes.dart';
+import 'theme/theme.dart';
 import 'views/chat/chat_view.dart';
 import 'views/confirm_sms_code/confirm_sms_code_view.dart';
 import 'views/home_view.dart';
@@ -57,6 +58,7 @@ class _AppWidgetState extends State<AppWidget> {
       title: 'Colaborativa',
       initialRoute: Routes.splash,
       navigatorKey: _navKey,
+      theme: AppTheme.instance,
       routes: {
         Routes.splash: (context) => const SplashView(),
         Routes.verifyPhoneNumber: (context) => const VerifyPhoneNumberView(),
