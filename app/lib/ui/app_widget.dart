@@ -8,7 +8,7 @@ import 'theme/theme.dart';
 import 'views/chat/chat_view.dart';
 import 'views/confirm_sms_code/confirm_sms_code_view.dart';
 import 'views/home_view.dart';
-import 'views/menu_view.dart';
+import 'views/menu/menu_view.dart';
 import 'views/rank/rank_view.dart';
 import 'views/share_feeling_diary_view.dart';
 import 'views/splash_view.dart';

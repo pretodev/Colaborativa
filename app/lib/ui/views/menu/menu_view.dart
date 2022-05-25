@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../controllers/auth_controller.dart';
-import '../theme/colors.dart';
-import '../widgets/page_body.dart';
-import '../widgets/profile_avatar.dart';
+import '../../controllers/auth_controller.dart';
+import '../../theme/colors.dart';
+import '../../theme/pictures.dart';
+import '../../widgets/page_body.dart';
+import '../../widgets/profile_avatar.dart';
+import 'widgets/menu_item_widget.dart';
 
 class MenuView extends StatelessWidget {
   const MenuView({Key? key}) : super(key: key);
@@ -39,7 +41,26 @@ class MenuView extends StatelessWidget {
           Expanded(
             child: PageBody(
               child: ListView(
-                children: const [],
+                children: const [
+                  MenuItemWidget(
+                    svgIcon: SvgPictures.goal,
+                    title: 'Desafios',
+                    description:
+                        'Conquiste os desafios e suba seu nível no controle da lesão por pessão',
+                  ),
+                  MenuItemWidget(
+                    svgIcon: SvgPictures.readingBook,
+                    title: 'Informativos',
+                    description:
+                        'Se informe e tenha a acesso a materias sobre lesão por pressão',
+                  ),
+                  MenuItemWidget(
+                    svgIcon: SvgPictures.settings,
+                    title: 'Configurações',
+                    description:
+                        'Controle notificações e explore outros recursos.',
+                  ),
+                ],
               ),
             ),
           ),
