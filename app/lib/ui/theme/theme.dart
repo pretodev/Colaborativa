@@ -7,6 +7,7 @@ import 'typography.dart';
 class AppTheme {
   static final instance = ThemeData(
     textTheme: AppTextTheme(),
+    primaryColor: AppColors.primary,
     appBarTheme: AppBarTheme(
       titleTextStyle: GoogleFonts.nunito(
         fontSize: 20,

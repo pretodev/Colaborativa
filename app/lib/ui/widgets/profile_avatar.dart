@@ -5,13 +5,19 @@ import '../theme/colors.dart';
 import '../theme/pictures.dart';
 
 class ProfileAvatar extends StatelessWidget {
-  const ProfileAvatar({Key? key}) : super(key: key);
+  const ProfileAvatar({
+    Key? key,
+    this.size = 100,
+  }) : super(key: key);
+
+  final double size;
 
   @override
   Widget build(BuildContext context) {
+    final imageSize = (size / 100) * 36.0;
     return Container(
-      width: 100,
-      height: 100,
+      width: size,
+      height: size,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
@@ -23,8 +29,8 @@ class ProfileAvatar extends StatelessWidget {
       child: Center(
         child: SvgPicture.asset(
           SvgPictures.user,
-          height: 36.0,
-          width: 36.0,
+          height: imageSize,
+          width: imageSize,
         ),
       ),
     );

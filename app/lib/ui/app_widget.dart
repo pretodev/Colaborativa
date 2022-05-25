@@ -8,6 +8,7 @@ import 'views/chat/chat_view.dart';
 import 'views/confirm_sms_code/confirm_sms_code_view.dart';
 import 'views/home_view.dart';
 import 'views/menu_view.dart';
+import 'views/rank/rank_view.dart';
 import 'views/share_feeling_diary/share_feeling_diary_view.dart';
 import 'views/splash_view.dart';
 import 'views/verify_phone_number/verify_phone_number_view.dart';
@@ -67,6 +68,7 @@ class _AppWidgetState extends State<AppWidget> {
         Routes.menu: (context) => const MenuView(),
         Routes.fellingDiary: (context) => const ShareFeelingDiaryView(),
         Routes.chat: (context) => const ChatView(),
+        Routes.rank: (context) => const RankView(),
       },
     );
   }

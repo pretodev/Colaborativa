@@ -7,4 +7,5 @@ class Routes {
   static const menu = '/menu';
   static const fellingDiary = '/felling/diary';
   static const chat = '/chat';
+  static const rank = '/rank';
 }

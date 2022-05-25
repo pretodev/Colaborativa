@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/score_service.dart';
+import '../navigation/routes.dart';
 import '../theme/colors.dart';
 import '../theme/pictures.dart';
 import '../theme/typography.dart';
@@ -15,6 +16,7 @@ class ScoreView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scoreService = context.read<ScoreService>();
+    final navigator = Navigator.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -49,10 +51,13 @@ class ScoreView extends StatelessWidget {
                         );
                       },
                     ),
-                    Text(
-                      'Ver rank',
-                      style: AppTextTheme.link.copyWith(
-                        color: AppColors.primaryDark,
+                    InkWell(
+                      onTap: () => navigator.pushNamed(Routes.rank),
+                      child: Text(
+                        'Ver rank',
+                        style: AppTextTheme.link.copyWith(
+                          color: AppColors.primaryDark,
+                        ),
                       ),
                     ),
                   ],
