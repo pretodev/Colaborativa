@@ -3,4 +3,5 @@ class SvgPictures {
   static const menu = 'assets/images/svg/menu.svg';
   static const messenger = 'assets/images/svg/messenger.svg';
   static const user = 'assets/images/svg/user.svg';
+  static const trophy = 'assets/images/svg/trophy.svg';
 }

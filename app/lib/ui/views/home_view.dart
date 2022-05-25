@@ -6,6 +6,7 @@ import '../controllers/auth_controller.dart';
 import '../navigation/routes.dart';
 import '../theme/pictures.dart';
 import 'activities/activities_view.dart';
+import 'score_view.dart';
 import 'share_feeling_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -48,6 +49,7 @@ class HomeView extends StatelessWidget {
             child: ShareFeelingView(),
           ),
           ActivitiesView(),
+          ScoreView(),
         ],
       ),
     );
