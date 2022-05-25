@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'core/achievement_service.dart';
 import 'core/activities_service.dart';
 import 'core/auth_service.dart';
 import 'core/chat_service.dart';
@@ -39,6 +40,10 @@ void main() async {
         ),
         Provider(
           create: (context) => ScoreService(),
+          lazy: true,
+        ),
+        Provider(
+          create: (context) => AchievementService(),
           lazy: true,
         ),
         ChangeNotifierProvider(

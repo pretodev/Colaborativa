@@ -19,7 +19,6 @@ class PageBody extends StatelessWidget {
         MediaQuery.of(context).padding.top + kToolbarHeight + (paddingSize * 2);
 
     final wrapperChild = Container(
-      child: child,
       constraints: BoxConstraints(
         minHeight: MediaQuery.of(context).size.height - appBarSize,
         minWidth: double.infinity,
@@ -32,6 +31,7 @@ class PageBody extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
       ),
+      child: child,
     );
     return scroll ? SingleChildScrollView(child: wrapperChild) : wrapperChild;
   }

@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/ui/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,20 +42,22 @@ class MenuView extends StatelessWidget {
           Expanded(
             child: PageBody(
               child: ListView(
-                children: const [
+                children: [
                   MenuItemWidget(
                     svgIcon: SvgPictures.goal,
-                    title: 'Desafios',
+                    title: 'Conquistas',
                     description:
-                        'Conquiste os desafios e suba seu nível no controle da lesão por pessão',
+                        'Veja os objetivos conquistado ao longo da sua jornada de cuidado próprio.',
+                    onPresssed: () =>
+                        Navigator.pushNamed(context, Routes.achievements),
                   ),
-                  MenuItemWidget(
+                  const MenuItemWidget(
                     svgIcon: SvgPictures.readingBook,
                     title: 'Informativos',
                     description:
                         'Se informe e tenha a acesso a materias sobre lesão por pressão',
                   ),
-                  MenuItemWidget(
+                  const MenuItemWidget(
                     svgIcon: SvgPictures.settings,
                     title: 'Configurações',
                     description:

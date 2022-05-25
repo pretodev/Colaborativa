@@ -8,4 +8,5 @@ class Routes {
   static const fellingDiary = '/felling/diary';
   static const chat = '/chat';
   static const rank = '/rank';
+  static const achievements = '/achievements';
 }

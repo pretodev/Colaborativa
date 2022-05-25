@@ -7,4 +7,6 @@ class SvgPictures {
   static const goal = 'assets/images/svg/goal.svg';
   static const readingBook = 'assets/images/svg/reading-book.svg';
   static const settings = 'assets/images/svg/settings.svg';
+  static const starActive = 'assets/images/svg/star_active.svg';
+  static const starInactive = 'assets/images/svg/star_inactive.svg';
 }

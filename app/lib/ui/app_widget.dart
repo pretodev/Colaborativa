@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/ui/views/achievements/achievements_view.dart';
 import 'package:colaborativa_app/utils/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -71,6 +72,7 @@ class _AppWidgetState extends State<AppWidget> {
             ShareFeelingDiaryView(feeling: ctx.args()),
         Routes.chat: (ctx) => const ChatView(),
         Routes.rank: (ctx) => const RankView(),
+        Routes.achievements: (ctx) => const AchievementsView(),
       },
     );
   }
