@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'entities/auth_status.dart';
 import 'entities/phone_preferences.dart';
+import 'errors/errors.dart';
 
 class AuthService {
   static const _phoneNumber = 'phone_number';
@@ -50,13 +51,16 @@ class AuthService {
     _auth.userChanges().listen((user) async {
       if (user == null) {
         _loadPhonePreferences();
-        _phoneSuscription = _phoneController.stream.listen((prefs) {
-          if (prefs == null) {
-            _serviceController.add(const AuthStatus.unauthenticated());
-          } else {
-            _serviceController.add(AuthStatus.waitingSmsCode(prefs));
-          }
-        });
+        _phoneSuscription = _phoneController.stream.listen(
+          (prefs) {
+            if (prefs == null) {
+              _serviceController.add(const AuthStatus.unauthenticated());
+            } else {
+              _serviceController.add(AuthStatus.waitingSmsCode(prefs));
+            }
+          },
+          onError: _serviceController.addError,
+        );
       } else {
         _phoneSuscription?.cancel();
         final doc = await _firestore.doc('users/${user.uid}').get();
@@ -83,7 +87,11 @@ class AuthService {
         await _auth.signInWithCredential(authCredential);
       },
       verificationFailed: (e) {
-        _phoneController.addError(e);
+        if (e.code == 'invalid-phone-number') {
+          _serviceController.addError(Errors.invalidPhoneNumber);
+        } else {
+          _serviceController.addError(e);
+        }
       },
       codeSent: (verificationId, [code]) async {
         final status = PhonePreferences(
@@ -104,13 +112,21 @@ class AuthService {
     required String verificationId,
     required String smsCode,
   }) async {
-    await _auth.signInWithCredential(PhoneAuthProvider.credential(
-      verificationId: verificationId,
-      smsCode: smsCode,
-    ));
+    try {
+      await _auth.signInWithCredential(PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: smsCode,
+      ));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-verification-code') {
+        _serviceController.addError(Errors.invalidSmsCode);
+      } else {
+        _serviceController.addError(e);
+      }
+    }
   }
 
-  Future<void> logout() async {
+  Future<void> resetPhoneNumber() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_phoneNumber);
     await prefs.remove(_verificationId);

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
-
-import '../../core/user_service.dart';
-import '../app_model.dart';
-import '../navigation/routes.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -15,23 +10,23 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   void loadUser() async {
-    final userRepo = context.read<UserService>();
-    final appVM = context.read<AppModel>();
-    final user = await userRepo.currentUser();
-    user.mapOrNull(
-      unauthenticated: (data) {
-        Navigator.of(context).popAndPushNamed(Routes.verifyPhoneNumber);
-      },
-      unregistered: (data) {
-        appVM.user = data;
-        Navigator.of(context).popAndPushNamed(Routes.register);
-      },
-      registered: (data) async {
-        appVM.user = data;
-        //userRepo.registerAccess();
-        Navigator.of(context).popAndPushNamed(Routes.home);
-      },
-    );
+    // final userRepo = context.read<UserService>();
+    // final appVM = context.read<AppModel>();
+    // final user = await userRepo.currentUser();
+    // user.mapOrNull(
+    //   unauthenticated: (data) {
+    //     Navigator.of(context).popAndPushNamed(Routes.verifyPhoneNumber);
+    //   },
+    //   unregistered: (data) {
+    //     appVM.user = data;
+    //     Navigator.of(context).popAndPushNamed(Routes.register);
+    //   },
+    //   registered: (data) async {
+    //     appVM.user = data;
+    //     //userRepo.registerAccess();
+    //     Navigator.of(context).popAndPushNamed(Routes.home);
+    //   },
+    // );
   }
 
   @override

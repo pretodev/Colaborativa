@@ -3,9 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../utils/strings/strings.dart';
 import '../../../../utils/validation/validation.dart';
-import '../../../core/auth_service.dart';
+import '../../controllers/auth_controller.dart';
 import '../../widgets/field_wrapper.dart';
 import 'widgets/user_terms_widget.dart';
 
@@ -20,7 +19,7 @@ class _VerifyPhoneNumberViewState extends State<VerifyPhoneNumberView> {
   final _formKey = GlobalKey<FormState>();
   final _phoneNumberController = TextEditingController();
 
-  late final AuthService _auth;
+  late final AuthController _authController;
 
   var _checkingPhone = false;
   set checkingPhone(bool value) => setState(() => _checkingPhone = value);
@@ -28,15 +27,19 @@ class _VerifyPhoneNumberViewState extends State<VerifyPhoneNumberView> {
   void verifyPhoneNumber() {
     if (_formKey.currentState?.validate() ?? false) {
       checkingPhone = true;
-      final phoneNumber = extractNumbers(_phoneNumberController.text);
-      _auth.verifyPhoneNumber(phoneNumber);
+      _authController.verifyPhoneNumber(_phoneNumberController.text);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    _auth = context.read();
+    _authController = context.read();
+    _authController.addListener(() {
+      if (_authController.error != null) {
+        checkingPhone = false;
+      }
+    });
   }
 
   @override
@@ -68,21 +71,25 @@ class _VerifyPhoneNumberViewState extends State<VerifyPhoneNumberView> {
               const Spacer(),
               Form(
                 key: _formKey,
-                child: FieldWrapper(
-                  label: 'Digite seu telefone',
-                  child: TextFormField(
-                    controller: _phoneNumberController,
-                    keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
-                      // errorText: snapshot.error?.toString(),
-                      errorMaxLines: 2,
-                    ),
-                    readOnly: _checkingPhone,
-                    inputFormatters: [maskFormatter],
-                    validator: useValidates([
-                      isRequired('Por favor, digite seu telefone'),
-                    ]),
-                  ),
+                child: Consumer<AuthController>(
+                  builder: (context, auth, child) {
+                    return FieldWrapper(
+                      label: 'Digite seu telefone',
+                      child: TextFormField(
+                        controller: _phoneNumberController,
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                          errorText: auth.error,
+                          errorMaxLines: 2,
+                        ),
+                        readOnly: _checkingPhone,
+                        inputFormatters: [maskFormatter],
+                        validator: useValidates([
+                          isRequired('Por favor, digite seu telefone'),
+                        ]),
+                      ),
+                    );
+                  },
                 ),
               ),
               const Spacer(),

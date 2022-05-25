@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 
-import '../app_model.dart';
 import '../navigation/routes.dart';
 import '../theme/pictures.dart';
 import 'activities/activities_view.dart';
@@ -26,12 +24,11 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final appVm = context.read<AppModel>();
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Olá, ${appVm.registeredUser.name}',
-          style: const TextStyle(fontSize: 28.0),
+        title: const Text(
+          'Olá, appVm.registeredUser.name',
+          style: TextStyle(fontSize: 28.0),
         ),
         actions: [
           TextButton(
