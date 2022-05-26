@@ -1,4 +1,5 @@
 import 'package:colaborativa_app/ui/navigation/routes.dart';
+import 'package:colaborativa_app/ui/widgets/user_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class MenuView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final auth = context.read<AuthController>();
+    final navigator = Navigator.of(context);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -29,12 +31,21 @@ class MenuView extends StatelessWidget {
         children: [
           const ProfileAvatar(),
           const SizedBox(height: 8),
-          Consumer<AuthController>(
-            builder: (context, auth, child) => Text(
-              auth.user?.name ?? 'Sem nome',
+          UserWidget(
+            builder: (context, user) => Text(
+              user?.name ?? 'Sem nome',
               style: theme.textTheme.bodyText1?.copyWith(
                 fontSize: 16.0,
                 color: AppColors.text2,
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () => navigator.pushNamed(Routes.profile),
+            child: Text(
+              'Editar perfil',
+              style: theme.textTheme.bodyText2?.copyWith(
+                color: AppColors.primary,
               ),
             ),
           ),

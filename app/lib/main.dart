@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/core/user_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +45,10 @@ void main() async {
         ),
         Provider(
           create: (context) => AchievementService(),
+          lazy: true,
+        ),
+        Provider(
+          create: (context) => UserService(),
           lazy: true,
         ),
         ChangeNotifierProvider(

@@ -1,8 +1,7 @@
+import 'package:colaborativa_app/ui/widgets/user_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 
-import '../controllers/auth_controller.dart';
 import '../navigation/routes.dart';
 import '../theme/pictures.dart';
 import 'activities/activities_view.dart';
@@ -15,11 +14,12 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final navigate = Navigator.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Consumer<AuthController>(
-          builder: (context, auth, child) => Text(
-            'Olá, ${auth.user!.name}',
+        title: UserWidget(
+          builder: (contex, user) => Text(
+            'Olá, ${user!.name}',
             style: const TextStyle(fontSize: 28.0),
           ),
         ),

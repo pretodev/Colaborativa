@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/utils/validation/validation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/entities/user_profile.dart';
@@ -10,9 +11,11 @@ import '../../../widgets/field_wrapper.dart';
 class ProfileForm extends StatefulWidget {
   final void Function(UserProfile) onSubmit;
   final bool saving;
+  final UserProfile? initialValue;
 
   const ProfileForm({
     Key? key,
+    this.initialValue,
     required this.onSubmit,
     this.saving = false,
   }) : super(key: key);
@@ -24,16 +27,16 @@ class ProfileForm extends StatefulWidget {
 class _ProfileFormState extends State<ProfileForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final _name = TextEditingController();
-
+  String? _name;
   GenderEnum? _gender;
   EthnicityEnum? _ethnicity;
   DateTime? _birthday;
 
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
+      _formKey.currentState?.save();
       widget.onSubmit(UserProfile(
-        name: _name.text,
+        name: _name!,
         ethnicity: _ethnicity!,
         birthday: _birthday!,
         gender: _gender!,
@@ -42,8 +45,18 @@ class _ProfileFormState extends State<ProfileForm> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.initialValue != null) {
+      _name = widget.initialValue!.name;
+      _birthday = widget.initialValue!.birthday;
+      _ethnicity = widget.initialValue!.ethnicity;
+      _gender = widget.initialValue!.gender;
+    }
+  }
+
+  @override
   void dispose() {
-    _name.dispose();
     super.dispose();
   }
 
@@ -57,8 +70,12 @@ class _ProfileFormState extends State<ProfileForm> {
           FieldWrapper(
             label: 'Seu nome',
             child: TextFormField(
-              controller: _name,
+              initialValue: _name,
               readOnly: widget.saving,
+              onSaved: (value) => _name = value,
+              validator: [
+                isRequired('Nome obrigatório'),
+              ].validate(),
             ),
           ),
           const SizedBox(height: 16),
@@ -66,6 +83,7 @@ class _ProfileFormState extends State<ProfileForm> {
             label: 'Data de nascimento',
             child: DateFormField(
               readOnly: widget.saving,
+              initialValue: _birthday,
               onChanged: (date) {
                 _birthday = date;
               },
@@ -76,6 +94,7 @@ class _ProfileFormState extends State<ProfileForm> {
             label: 'Sexo',
             child: DropdownField<GenderEnum>(
               readOnly: widget.saving,
+              value: _gender,
               onChanged: (value) {
                 _gender = value;
               },
@@ -100,6 +119,7 @@ class _ProfileFormState extends State<ProfileForm> {
             label: 'Cor ou raça',
             child: DropdownField<EthnicityEnum>(
               readOnly: widget.saving,
+              value: _ethnicity,
               onChanged: (value) {
                 _ethnicity = value;
               },

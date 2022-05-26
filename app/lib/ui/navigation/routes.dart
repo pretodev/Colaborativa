@@ -9,4 +9,5 @@ class Routes {
   static const chat = '/chat';
   static const rank = '/rank';
   static const achievements = '/achievements';
+  static const profile = '/profile';
 }

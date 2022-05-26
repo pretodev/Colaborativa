@@ -22,7 +22,6 @@ class AchievementsView extends StatelessWidget {
           if (!snapshot.hasData) {
             return const SizedBox();
           }
-          print(snapshot.data);
           return ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {

@@ -56,6 +56,14 @@ class AppTheme {
         ),
       ),
     ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        primary: AppColors.primary,
+        textStyle: GoogleFonts.nunito(
+          color: AppColors.primary,
+        ),
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.inputBackground,

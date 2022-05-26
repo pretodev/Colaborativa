@@ -3,5 +3,9 @@ enum EthnicityEnum {
   black,
   white,
   indigenous,
-  brown,
+  brown;
+
+  factory EthnicityEnum.fromString(String value) {
+    return EthnicityEnum.values.firstWhere((e) => e.name == value);
+  }
 }

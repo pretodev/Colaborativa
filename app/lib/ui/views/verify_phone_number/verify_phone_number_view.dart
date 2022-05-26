@@ -84,9 +84,9 @@ class _VerifyPhoneNumberViewState extends State<VerifyPhoneNumberView> {
                         ),
                         readOnly: _checkingPhone,
                         inputFormatters: [maskFormatter],
-                        validator: useValidates([
+                        validator: [
                           isRequired('Por favor, digite seu telefone'),
-                        ]),
+                        ].validate(),
                       ),
                     );
                   },

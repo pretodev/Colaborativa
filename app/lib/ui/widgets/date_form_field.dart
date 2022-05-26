@@ -4,11 +4,13 @@ import 'package:intl/intl.dart';
 class DateFormField extends StatefulWidget {
   final ValueChanged<DateTime?> onChanged;
   final bool readOnly;
+  final DateTime? initialValue;
 
   const DateFormField({
     Key? key,
     required this.onChanged,
     this.readOnly = false,
+    this.initialValue,
   }) : super(key: key);
 
   @override
@@ -28,6 +30,14 @@ class _DateFormFieldState extends State<DateFormField> {
     widget.onChanged(date);
     if (date != null) {
       _controller.text = DateFormat('dd/MM/yyyy').format(date);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialValue != null) {
+      _controller.text = DateFormat('dd/MM/yyyy').format(widget.initialValue!);
     }
   }
 
