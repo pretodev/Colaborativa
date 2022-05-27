@@ -3,7 +3,8 @@ import '../../utils/date/date_utils.dart';
 enum PeriodEnum {
   all,
   day,
-  week;
+  week,
+  month;
 
   String get path {
     switch (this) {
@@ -12,7 +13,9 @@ enum PeriodEnum {
       case PeriodEnum.day:
         return 'day/$todayKey';
       case PeriodEnum.week:
-        return 'week/';
+        return 'week/$weekKey';
+      case PeriodEnum.month:
+        return 'month/$monthKey';
     }
   }
 }

@@ -16,7 +16,7 @@ class RankFilterWidget extends StatefulWidget {
 }
 
 class _RankFilterWidgetState extends State<RankFilterWidget> {
-  var _period = PeriodEnum.all;
+  var _period = PeriodEnum.month;
 
   void _setPeriod(PeriodEnum value) {
     setState(() {
@@ -30,9 +30,9 @@ class _RankFilterWidgetState extends State<RankFilterWidget> {
     return Row(
       children: [
         RankFilterItemWidget(
-          label: 'Todos',
-          selected: _period == PeriodEnum.all,
-          onPressed: () => _setPeriod(PeriodEnum.all),
+          label: 'Mês',
+          selected: _period == PeriodEnum.month,
+          onPressed: () => _setPeriod(PeriodEnum.month),
         ),
         const SizedBox(width: 4),
         RankFilterItemWidget(

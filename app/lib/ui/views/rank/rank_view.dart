@@ -30,7 +30,7 @@ class _RankViewState extends State<RankView> {
   void initState() {
     super.initState();
     _scoreService = context.read<ScoreService>();
-    loadRank(PeriodEnum.all);
+    loadRank(PeriodEnum.month);
   }
 
   @override
