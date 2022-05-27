@@ -1,16 +1,18 @@
-import 'package:colaborativa_app/ui/views/achievements/achievements_view.dart';
-import 'package:colaborativa_app/ui/views/profile_editor/profile_editor_view.dart';
-import 'package:colaborativa_app/utils/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../utils/context_extension.dart';
+import 'controllers/app_controller.dart';
 import 'controllers/auth_controller.dart';
 import 'navigation/routes.dart';
 import 'theme/theme.dart';
+import 'views/achievements/achievements_view.dart';
 import 'views/chat/chat_view.dart';
+import 'views/chat_message_selector_view.dart';
 import 'views/confirm_sms_code/confirm_sms_code_view.dart';
 import 'views/home_view.dart';
 import 'views/menu/menu_view.dart';
+import 'views/profile_editor/profile_editor_view.dart';
 import 'views/rank/rank_view.dart';
 import 'views/share_feeling_diary_view.dart';
 import 'views/splash_view.dart';
@@ -39,6 +41,8 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   void initState() {
     super.initState();
+    final app = context.read<AppController>();
+    app.load();
     final auth = context.read<AuthController>();
     auth.addListener(() {
       auth.status.whenOrNull(
@@ -75,6 +79,8 @@ class _AppWidgetState extends State<AppWidget> {
         Routes.rank: (ctx) => const RankView(),
         Routes.achievements: (ctx) => const AchievementsView(),
         Routes.profile: (ctx) => const ProfileEditorView(),
+        Routes.chatMessageSelector: (ctx) =>
+            ChatMessageSelectorView(messageType: ctx.args()),
       },
     );
   }

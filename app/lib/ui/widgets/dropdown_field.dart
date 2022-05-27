@@ -17,6 +17,7 @@ class DropdownField<T> extends StatefulWidget {
   final ValueChanged<T?> onChanged;
   final T? value;
   final bool readOnly;
+  final InputDecoration? decoration;
 
   const DropdownField({
     Key? key,
@@ -24,6 +25,7 @@ class DropdownField<T> extends StatefulWidget {
     required this.onChanged,
     this.value,
     this.readOnly = false,
+    this.decoration,
   }) : super(key: key);
 
   @override
@@ -37,12 +39,17 @@ class _DropdownFieldState<T> extends State<DropdownField<T>> {
 
   OverlayEntry? _overlayEntry;
 
+  InputDecoration _decoration = const InputDecoration();
+
   @override
   void initState() {
     super.initState();
     if (widget.value != null) {
       _controller.text =
           widget.items.firstWhere((item) => item.value == widget.value).label;
+    }
+    if (widget.decoration != null) {
+      _decoration = widget.decoration!;
     }
     _focusNode.addListener(() {
       if (_focusNode.hasFocus && !widget.readOnly) {
@@ -99,11 +106,12 @@ class _DropdownFieldState<T> extends State<DropdownField<T>> {
         readOnly: true,
         focusNode: _focusNode,
         controller: _controller,
-        decoration: const InputDecoration(
-          suffixIcon: Icon(
-            Icons.keyboard_arrow_down_rounded,
-            color: AppColors.primary,
-          ),
+        decoration: _decoration.copyWith(
+          suffixIcon: widget.decoration?.suffixIcon ??
+              const Icon(
+                Icons.keyboard_arrow_down_rounded,
+                color: AppColors.primary,
+              ),
         ),
       ),
     );

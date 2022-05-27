@@ -1,16 +1,18 @@
-import 'package:colaborativa_app/core/user_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core/achievement_service.dart';
 import 'core/activities_service.dart';
+import 'core/app_service.dart';
 import 'core/auth_service.dart';
 import 'core/chat_service.dart';
 import 'core/feeling_service.dart';
 import 'core/score_service.dart';
+import 'core/user_service.dart';
 import 'firebase_options.dart';
 import 'ui/app_widget.dart';
+import 'ui/controllers/app_controller.dart';
 import 'ui/controllers/auth_controller.dart';
 
 void main() async {
@@ -23,6 +25,10 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        Provider(
+          create: (context) => AppService(),
+          lazy: true,
+        ),
         Provider(
           create: (context) => FeelingService(),
           lazy: true,
@@ -52,9 +58,14 @@ void main() async {
           lazy: true,
         ),
         ChangeNotifierProvider(
+          create: (context) => AppController(
+            appService: context.read<AppService>(),
+          ),
+        ),
+        ChangeNotifierProvider(
           create: (context) => AuthController(
             authService: context.read<AuthService>(),
-          ),
+          )..loadUser(),
         ),
       ],
       child: const AppWidget(),

@@ -1,3 +1,5 @@
+import 'package:colaborativa_app/ui/navigation/routes.dart';
+import 'package:colaborativa_app/ui/views/chat/widgets/chat_menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +45,6 @@ class ChatView extends StatelessWidget {
                     }
                     final messages = snapshot.data ?? [];
                     return ListView.builder(
-                      //controller: controller.chatList,
                       reverse: true,
                       itemCount: messages.length,
                       itemBuilder: (_, index) {
@@ -61,13 +62,15 @@ class ChatView extends StatelessWidget {
                   }),
             ),
             const SizedBox(height: 16),
-            TextField(
-              onTap: () => sendMessage(context),
-              readOnly: true,
-              decoration: const InputDecoration(
-                hintText: 'Escreva algo para a comunidade...',
-              ),
-            )
+            ChatMenuWidget(
+              onItemClicked: (type) {
+                Navigator.pushNamed(
+                  context,
+                  Routes.chatMessageSelector,
+                  arguments: type,
+                );
+              },
+            ),
           ],
         ),
       ),

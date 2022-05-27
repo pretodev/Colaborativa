@@ -7,6 +7,7 @@ class Routes {
   static const menu = '/menu';
   static const fellingDiary = '/felling/diary';
   static const chat = '/chat';
+  static const chatMessageSelector = '/chat/message-selector';
   static const rank = '/rank';
   static const achievements = '/achievements';
   static const profile = '/profile';

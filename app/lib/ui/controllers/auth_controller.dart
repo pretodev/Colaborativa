@@ -8,9 +8,7 @@ import '../../utils/strings/strings.dart';
 
 class AuthController extends ChangeNotifier {
   AuthController({required AuthService authService})
-      : _authService = authService {
-    loadUser();
-  }
+      : _authService = authService;
 
   final AuthService _authService;
 
