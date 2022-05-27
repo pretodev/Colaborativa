@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:modx/modx.dart';
 
 import '../../../core/entities/activity.dart';
 
-class ActivityDetailsView extends StatelessView {
+class ActivityDetailsView extends StatelessWidget {
   const ActivityDetailsView({Key? key, required this.activity})
       : super(key: key);
 

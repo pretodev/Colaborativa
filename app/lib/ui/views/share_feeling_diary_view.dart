@@ -34,7 +34,7 @@ class _ShareFeelingDiaryViewState extends State<ShareFeelingDiaryView> {
     await _feelingRepository.save(
       FeelingDiary(
         feeling: widget.feeling,
-        text: _textController.text,
+        text: _textController.text.trim(),
       ),
     );
     _navigator.pop();
@@ -87,6 +87,8 @@ class _ShareFeelingDiaryViewState extends State<ShareFeelingDiaryView> {
             Emoji(widget.feeling),
             const SizedBox(height: 16.0),
             Text('${feelingsDescriptions[widget.feeling]}'),
+            const SizedBox(height: 8),
+            const Text('Pelo menos 10 caracteres'),
             const SizedBox(height: 12),
             Expanded(
               child: TextField(
