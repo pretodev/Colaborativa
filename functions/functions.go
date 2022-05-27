@@ -21,6 +21,7 @@ var userRepo *repositories.UserRepo
 var feelingRepo *repositories.FeelingRepo
 var activityRepo *repositories.ActivityRepo
 var messageRepo *repositories.MessageRepo
+var scoreRepo *repositories.ScoreRepo
 
 var saveMessage commands.SaveMessageCommand
 
@@ -50,5 +51,6 @@ func init() {
 	feelingRepo = repositories.NewFeelingRepo(database)
 	activityRepo = repositories.NewActivityRepo(database)
 	messageRepo = repositories.NewMessageRepo(database)
+	scoreRepo = repositories.NewScoreRepo(firestore, database)
 	saveMessage = commands.NewSaveMessageCommand(messageRepo, userRepo)
 }

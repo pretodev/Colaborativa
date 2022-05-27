@@ -39,6 +39,7 @@ func (repo *UserRepo) FromId(ctx context.Context, userId string) (*models.User, 
 	}
 	profile := models.User{}
 	err = doc.DataTo(&profile)
+	profile.Id = userId
 	if err != nil {
 		return nil, err
 	}

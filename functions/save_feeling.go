@@ -37,5 +37,14 @@ func SaveDailyFeeling(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%e", err), http.StatusInternalServerError)
 		return
 	}
+	user, err := userRepo.FromId(ctx, userId)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+		return
+	}
+	if err := scoreRepo.ScoreAction(ctx, *user, models.ActionSaveFeeling); err != nil {
+		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+		return
+	}
 	helpers.Response(w, "Success", http.StatusCreated)
 }
