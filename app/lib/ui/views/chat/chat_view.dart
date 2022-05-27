@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/core/enums/message_types_enum.dart';
 import 'package:colaborativa_app/ui/navigation/routes.dart';
 import 'package:colaborativa_app/ui/views/chat/widgets/chat_menu_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,15 @@ import '../../widgets/page_body.dart';
 import '../chat_input_view.dart';
 import 'widgets/chat_message.dart';
 
-class ChatView extends StatelessWidget {
+class ChatView extends StatefulWidget {
   const ChatView({Key? key}) : super(key: key);
 
-  void sendMessage(BuildContext context) {
+  @override
+  State<ChatView> createState() => _ChatViewState();
+}
+
+class _ChatViewState extends State<ChatView> {
+  void sendMessage() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -22,6 +28,17 @@ class ChatView extends StatelessWidget {
         ),
       ),
       builder: (context) => const ChatInputView(),
+    );
+  }
+
+  void menuClicked(MessageTypesEnum type) {
+    if (type == MessageTypesEnum.custom) {
+      return sendMessage();
+    }
+    Navigator.pushNamed(
+      context,
+      Routes.chatMessageSelector,
+      arguments: type,
     );
   }
 
@@ -63,13 +80,7 @@ class ChatView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ChatMenuWidget(
-              onItemClicked: (type) {
-                Navigator.pushNamed(
-                  context,
-                  Routes.chatMessageSelector,
-                  arguments: type,
-                );
-              },
+              onItemClicked: menuClicked,
             ),
           ],
         ),

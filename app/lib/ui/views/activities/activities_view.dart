@@ -14,6 +14,11 @@ class ActivitiesView extends StatelessWidget {
   void showActiviyCheckout(BuildContext context, Activity activity) {
     showModalBottomSheet(
       context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
       builder: (context) {
         return ActivityDetailsView(activity: activity);
       },
