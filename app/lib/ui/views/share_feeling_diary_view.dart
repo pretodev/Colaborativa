@@ -58,6 +58,21 @@ class _ShareFeelingDiaryViewState extends State<ShareFeelingDiaryView> {
 
   @override
   Widget build(BuildContext context) {
+    final feelingsDescriptions = {
+      Feeling.angry:
+          'O que aconteceu para você ficar irritado? Compartilhe com nós e alivie um pouco da sua raiva.',
+      Feeling.confused:
+          'Se sentir confuso pode ser muito frustrante às vezes. Compartilhe com a nossa comunidade para tentarmos te ajudar.',
+      Feeling.sad:
+          'Se você está triste, nós estamos tristes. Fale um pouco sobre este sentimento e nos deixe ajudar.',
+      Feeling.sick:
+          'Desejamos melhoras para você. Fale com a gente o que aconteceu e como está se sentindo agora.',
+      Feeling.sleeping:
+          'Os dias às vezes são duros, mas é sempre bom tirar um tempo para você. Agora você pode relaxar e compartilhar o que tá te deixando cansado.',
+      Feeling.smiling:
+          'Que bom que você está se sentido ótimo, compartilhe com a gente o que está te deixando tão feliz.',
+    };
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -71,9 +86,7 @@ class _ShareFeelingDiaryViewState extends State<ShareFeelingDiaryView> {
           children: [
             Emoji(widget.feeling),
             const SizedBox(height: 16.0),
-            const Text(
-              'Que bom que você está se sentido ótimo, compartilhe com a gente o que está te deixando tão feliz.',
-            ),
+            Text('${feelingsDescriptions[widget.feeling]}'),
             const SizedBox(height: 12),
             Expanded(
               child: TextField(
