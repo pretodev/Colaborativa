@@ -18,18 +18,22 @@ func RegisterAccess(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusBadRequest)
 		return
 	}
-	var userId string
-	if err := helpers.UserId(r, &userId); err != nil {
-		http.Error(w, fmt.Sprintf("%s", err), http.StatusUnauthorized)
+	var user models.User
+	if err := parseUser(r, &user); err != nil {
+		http.Error(w, fmt.Sprintf("Parse User:%s", err), http.StatusUnauthorized)
 		return
 	}
 	ctx := context.Background()
-	if err := userRepo.AddDeviceToken(ctx, userId, access.DeviceToken); err != nil {
-		http.Error(w, fmt.Sprintf("%e", err), http.StatusInternalServerError)
+	if err := userRepo.AddDeviceToken(ctx, user.Id, access.DeviceToken); err != nil {
+		http.Error(w, fmt.Sprintf("Add Device Token: %e", err), http.StatusInternalServerError)
 		return
 	}
-	if err := userRepo.AddAccess(ctx, userId); err != nil {
-		http.Error(w, fmt.Sprintf("%e", err), http.StatusInternalServerError)
+	if err := userRepo.AddAccess(ctx, user.Id); err != nil {
+		http.Error(w, fmt.Sprintf("Add Access: %e", err), http.StatusInternalServerError)
+		return
+	}
+	if err := achievementRepo.CheckGoal(ctx, user, models.ActionRegisterDiaryAccess); err != nil {
+		http.Error(w, fmt.Sprintf("Check Goal: %e", err), http.StatusInternalServerError)
 		return
 	}
 

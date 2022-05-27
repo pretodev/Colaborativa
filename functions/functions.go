@@ -2,7 +2,10 @@ package functions
 
 import (
 	"context"
+	"errors"
+	"github.com/pretodev/colaborativa/functions/models"
 	"log"
+	"net/http"
 	"os"
 
 	firebase "firebase.google.com/go"
@@ -22,10 +25,24 @@ var feelingRepo *repositories.FeelingRepo
 var activityRepo *repositories.ActivityRepo
 var messageRepo *repositories.MessageRepo
 var scoreRepo *repositories.ScoreRepo
+var achievementRepo *repositories.AchievementRepo
 
 var saveMessage commands.SaveMessageCommand
 
 var validate = v10.New()
+
+func parseUser(r *http.Request, u *models.User) error {
+	userId := r.Header.Get("X-User-Id")
+	if userId == "" {
+		return errors.New("X-User-ActivityId não encontrado")
+	}
+	user, err := userRepo.FromId(ctx, userId)
+	if err != nil {
+		return errors.New("erro na busca usuários")
+	}
+	*u = *user
+	return nil
+}
 
 func init() {
 	if value := os.Getenv("DATABASE_EMULATOR_HOST"); value != "" {
@@ -52,5 +69,7 @@ func init() {
 	activityRepo = repositories.NewActivityRepo(database)
 	messageRepo = repositories.NewMessageRepo(database)
 	scoreRepo = repositories.NewScoreRepo(firestore, database)
+	achievementRepo = repositories.NewAchievementRepo(firestore, database)
+
 	saveMessage = commands.NewSaveMessageCommand(messageRepo, userRepo)
 }
