@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 
+import '../utils/collections.dart';
 import 'entities/app_configs.dart';
 
 class AppService {
@@ -21,15 +22,11 @@ class AppService {
     for (var type in types) {
       final typeMessages = chatSSuggestions[type] as Map?;
       if (typeMessages != null) {
-        chatSSuggestionsMap['${type}All'] = _parseList(typeMessages['all']);
+        chatSSuggestionsMap['${type}All'] = listDecode(typeMessages['all']);
         chatSSuggestionsMap['${type}Individual'] =
-            _parseList(typeMessages['individual']);
+            listDecode(typeMessages['individual']);
       }
     }
     return chatSSuggestionsMap;
-  }
-
-  List<T> _parseList<T>(List? list) {
-    return list?.map((e) => e as T).toList() ?? [];
   }
 }

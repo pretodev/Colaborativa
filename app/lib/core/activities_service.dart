@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/utils/collections.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -15,10 +16,13 @@ class ActivitiesServices {
           await FirebaseDatabase.instance.ref('activities').get();
       final activities =
           activitiesSnap.children.map(_fromDataSnapshot).toList();
-      final userActivies = event.snapshot.value as Map<String, dynamic>? ?? {};
-      return activities
-          .where((activity) => !userActivies.containsKey(activity.id))
-          .toList();
+      final userActivies = listDecode<int>(event.snapshot.value);
+      for (var activityId in userActivies) {
+        if (activityId < activities.length) {
+          activities.removeAt(activityId);
+        }
+      }
+      return activities;
     });
   }
 }
