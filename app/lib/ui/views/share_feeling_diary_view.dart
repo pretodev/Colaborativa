@@ -30,7 +30,11 @@ class _ShareFeelingDiaryViewState extends State<ShareFeelingDiaryView> {
   set textValid(bool value) => setState(() => _textValid = value);
   bool get isTextValid => _textValid;
 
+  var savingValue = false;
+  set saving(bool value) => setState(() => savingValue = value);
+
   void shareFeeling() async {
+    saving = true;
     await _feelingRepository.save(
       FeelingDiary(
         feeling: widget.feeling,
@@ -109,8 +113,8 @@ class _ShareFeelingDiaryViewState extends State<ShareFeelingDiaryView> {
               ),
             ),
             ElevatedButton(
-              onPressed: isTextValid ? shareFeeling : null,
-              child: const Text('Publicar'),
+              onPressed: isTextValid && !savingValue ? shareFeeling : null,
+              child: Text(savingValue ? 'Publicando' : 'Publicar'),
             ),
           ],
         ),

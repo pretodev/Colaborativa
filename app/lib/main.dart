@@ -1,4 +1,8 @@
+import 'package:colaborativa_app/core/clients/colaborativa_api_client.dart';
+import 'package:colaborativa_app/utils/context_extension.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,45 +30,61 @@ void main() async {
     MultiProvider(
       providers: [
         Provider(
-          create: (context) => AppService(),
+          create: (ctx) => FirebaseAuth.instance,
           lazy: true,
         ),
         Provider(
-          create: (context) => FeelingService(),
+          create: (ctx) => FirebaseDatabase.instance,
           lazy: true,
         ),
         Provider(
-          create: (context) => ActivitiesServices(),
+          create: (ctx) => ColaborativaApiClient(ctx.read()),
           lazy: true,
         ),
         Provider(
-          create: (context) => ChatService(),
+          create: (ctx) => AppService(),
           lazy: true,
         ),
         Provider(
-          create: (context) => AuthService(),
+          create: (ctx) => FeelingService(
+            ctx.userId,
+            db: ctx.read(),
+            colaborativaApi: ctx.read<ColaborativaApiClient>().client,
+          ),
           lazy: true,
         ),
         Provider(
-          create: (context) => ScoreService(),
+          create: (ctx) => ActivitiesServices(),
           lazy: true,
         ),
         Provider(
-          create: (context) => AchievementService(),
+          create: (ctx) => ChatService(),
           lazy: true,
         ),
         Provider(
-          create: (context) => UserService(),
+          create: (ctx) => AuthService(),
+          lazy: true,
+        ),
+        Provider(
+          create: (ctx) => ScoreService(),
+          lazy: true,
+        ),
+        Provider(
+          create: (ctx) => AchievementService(),
+          lazy: true,
+        ),
+        Provider(
+          create: (ctx) => UserService(),
           lazy: true,
         ),
         ChangeNotifierProvider(
-          create: (context) => AppController(
-            appService: context.read<AppService>(),
+          create: (ctx) => AppController(
+            appService: ctx.read<AppService>(),
           ),
         ),
         ChangeNotifierProvider(
-          create: (context) => AuthController(
-            authService: context.read<AuthService>(),
+          create: (ctx) => AuthController(
+            authService: ctx.read<AuthService>(),
           )..loadUser(),
         ),
       ],
