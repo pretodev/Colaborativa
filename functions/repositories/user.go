@@ -52,8 +52,8 @@ func (repo UserRepo) AddDeviceToken(ctx context.Context, userId string, deviceTo
 	return err
 }
 
-func (repo *UserRepo) AddAccess(ctx context.Context, userId string) error {
-	accessTimeStr := time.Now().Format("2006-01-02 15:04:05")
+func (repo *UserRepo) AddAccess(ctx context.Context, userId string, time time.Time) error {
+	accessTimeStr := time.Format("2006-01-02 15:04:05")
 	ref := repo.database.NewRef("users/" + userId + "/access")
 	_, err := ref.Push(ctx, accessTimeStr)
 	return err
@@ -61,12 +61,19 @@ func (repo *UserRepo) AddAccess(ctx context.Context, userId string) error {
 
 func (repo UserRepo) LastAccess(ctx context.Context, userId string) (*time.Time, error) {
 	ref := repo.database.NewRef("users/" + userId + "/access")
-	var lastAccess string
+	var lastAccess map[string]string
 	err := ref.OrderByValue().LimitToLast(1).Get(ctx, &lastAccess)
 	if err != nil {
 		return nil, err
 	}
-	lastAccessTime, err := time.Parse("2006-01-02 15:04:05", lastAccess)
+	v := make([]string, 0, len(lastAccess))
+	for _, value := range lastAccess {
+		v = append(v, value)
+	}
+	if len(v) == 0 {
+		return nil, nil
+	}
+	lastAccessTime, err := time.Parse("2006-01-02 15:04:05", v[0])
 	if err != nil {
 		return nil, err
 	}
