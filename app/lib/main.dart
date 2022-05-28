@@ -54,7 +54,10 @@ void main() async {
           lazy: true,
         ),
         Provider(
-          create: (ctx) => ActivitiesServices(),
+          create: (ctx) => ActivitiesServices(
+            ctx.userId,
+            database: ctx.read(),
+          ),
           lazy: true,
         ),
         Provider(

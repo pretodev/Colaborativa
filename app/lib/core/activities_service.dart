@@ -1,13 +1,18 @@
 import 'package:colaborativa_app/utils/collections.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../utils/date/date_utils.dart';
 import 'entities/activity.dart';
 
 class ActivitiesServices {
-  final _db = FirebaseDatabase.instance;
-  final _userId = FirebaseAuth.instance.currentUser!.uid;
+  ActivitiesServices(
+    String id, {
+    required FirebaseDatabase database,
+  })  : _db = database,
+        _userId = id;
+
+  final FirebaseDatabase _db;
+  final String _userId;
 
   Stream<List<Activity>> get activities {
     final ref = _db.ref('users/$_userId/activities/$todayKey');
