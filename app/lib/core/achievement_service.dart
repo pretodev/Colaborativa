@@ -12,6 +12,7 @@ class AchievementService {
     return ref.onValue.asyncMap((event) async {
       final achievementsSnap =
           await FirebaseDatabase.instance.ref('achievements').get();
+
       final achievements = achievementsSnap.children
           .map((data) => _fromDataSnapshot(data, event.snapshot))
           .toList();
@@ -21,19 +22,24 @@ class AchievementService {
 }
 
 Achievement _fromDataSnapshot(DataSnapshot globalData, DataSnapshot userData) {
-  final key = globalData.key!;
+  final globaKey = globalData.key!;
   final globalMap = globalData.value as Map;
-  final maxLevel = globalData.child('levels').children.length;
-  final userMap = userData.value as Map? ?? {};
-  final userLevel = userMap[key]?['level'] as int? ?? 0;
-  final userProgress = userMap[key]?['progress'] as int? ?? 0;
-  final maxLevelProgress = globalMap['levels'][userLevel + 1] as int;
+  final levels = globalData.child('goals').value as List? ?? [];
+  final userAchievement = userData.child(globaKey).value as Map?;
+
+  var userLevel = 0;
+  var userPoints = 0;
+  if (userAchievement != null) {
+    userLevel = userAchievement['level'] as int;
+    userPoints = userAchievement['points'] as int;
+  }
+
   return Achievement(
-    id: key,
-    maxLevel: maxLevel,
+    id: globaKey,
+    maxLevel: levels.length,
     description: globalMap['description'],
-    userLevel: userLevel,
-    userProgress: userProgress,
-    maxLevelProgess: maxLevelProgress,
+    userLevel: userLevel + 1,
+    userProgress: userPoints,
+    maxLevelProgess: levels[userLevel] as int,
   );
 }
