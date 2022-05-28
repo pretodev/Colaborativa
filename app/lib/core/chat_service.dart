@@ -10,20 +10,7 @@ class ChatService {
     final messageRef = _db.ref('messages');
     return messageRef.onValue.map(
       (event) {
-        final messages = event.snapshot.value as Map<String, dynamic>;
-        return messages.keys.map((key) {
-          final message = messages[key] as Map<String, dynamic>;
-          return Message(
-            id: key,
-            content: message['content'],
-            timestamp: DateTime.parse(message['timestamp'] as String),
-            emitter: Emitter(
-              id: message['emitter']['id'],
-              name: message['emitter']['name'],
-              photoUrl: message['emitter']['photo_url'],
-            ),
-          );
-        }).toList();
+        return event.snapshot.children.map(_fromDataSnapshot).toList();
       },
     );
   }
@@ -31,15 +18,14 @@ class ChatService {
 
 Message _fromDataSnapshot(DataSnapshot data) {
   final map = data.value as Map;
-  final emitterMap = map['emitter'];
   return Message(
     id: data.key!,
     content: map['content'],
-    timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp']),
+    timestamp: DateTime.parse(map['timestamp'] as String),
     emitter: Emitter(
-      id: emitterMap['id'],
-      name: emitterMap['name'],
-      photoUrl: emitterMap['photo_url'],
+      id: map['emitter']['id'],
+      name: map['emitter']['name'],
+      photoUrl: map['emitter']['photo_url'],
     ),
   );
 }
