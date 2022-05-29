@@ -1,4 +1,5 @@
 import 'package:colaborativa_app/utils/collections.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../utils/date/date_utils.dart';
@@ -8,11 +9,20 @@ class ActivitiesServices {
   ActivitiesServices(
     String id, {
     required FirebaseDatabase database,
+    required Dio colaborativaApi,
   })  : _db = database,
-        _userId = id;
+        _userId = id,
+        _colaborativaApi = colaborativaApi;
 
   final FirebaseDatabase _db;
   final String _userId;
+  final Dio _colaborativaApi;
+
+  Future<void> checkActivity(Activity activity) async {
+    await _colaborativaApi.post('/check-activity', data: {
+      'activityId': activity.id,
+    });
+  }
 
   Stream<List<Activity>> get activities {
     final ref = _db.ref('users/$_userId/activities/$todayKey');

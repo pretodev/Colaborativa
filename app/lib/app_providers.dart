@@ -44,6 +44,7 @@ final appProviders = [
     create: (ctx) => ActivitiesServices(
       ctx.userId,
       database: ctx.read(),
+      colaborativaApi: ctx.read<ColaborativaApiClient>().client,
     ),
     lazy: true,
   ),

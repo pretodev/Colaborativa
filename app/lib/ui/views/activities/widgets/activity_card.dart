@@ -22,11 +22,19 @@ class ActivityCard extends StatelessWidget {
         width: 178.0,
         child: Column(
           children: [
-            SvgPicture.network(
-              activity.iconUrl,
-              height: 50.0,
-              width: 50.0,
-              semanticsLabel: 'A shark?!',
+            Visibility(
+              visible: activity.iconUrl.contains('svg'),
+              replacement: Image.network(
+                activity.iconUrl,
+                height: 50.0,
+                width: 50.0,
+              ),
+              child: SvgPicture.network(
+                activity.iconUrl,
+                height: 50.0,
+                width: 50.0,
+                semanticsLabel: 'A shark?!',
+              ),
             ),
             const SizedBox(height: 8.0),
             Text(
