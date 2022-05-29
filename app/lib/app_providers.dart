@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:colaborativa_app/core/clients/colaborativa_api_client.dart';
 import 'package:colaborativa_app/utils/context_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +23,10 @@ final appProviders = [
   ),
   Provider(
     create: (ctx) => FirebaseDatabase.instance,
+    lazy: true,
+  ),
+  Provider(
+    create: (ctx) => FirebaseFirestore.instance,
     lazy: true,
   ),
   Provider(
@@ -68,7 +73,11 @@ final appProviders = [
     lazy: true,
   ),
   Provider(
-    create: (ctx) => UserService(),
+    create: (ctx) => UserService(
+      ctx.userId,
+      firestore: ctx.read(),
+      colaborativaApi: ctx.read<ColaborativaApiClient>().client,
+    ),
     lazy: true,
   ),
   ChangeNotifierProvider<AppController>(

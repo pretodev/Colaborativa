@@ -2,13 +2,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:colaborativa_app/core/entities/user_profile.dart';
 import 'package:colaborativa_app/core/enums/ethnicity_enum.dart';
 import 'package:colaborativa_app/core/enums/gender_enum.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fa;
 
 import 'entities/user.dart';
 
 class UserService {
-  final _firestore = FirebaseFirestore.instance;
-  final _userId = fa.FirebaseAuth.instance.currentUser!.uid;
+  UserService(
+    this._userId, {
+    required FirebaseFirestore firestore,
+    required Dio colaborativaApi,
+  })  : _firestore = firestore,
+        _colaborativaApi = colaborativaApi;
+
+  final FirebaseFirestore _firestore;
+  final String _userId;
+  final Dio _colaborativaApi;
 
   Future<UserProfile> get profile async {
     final snapshot = await _firestore.collection('users').doc(_userId).get();
@@ -18,10 +27,8 @@ class UserService {
   bool get hasUser => fa.FirebaseAuth.instance.currentUser?.uid != null;
 
   Future<void> saveProfile(UserProfile profile) async {
-    return _firestore
-        .collection('users')
-        .doc(_userId)
-        .set(_toMap(profile), SetOptions(merge: true));
+    print(_toMap(profile));
+    await _colaborativaApi.post('/save-user', data: _toMap(profile));
   }
 
   Stream<User?> get user {
@@ -47,6 +54,6 @@ Map<String, dynamic> _toMap(UserProfile user) {
     'name': user.name,
     'ethnicity': user.ethnicity.name,
     'gender': user.gender.name,
-    'birthday': Timestamp.fromDate(user.birthday),
+    'birthday': "${user.birthday.toIso8601String()}-03:00",
   };
 }

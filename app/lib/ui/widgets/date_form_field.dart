@@ -23,7 +23,7 @@ class _DateFormFieldState extends State<DateFormField> {
   void _setDate() async {
     final date = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: widget.initialValue ?? DateTime.now(),
       lastDate: DateTime.now(),
       firstDate: DateTime(1900),
     );

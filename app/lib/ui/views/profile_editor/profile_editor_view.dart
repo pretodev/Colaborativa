@@ -1,6 +1,7 @@
 import 'package:colaborativa_app/core/entities/user_profile.dart';
 import 'package:colaborativa_app/core/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/page_body.dart';
 import '../../widgets/profile_avatar.dart';
@@ -40,7 +41,7 @@ class _ProfileEditorViewState extends State<ProfileEditorView> {
   @override
   void initState() {
     super.initState();
-    _userService = UserService();
+    _userService = context.read<UserService>();
     loadUser();
   }
 
