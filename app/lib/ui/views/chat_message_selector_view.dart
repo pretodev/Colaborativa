@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/core/chat_service.dart';
 import 'package:colaborativa_app/ui/theme/colors.dart';
 
 import '../controllers/app_controller.dart';
@@ -22,6 +23,10 @@ class ChatMessageSelectorView extends StatefulWidget {
 }
 
 class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
+  late final AppController app;
+  late final NavigatorState navigate;
+  late final ChatService chatService;
+
   int? msgIndexValue;
   set msgIndex(int? value) => setState(() => msgIndexValue = value);
 
@@ -37,17 +42,35 @@ class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
     msgIndex = index != msgIndexValue ? index : null;
   }
 
-  void sendMessage() {
-    Navigator.pop(context);
+  void sendMessage() async {
+    if (msgIndexValue != null) {
+      await chatService.sendMessage(
+        content: suggestions[msgIndexValue!],
+        destination: receveiverValue,
+      );
+      navigate.pop();
+    }
+  }
+
+  List<String> get suggestions {
+    final messageKey = receveiverValue == '@todos'
+        ? widget.messageType.allSuggestionKey
+        : widget.messageType.individualSuggestionKey;
+    final data = app.config.chatSSuggestions[messageKey] ?? [];
+    if (receveiverValue == '@todos') return data;
+    return data.map((m) => m.replaceAll('@', receveiverValue)).toList();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    navigate = Navigator.of(context);
+    app = context.read<AppController>();
+    chatService = context.read<ChatService>();
   }
 
   @override
   Widget build(BuildContext context) {
-    final config = context.read<AppController>().config;
-    final messageKey = receveiverValue == '@todos'
-        ? widget.messageType.allSuggestionKey
-        : widget.messageType.individualSuggestionKey;
-    final suggestions = config.chatSSuggestions[messageKey] ?? [];
     const titles = {
       MessageTypesEnum.support: 'Mensagems para Apoiar',
       MessageTypesEnum.incentive: 'Mensagens para Incentivar',
@@ -78,11 +101,11 @@ class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
                   label: '@todos',
                 ),
                 DropdownFieldItem<String>(
-                  value: 'vanessa',
+                  value: 'Vanessa',
                   label: '@Vanessa',
                 ),
                 DropdownFieldItem<String>(
-                  value: 'silas',
+                  value: 'Silas',
                   label: '@Silas',
                 ),
               ],
@@ -94,9 +117,10 @@ class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
                 itemBuilder: (context, index) {
                   final selected = index == msgIndexValue;
                   return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
-                      color: selected ? AppColors.primaryLight : null,
+                      color: selected ? AppColors.backgroundDark : null,
                     ),
                     child: ListTile(
                       title: Text(suggestions[index]),
@@ -109,7 +133,7 @@ class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: msgIndexValue != null ? () {} : null,
+              onPressed: msgIndexValue != null ? sendMessage : null,
               child: const Text('Enviar'),
             ),
           ],

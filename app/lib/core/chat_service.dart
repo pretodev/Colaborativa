@@ -1,10 +1,18 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'entities/emitter.dart';
 import 'entities/message.dart';
 
 class ChatService {
-  final _db = FirebaseDatabase.instance;
+  ChatService({
+    required FirebaseDatabase db,
+    required Dio colaborativaApi,
+  })  : _db = db,
+        _colaborativaApi = colaborativaApi;
+
+  final FirebaseDatabase _db;
+  final Dio _colaborativaApi;
 
   Stream<List<Message>> get messages {
     final messageRef = _db.ref('messages');
@@ -13,6 +21,16 @@ class ChatService {
         return event.snapshot.children.map(_fromDataSnapshot).toList();
       },
     );
+  }
+
+  Future<void> sendMessage({
+    required String content,
+    String destination = '@todos',
+  }) async {
+    await _colaborativaApi.post('/send-message', data: {
+      'content': content,
+      'destination': destination,
+    });
   }
 }
 

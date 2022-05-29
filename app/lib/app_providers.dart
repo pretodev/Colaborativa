@@ -49,7 +49,10 @@ final appProviders = [
     lazy: true,
   ),
   Provider(
-    create: (ctx) => ChatService(),
+    create: (ctx) => ChatService(
+      colaborativaApi: ctx.read<ColaborativaApiClient>().client,
+      db: ctx.read(),
+    ),
     lazy: true,
   ),
   Provider(
