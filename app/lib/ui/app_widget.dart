@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/core/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,6 +43,7 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     super.initState();
     final app = context.read<AppController>();
+    final notification = context.read<NotificationService>();
     app.load();
     final auth = context.read<AuthController>();
     auth.addListener(() {
@@ -54,6 +56,7 @@ class _AppWidgetState extends State<AppWidget> {
         },
         unregistered: () {},
         authenticated: (_) {
+          notification.subscribe();
           _navigateTo(Routes.home);
         },
       );

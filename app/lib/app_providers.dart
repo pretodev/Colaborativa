@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:colaborativa_app/core/clients/colaborativa_api_client.dart';
+import 'package:colaborativa_app/core/notification_service.dart';
 import 'package:colaborativa_app/utils/context_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:provider/provider.dart';
 
 import 'core/achievement_service.dart';
@@ -27,6 +29,10 @@ final appProviders = [
   ),
   Provider(
     create: (ctx) => FirebaseFirestore.instance,
+    lazy: true,
+  ),
+  Provider(
+    create: (ctx) => FirebaseMessaging.instance,
     lazy: true,
   ),
   Provider(
@@ -77,6 +83,14 @@ final appProviders = [
       ctx.userId,
       firestore: ctx.read(),
       colaborativaApi: ctx.read<ColaborativaApiClient>().client,
+    ),
+    lazy: true,
+  ),
+  Provider(
+    create: (ctx) => NotificationService(
+      ctx.userId,
+      firestore: ctx.read(),
+      messaging: ctx.read(),
     ),
     lazy: true,
   ),
