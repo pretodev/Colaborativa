@@ -27,7 +27,6 @@ class UserService {
   bool get hasUser => fa.FirebaseAuth.instance.currentUser?.uid != null;
 
   Future<void> saveProfile(UserProfile profile) async {
-    print(_toMap(profile));
     await _colaborativaApi.post('/save-user', data: _toMap(profile));
   }
 
