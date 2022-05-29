@@ -7,14 +7,16 @@ import (
 	"firebase.google.com/go/db"
 	"fmt"
 	"github.com/pretodev/colaborativa/functions/models"
+	"log"
 	"time"
 )
 
 var scoreTable = map[models.Action]int{
 	models.ActionSaveFeeling:         30,
-	models.ActionRegisterDiaryAccess: 10,
-	models.ActionSendMessage:         5,
-	models.ActionCheckActivity:       50,
+	models.ActionRegisterDiaryAccess: 2,
+	models.ActionSendMessage:         6,
+	models.ActionCheckActivity:       20,
+	models.ActionLevelUp:             10,
 }
 
 type ScoreRepo struct {
@@ -29,7 +31,6 @@ func (repo ScoreRepo) save(ctx context.Context, user models.User, score int, key
 	if err != nil {
 		return err
 	}
-	fmt.Print(dayScore)
 	newTotal := score
 	if dayScore != nil {
 		newTotal = dayScore.Total + score
@@ -49,6 +50,7 @@ func NewScoreRepo(firestore *firestore.Client, database *db.Client) *ScoreRepo {
 }
 
 func (repo ScoreRepo) ScoreAction(ctx context.Context, user models.User, action models.Action) error {
+	log.Println("ScoreAction", action)
 	score := scoreTable[action]
 	if score == 0 {
 		return errors.New("invalid action")

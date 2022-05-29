@@ -27,37 +27,39 @@ func NewAchievementRepo(firestore *firestore.Client, database *db.Client) *Achie
 	}
 }
 
-func (repo AchievementRepo) CheckGoal(ctx context.Context, user models.User, action models.Action) error {
+func (repo AchievementRepo) CheckGoal(ctx context.Context, user models.User, action models.Action) (bool, error) {
 	achievementPosition := achievementTable[action]
 	gKey := fmt.Sprintf("achievements/%d", achievementPosition)
 	var archive models.Achievement
 	err := repo.database.NewRef(gKey).Get(ctx, &archive)
 	if err != nil {
-		return err
+		return false, err
 	}
 
 	uKey := fmt.Sprintf("users/%s/achievements/%d", user.Id, achievementPosition)
 	var userAchievement *models.UserAchievement
 	err = repo.database.NewRef(uKey).Get(ctx, &userAchievement)
 	if err != nil {
-		return err
+		return false, err
 	}
 	if userAchievement.Level == len(archive.Goals) {
-		return nil
+		return false, nil
 	}
+	levelUp := false
 	newPoints := 1
 	if userAchievement != nil {
 		newPoints = userAchievement.Points + 1
 		if newPoints >= archive.Goals[userAchievement.Level] {
 			userAchievement.Level++
 			userAchievement.Points = 0
+			levelUp = true
 		} else {
 			userAchievement.Points = newPoints
 		}
 	}
 	err = repo.database.NewRef(uKey).Set(ctx, userAchievement)
 	if err != nil {
-		return err
+		return false, err
 	}
-	return nil
+	return levelUp, nil
 }
