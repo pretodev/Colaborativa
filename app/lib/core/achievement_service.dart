@@ -38,7 +38,7 @@ Achievement _fromDataSnapshot(DataSnapshot globalData, DataSnapshot userData) {
     id: globaKey,
     maxLevel: levels.length,
     description: globalMap['description'],
-    userLevel: userLevel + 1,
+    userLevel: userLevel,
     userProgress: userPoints,
     maxLevelProgess: levels[userLevel] as int,
   );

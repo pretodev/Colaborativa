@@ -24,7 +24,7 @@ class AchievementCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AchievementLevelWidget(
-            level: achievement.userProgress,
+            level: achievement.userLevel,
             maxLevel: achievement.maxLevel,
           ),
           const SizedBox(height: 16.0),
