@@ -29,17 +29,33 @@ func NewAchievementRepo(firestore *firestore.Client, database *db.Client) *Achie
 
 func (repo AchievementRepo) CheckGoal(ctx context.Context, user models.User, action models.Action) error {
 	achievementPosition := achievementTable[action]
-	uKey := fmt.Sprintf("users/%s/achievements/%d", user.Id, achievementPosition)
-	var points *int
-	err := repo.database.NewRef(uKey).Get(ctx, &points)
+	gKey := fmt.Sprintf("achievements/%d", achievementPosition)
+	var archive models.Achievement
+	err := repo.database.NewRef(gKey).Get(ctx, &archive)
 	if err != nil {
 		return err
 	}
-	newPoints := 1
-	if points != nil {
-		newPoints = *points + 1
+
+	uKey := fmt.Sprintf("users/%s/achievements/%d", user.Id, achievementPosition)
+	var userAchievement *models.UserAchievement
+	err = repo.database.NewRef(uKey).Get(ctx, &userAchievement)
+	if err != nil {
+		return err
 	}
-	err = repo.database.NewRef(uKey).Set(ctx, newPoints)
+	if userAchievement.Level == len(archive.Goals) {
+		return nil
+	}
+	newPoints := 1
+	if userAchievement != nil {
+		newPoints = userAchievement.Points + 1
+		if newPoints >= archive.Goals[userAchievement.Level] {
+			userAchievement.Level++
+			userAchievement.Points = 0
+		} else {
+			userAchievement.Points = newPoints
+		}
+	}
+	err = repo.database.NewRef(uKey).Set(ctx, userAchievement)
 	if err != nil {
 		return err
 	}
