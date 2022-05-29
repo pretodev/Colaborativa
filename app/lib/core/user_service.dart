@@ -30,6 +30,10 @@ class UserService {
     await _colaborativaApi.post('/save-user', data: _toMap(profile));
   }
 
+  Future<void> registerAccess() async {
+    await _colaborativaApi.post('/register-access');
+  }
+
   Stream<User?> get user {
     return _firestore.collection('users').doc(_userId).snapshots().map((doc) {
       if (!hasUser) return null;
