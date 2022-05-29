@@ -10,13 +10,8 @@ import (
 )
 
 func RegisterAccess(w http.ResponseWriter, r *http.Request) {
-	var access models.UserAccess
-	if err, code := helpers.ParsePost(r, &access); code >= 400 {
+	if err, code := helpers.ParsePost(r, nil); code >= 400 {
 		http.Error(w, fmt.Sprintf("%s", err), code)
-		return
-	}
-	if err := validate.Struct(access); err != nil {
-		http.Error(w, fmt.Sprintf("%s", err), http.StatusBadRequest)
 		return
 	}
 	var user models.User
@@ -36,10 +31,6 @@ func RegisterAccess(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Check Goal: %e", err), http.StatusInternalServerError)
 			return
 		}
-	}
-	if err := userRepo.AddDeviceToken(ctx, user.Id, access.DeviceToken); err != nil {
-		http.Error(w, fmt.Sprintf("Add Device Token: %e", err), http.StatusInternalServerError)
-		return
 	}
 	if err := userRepo.AddAccess(ctx, user.Id, accessTime); err != nil {
 		http.Error(w, fmt.Sprintf("Add Access: %e", err), http.StatusInternalServerError)
