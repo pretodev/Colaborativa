@@ -6,6 +6,7 @@ import (
 	"github.com/pretodev/colaborativa/functions/helpers"
 	"github.com/pretodev/colaborativa/functions/models"
 	"net/http"
+	"time"
 )
 
 func CheckActivity(w http.ResponseWriter, r *http.Request) {
@@ -19,14 +20,36 @@ func CheckActivity(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusBadRequest)
 		return
 	}
-	var userId string
-	if err := helpers.UserId(r, &userId); err != nil {
-		http.Error(w, fmt.Sprintf("%s", err), http.StatusUnauthorized)
+	var user models.User
+	if err := parseUser(r, &user); err != nil {
+		http.Error(w, fmt.Sprintf("Parse User:%s", err), http.StatusUnauthorized)
 		return
 	}
-	if err := activityRepo.Check(ctx, userId, activity); err != nil {
+	if err := activityRepo.Check(ctx, user.Id, activity); err != nil {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
 		return
+	}
+	if err := scoreRepo.ScoreAction(ctx, user, models.ActionCheckActivity); err != nil {
+		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+		return
+	}
+	isDateChecked, err := activityRepo.IsDateChecked(ctx, user, time.Now())
+	if err != nil {
+		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+		return
+	}
+	if isDateChecked {
+		levelUp, err := achievementRepo.CheckGoal(ctx, user, models.UpCompleteActivityDaily)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+			return
+		}
+		if levelUp {
+			if err := scoreRepo.ScoreAction(ctx, user, models.ActionLevelUp); err != nil {
+				http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+				return
+			}
+		}
 	}
 	helpers.Response(w, "Success", http.StatusCreated)
 }

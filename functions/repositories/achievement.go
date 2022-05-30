@@ -6,13 +6,13 @@ import (
 	"firebase.google.com/go/db"
 	"fmt"
 	"github.com/pretodev/colaborativa/functions/models"
+	"log"
 )
 
-var achievementTable = map[models.Action]int{
-	models.ActionSaveFeeling:         0,
-	models.ActionRegisterDiaryAccess: 1,
-	models.ActionSendMessage:         2,
-	models.ActionCheckActivity:       3,
+var achievementTable = map[models.UpAchievement]int{
+	models.UpAccessDaily:            1,
+	models.UpCompleteActivityDaily:  0,
+	models.UpCompleteActivityWeekly: 2,
 }
 
 type AchievementRepo struct {
@@ -27,8 +27,9 @@ func NewAchievementRepo(firestore *firestore.Client, database *db.Client) *Achie
 	}
 }
 
-func (repo AchievementRepo) CheckGoal(ctx context.Context, user models.User, action models.Action) (bool, error) {
+func (repo AchievementRepo) CheckGoal(ctx context.Context, user models.User, action models.UpAchievement) (bool, error) {
 	achievementPosition := achievementTable[action]
+	log.Println("achievementPosition", achievementPosition)
 	gKey := fmt.Sprintf("achievements/%d", achievementPosition)
 	var archive models.Achievement
 	err := repo.database.NewRef(gKey).Get(ctx, &archive)
@@ -42,12 +43,12 @@ func (repo AchievementRepo) CheckGoal(ctx context.Context, user models.User, act
 	if err != nil {
 		return false, err
 	}
-	if userAchievement.Level == len(archive.Goals) {
-		return false, nil
-	}
 	levelUp := false
 	newPoints := 1
 	if userAchievement != nil {
+		if userAchievement.Level == len(archive.Goals) {
+			return false, nil
+		}
 		newPoints = userAchievement.Points + 1
 		if newPoints >= archive.Goals[userAchievement.Level] {
 			userAchievement.Level++
@@ -55,6 +56,11 @@ func (repo AchievementRepo) CheckGoal(ctx context.Context, user models.User, act
 			levelUp = true
 		} else {
 			userAchievement.Points = newPoints
+		}
+	} else {
+		userAchievement = &models.UserAchievement{
+			Points: newPoints,
+			Level:  0,
 		}
 	}
 	err = repo.database.NewRef(uKey).Set(ctx, userAchievement)

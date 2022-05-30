@@ -5,6 +5,7 @@ import (
 	"errors"
 	"firebase.google.com/go/db"
 	"github.com/pretodev/colaborativa/functions/models"
+	"log"
 	"time"
 )
 
@@ -40,4 +41,29 @@ func (repo ActivityRepo) Check(ctx context.Context, userId string, activity mode
 	}
 	err = ref.Set(ctx, true)
 	return err
+}
+
+func (repo ActivityRepo) IsDateChecked(ctx context.Context, user models.User, t time.Time) (bool, error) {
+	var activities []interface{}
+	err := repo.database.NewRef("activities").Get(ctx, &activities)
+	if err != nil {
+		return false, err
+	}
+	countActivities := len(activities)
+	key := t.Format("2006-01-02")
+	err = repo.database.NewRef("users/"+user.Id+"/activities/"+key).Get(ctx, &activities)
+	if err != nil {
+		return false, err
+	}
+	countChecked := 0
+	for _, activity := range activities {
+		if activity != nil {
+			countChecked++
+		}
+	}
+	log.Println("countActivities:", countActivities, "countChecked:", countChecked)
+	if countActivities != countChecked {
+		return false, nil
+	}
+	return true, nil
 }

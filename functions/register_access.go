@@ -27,7 +27,7 @@ func RegisterAccess(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if lastAccess == nil || !helpers.EqualsDate(*lastAccess, accessTime) {
-		levelUp, err := achievementRepo.CheckGoal(ctx, user, models.ActionRegisterDiaryAccess)
+		levelUp, err := achievementRepo.CheckGoal(ctx, user, models.UpAccessDaily)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Check Goal: %e", err), http.StatusInternalServerError)
 			return

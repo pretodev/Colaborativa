@@ -8,4 +8,5 @@ const (
 	ActionSendMessage
 	ActionCheckActivity
 	ActionLevelUp
+	ActionCheckAllActivitiesDaily
 )
