@@ -8,9 +8,10 @@ class AppService {
 
   Stream<AppConfigs> config([String language = 'pt-br']) {
     return _db.ref('app/$language').onValue.map((event) {
-      final configMap = event.snapshot.value as Map?;
+      final configMap = event.snapshot.value as Map? ?? {};
       return AppConfigs(
-        chatSSuggestions: _getChatSuggestions(configMap ?? {}),
+        chatSSuggestions: _getChatSuggestions(configMap),
+        newsUrl: configMap['news_url'] as String? ?? '',
       );
     });
   }

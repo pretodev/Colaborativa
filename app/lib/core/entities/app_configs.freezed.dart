@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppConfigs {
   Map<String, List<String>> get chatSSuggestions =>
       throw _privateConstructorUsedError;
+  String get newsUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppConfigsCopyWith<AppConfigs> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $AppConfigsCopyWith<$Res> {
   factory $AppConfigsCopyWith(
           AppConfigs value, $Res Function(AppConfigs) then) =
       _$AppConfigsCopyWithImpl<$Res>;
-  $Res call({Map<String, List<String>> chatSSuggestions});
+  $Res call({Map<String, List<String>> chatSSuggestions, String newsUrl});
 }
 
 /// @nodoc
@@ -43,12 +44,17 @@ class _$AppConfigsCopyWithImpl<$Res> implements $AppConfigsCopyWith<$Res> {
   @override
   $Res call({
     Object? chatSSuggestions = freezed,
+    Object? newsUrl = freezed,
   }) {
     return _then(_value.copyWith(
       chatSSuggestions: chatSSuggestions == freezed
           ? _value.chatSSuggestions
           : chatSSuggestions // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>,
+      newsUrl: newsUrl == freezed
+          ? _value.newsUrl
+          : newsUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -60,7 +66,7 @@ abstract class _$$_AppConfigsCopyWith<$Res>
           _$_AppConfigs value, $Res Function(_$_AppConfigs) then) =
       __$$_AppConfigsCopyWithImpl<$Res>;
   @override
-  $Res call({Map<String, List<String>> chatSSuggestions});
+  $Res call({Map<String, List<String>> chatSSuggestions, String newsUrl});
 }
 
 /// @nodoc
@@ -76,12 +82,17 @@ class __$$_AppConfigsCopyWithImpl<$Res> extends _$AppConfigsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? chatSSuggestions = freezed,
+    Object? newsUrl = freezed,
   }) {
     return _then(_$_AppConfigs(
       chatSSuggestions: chatSSuggestions == freezed
           ? _value._chatSSuggestions
           : chatSSuggestions // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>,
+      newsUrl: newsUrl == freezed
+          ? _value.newsUrl
+          : newsUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -90,7 +101,8 @@ class __$$_AppConfigsCopyWithImpl<$Res> extends _$AppConfigsCopyWithImpl<$Res>
 
 class _$_AppConfigs extends _AppConfigs {
   const _$_AppConfigs(
-      {required final Map<String, List<String>> chatSSuggestions})
+      {required final Map<String, List<String>> chatSSuggestions,
+      required this.newsUrl})
       : _chatSSuggestions = chatSSuggestions,
         super._();
 
@@ -102,8 +114,11 @@ class _$_AppConfigs extends _AppConfigs {
   }
 
   @override
+  final String newsUrl;
+
+  @override
   String toString() {
-    return 'AppConfigs(chatSSuggestions: $chatSSuggestions)';
+    return 'AppConfigs(chatSSuggestions: $chatSSuggestions, newsUrl: $newsUrl)';
   }
 
   @override
@@ -112,12 +127,15 @@ class _$_AppConfigs extends _AppConfigs {
         (other.runtimeType == runtimeType &&
             other is _$_AppConfigs &&
             const DeepCollectionEquality()
-                .equals(other._chatSSuggestions, _chatSSuggestions));
+                .equals(other._chatSSuggestions, _chatSSuggestions) &&
+            const DeepCollectionEquality().equals(other.newsUrl, newsUrl));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_chatSSuggestions));
+      runtimeType,
+      const DeepCollectionEquality().hash(_chatSSuggestions),
+      const DeepCollectionEquality().hash(newsUrl));
 
   @JsonKey(ignore: true)
   @override
@@ -127,13 +145,15 @@ class _$_AppConfigs extends _AppConfigs {
 
 abstract class _AppConfigs extends AppConfigs {
   const factory _AppConfigs(
-          {required final Map<String, List<String>> chatSSuggestions}) =
-      _$_AppConfigs;
+      {required final Map<String, List<String>> chatSSuggestions,
+      required final String newsUrl}) = _$_AppConfigs;
   const _AppConfigs._() : super._();
 
   @override
   Map<String, List<String>> get chatSSuggestions =>
       throw _privateConstructorUsedError;
+  @override
+  String get newsUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_AppConfigsCopyWith<_$_AppConfigs> get copyWith =>

@@ -12,7 +12,10 @@ class AppController extends ChangeNotifier {
 
   final AppService _appService;
 
-  AppConfigs _config = const AppConfigs(chatSSuggestions: {});
+  AppConfigs _config = const AppConfigs(
+    chatSSuggestions: {},
+    newsUrl: '',
+  );
   AppConfigs get config => _config;
 
   StreamSubscription? _subscription;

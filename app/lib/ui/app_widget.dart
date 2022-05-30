@@ -1,6 +1,7 @@
 import 'package:colaborativa_app/core/notification_service.dart';
 import 'package:colaborativa_app/core/user_service.dart';
 import 'package:colaborativa_app/ui/controllers/chat_controller.dart';
+import 'package:colaborativa_app/ui/views/news_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -90,6 +91,7 @@ class _AppWidgetState extends State<AppWidget> {
         Routes.register: (ctx) => const ProfileEditorView(register: true),
         Routes.chatMessageSelector: (ctx) =>
             ChatMessageSelectorView(messageType: ctx.args()),
+        Routes.news: (ctx) => const NewsView(),
       },
     );
   }

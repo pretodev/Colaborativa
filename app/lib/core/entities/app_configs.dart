@@ -8,5 +8,6 @@ class AppConfigs with _$AppConfigs {
 
   const factory AppConfigs({
     required Map<String, List<String>> chatSSuggestions,
+    required String newsUrl,
   }) = _AppConfigs;
 }

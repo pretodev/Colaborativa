@@ -59,21 +59,21 @@ class MenuView extends StatelessWidget {
                     title: 'Conquistas',
                     description:
                         'Veja os objetivos conquistado ao longo da sua jornada de cuidado próprio.',
-                    onPresssed: () =>
-                        Navigator.pushNamed(context, Routes.achievements),
+                    onPresssed: () => navigator.pushNamed(Routes.achievements),
                   ),
-                  const MenuItemWidget(
+                  MenuItemWidget(
                     svgIcon: SvgPictures.readingBook,
                     title: 'Informativos',
                     description:
                         'Se informe e tenha a acesso a materias sobre lesão por pressão',
+                    onPresssed: () => navigator.pushNamed(Routes.news),
                   ),
-                  const MenuItemWidget(
-                    svgIcon: SvgPictures.settings,
-                    title: 'Configurações',
-                    description:
-                        'Controle notificações e explore outros recursos.',
-                  ),
+                  // const MenuItemWidget(
+                  //   svgIcon: SvgPictures.settings,
+                  //   title: 'Configurações',
+                  //   description:
+                  //       'Controle notificações e explore outros recursos.',
+                  // ),
                 ],
               ),
             ),
