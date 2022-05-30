@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:colaborativa_app/core/clients/colaborativa_api_client.dart';
 import 'package:colaborativa_app/core/notification_service.dart';
+import 'package:colaborativa_app/ui/controllers/chat_controller.dart';
 import 'package:colaborativa_app/utils/context_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -107,5 +108,10 @@ final appProviders = [
     create: (ctx) => AuthController(
       authService: ctx.read<AuthService>(),
     )..loadUser(),
+  ),
+  ChangeNotifierProvider(
+    create: (ctx) => ChatController(
+      chatService: ctx.read<ChatService>(),
+    ),
   ),
 ];

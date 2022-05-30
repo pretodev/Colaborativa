@@ -1,5 +1,6 @@
 import 'package:colaborativa_app/core/notification_service.dart';
 import 'package:colaborativa_app/core/user_service.dart';
+import 'package:colaborativa_app/ui/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,6 +61,7 @@ class _AppWidgetState extends State<AppWidget> {
         authenticated: (_) {
           context.read<NotificationService>().subscribe();
           context.read<UserService>().registerAccess();
+          context.read<ChatController>().load();
           _navigateTo(Routes.home);
         },
       );

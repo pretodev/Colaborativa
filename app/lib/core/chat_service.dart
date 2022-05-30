@@ -23,6 +23,25 @@ class ChatService {
     );
   }
 
+  Stream<Message> get onNewMessage {
+    final messageRef = _db.ref('messages');
+    return messageRef.onChildAdded.map(
+      (event) => _fromDataSnapshot(event.snapshot),
+    );
+  }
+
+  Stream<Message> get onRemoveMessage {
+    final messageRef = _db.ref('messages');
+    return messageRef.onChildRemoved.map(
+      (event) => _fromDataSnapshot(event.snapshot),
+    );
+  }
+
+  Future<List<Message>> last() async {
+    final data = await _db.ref('messages').orderByChild('timestamp').get();
+    return data.children.map(_fromDataSnapshot).toList();
+  }
+
   Future<void> sendMessage({
     required String content,
     String destination = '@todos',
