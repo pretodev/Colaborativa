@@ -7,3 +7,5 @@ const FirebaseCredentialsFile = "firebase_credentials.json"
 // http repositories
 const UserId = "app.http.function.id"
 const Args = "app.http.function.Args"
+
+// Messages

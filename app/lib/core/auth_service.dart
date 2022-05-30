@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:colaborativa_app/core/mappers/profile_mapper.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fa;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'entities/auth_status.dart';
 import 'entities/phone_preferences.dart';
 import 'entities/user.dart';
+import 'entities/user_profile.dart';
 import 'errors/errors.dart';
 
 class AuthService {
@@ -14,8 +17,17 @@ class AuthService {
   static const _verificationId = 'verification_id';
   static const _timestamp = 'timestamp';
 
-  final _auth = fa.FirebaseAuth.instance;
-  final _firestore = FirebaseFirestore.instance;
+  AuthService({
+    required fa.FirebaseAuth auth,
+    required FirebaseFirestore firestore,
+    required Dio colaborativaApi,
+  })  : _auth = auth,
+        _firestore = firestore,
+        _colaborativaApi = colaborativaApi;
+
+  final fa.FirebaseAuth _auth;
+  final FirebaseFirestore _firestore;
+  final Dio _colaborativaApi;
   final _serviceController = StreamController<AuthStatus>();
 
   StreamController<PhonePreferences?>? _phoneController;
@@ -141,6 +153,22 @@ class AuthService {
     await prefs.remove(_verificationId);
     await prefs.remove(_timestamp);
     _phoneController?.add(null);
+  }
+
+  Future<void> register(UserProfile profile) async {
+    await _colaborativaApi.post(
+      '/save-user',
+      data: ProfileMapper.toMap(profile),
+    );
+    final user = _auth.currentUser!;
+    final doc = await _firestore.doc('users/${user.uid}').get();
+    if (doc.exists) {
+      final user = User(
+        id: doc.id,
+        name: doc.get('name') as String,
+      );
+      _serviceController.add(AuthStatus.authenticated(user));
+    }
   }
 
   Future<void> logout() {

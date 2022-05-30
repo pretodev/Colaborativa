@@ -7,22 +7,15 @@ import (
 	"time"
 )
 
-type SaveMessageCommand func(ctx context.Context, emitterId string, content string) error
+type SaveMessageCommand func(ctx context.Context, user models.User, content string) error
 
-func NewSaveMessageCommand(messageRepo *repositories.MessageRepo, profileRepo *repositories.UserRepo) SaveMessageCommand {
-	return func(ctx context.Context, emitterId string, content string) error {
-		profile, err := profileRepo.FromId(ctx, emitterId)
-		if err != nil {
-			return err
-		}
-		if profile == nil {
-			return repositories.ErrProfileNotFound
-		}
+func NewSaveMessageCommand(messageRepo *repositories.MessageRepo) SaveMessageCommand {
+	return func(ctx context.Context, user models.User, content string) error {
 		message := models.Message{
 			Content: content,
 			Emitter: models.MessageEmitter{
-				Id:   emitterId,
-				Name: profile.Name,
+				Id:   user.Id,
+				Name: user.Name,
 			},
 			Timestamp: time.Now(),
 		}

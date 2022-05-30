@@ -79,3 +79,11 @@ func (repo UserRepo) LastAccess(ctx context.Context, userId string) (*time.Time,
 	}
 	return &lastAccessTime, nil
 }
+
+func (repo UserRepo) Exists(ctx context.Context, userId string) bool {
+	doc, err := repo.firestore.Collection("users").Doc(userId).Get(ctx)
+	if err != nil {
+		return false
+	}
+	return doc.Exists()
+}

@@ -71,5 +71,5 @@ func init() {
 	scoreRepo = repositories.NewScoreRepo(firestore, database)
 	achievementRepo = repositories.NewAchievementRepo(firestore, database)
 
-	saveMessage = commands.NewSaveMessageCommand(messageRepo, userRepo)
+	saveMessage = commands.NewSaveMessageCommand(messageRepo)
 }

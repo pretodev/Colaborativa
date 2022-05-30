@@ -33,7 +33,7 @@ func ReceiveMessage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "user not found", http.StatusUnauthorized)
 		return
 	}
-	if err := saveMessage(ctx, userId, userMessage.Content); err != nil {
+	if err := saveMessage(ctx, *user, userMessage.Content); err != nil {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
 		return
 	}

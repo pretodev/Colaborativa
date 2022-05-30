@@ -67,7 +67,11 @@ final appProviders = [
     lazy: true,
   ),
   Provider(
-    create: (ctx) => AuthService(),
+    create: (ctx) => AuthService(
+      auth: ctx.read(),
+      firestore: ctx.read(),
+      colaborativaApi: ctx.read<ColaborativaApiClient>().client,
+    ),
     lazy: true,
   ),
   Provider(

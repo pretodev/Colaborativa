@@ -44,8 +44,6 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     super.initState();
     final app = context.read<AppController>();
-    final notification = context.read<NotificationService>();
-    final user = context.read<UserService>();
     app.load();
     final auth = context.read<AuthController>();
     auth.addListener(() {
@@ -56,10 +54,12 @@ class _AppWidgetState extends State<AppWidget> {
         waitingSmsCode: (prefs) {
           _navigateTo(Routes.confirmSmsCode);
         },
-        unregistered: () {},
+        unregistered: () {
+          _navigateTo(Routes.register);
+        },
         authenticated: (_) {
-          notification.subscribe();
-          user.registerAccess();
+          context.read<NotificationService>().subscribe();
+          context.read<UserService>().registerAccess();
           _navigateTo(Routes.home);
         },
       );
@@ -85,6 +85,7 @@ class _AppWidgetState extends State<AppWidget> {
         Routes.rank: (ctx) => const RankView(),
         Routes.achievements: (ctx) => const AchievementsView(),
         Routes.profile: (ctx) => const ProfileEditorView(),
+        Routes.register: (ctx) => const ProfileEditorView(register: true),
         Routes.chatMessageSelector: (ctx) =>
             ChatMessageSelectorView(messageType: ctx.args()),
       },
