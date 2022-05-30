@@ -62,7 +62,9 @@ final appProviders = [
   ),
   Provider(
     create: (ctx) => ChatService(
+      ctx.userId,
       colaborativaApi: ctx.read<ColaborativaApiClient>().client,
+      firestore: ctx.read(),
       db: ctx.read(),
     ),
     lazy: true,

@@ -1,5 +1,7 @@
 import 'package:colaborativa_app/core/chat_service.dart';
+import 'package:colaborativa_app/core/entities/user.dart';
 import 'package:colaborativa_app/ui/theme/colors.dart';
+import 'package:colaborativa_app/utils/strings/strings.dart';
 
 import '../controllers/app_controller.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,8 @@ import 'package:provider/provider.dart';
 import '../../core/enums/message_types_enum.dart';
 import '../widgets/dropdown_field.dart';
 import '../widgets/page_body.dart';
+
+const defaultDestination = User(id: '', name: 'Todos');
 
 class ChatMessageSelectorView extends StatefulWidget {
   const ChatMessageSelectorView({
@@ -30,12 +34,15 @@ class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
   int? msgIndexValue;
   set msgIndex(int? value) => setState(() => msgIndexValue = value);
 
-  String receveiverValue = '@todos';
-  set receiver(String value) => setState(() => receveiverValue = value);
+  User receveiverValue = defaultDestination;
+  set receiver(User value) => setState(() => receveiverValue = value);
 
-  void selectReceiver(String? value) {
+  bool sendingValue = false;
+  set sending(bool value) => setState(() => sendingValue = value);
+
+  void selectReceiver(User value) {
     msgIndex = null;
-    receiver = value ?? '@todos';
+    receiver = value;
   }
 
   void selectMessage(int index) {
@@ -44,21 +51,24 @@ class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
 
   void sendMessage() async {
     if (msgIndexValue != null) {
+      sending = true;
       await chatService.sendMessage(
         content: suggestions[msgIndexValue!],
-        destination: receveiverValue,
+        destination: receveiverValue.id,
       );
       navigate.pop();
     }
   }
 
   List<String> get suggestions {
-    final messageKey = receveiverValue == '@todos'
+    final messageKey = receveiverValue == defaultDestination
         ? widget.messageType.allSuggestionKey
         : widget.messageType.individualSuggestionKey;
     final data = app.config.chatSSuggestions[messageKey] ?? [];
-    if (receveiverValue == '@todos') return data;
-    return data.map((m) => m.replaceAll('@', receveiverValue)).toList();
+    if (receveiverValue == defaultDestination) return data;
+    return data
+        .map((m) => m.replaceAll('@', receveiverValue.name.capitalize))
+        .toList();
   }
 
   @override
@@ -89,26 +99,33 @@ class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DropdownField<String>(
-              value: receveiverValue,
-              onChanged: selectReceiver,
-              decoration: const InputDecoration(
-                prefixText: 'Para:',
-              ),
-              items: const [
-                DropdownFieldItem<String>(
-                  value: '@todos',
-                  label: '@todos',
-                ),
-                DropdownFieldItem<String>(
-                  value: 'Vanessa',
-                  label: '@Vanessa',
-                ),
-                DropdownFieldItem<String>(
-                  value: 'Silas',
-                  label: '@Silas',
-                ),
-              ],
+            FutureBuilder<List<User>>(
+              future: chatService.destinations,
+              builder: (context, snapshot) {
+                final users = snapshot.data ?? [];
+                final fields = users.map((user) {
+                  return DropdownFieldItem<User>(
+                    value: user,
+                    label: user.name.capitalize,
+                  );
+                }).toList();
+                fields.insert(
+                  0,
+                  DropdownFieldItem<User>(
+                    value: defaultDestination,
+                    label: defaultDestination.name.capitalize,
+                  ),
+                );
+
+                return DropdownField<User>(
+                  value: defaultDestination,
+                  onChanged: (u) => selectReceiver(u!),
+                  decoration: const InputDecoration(
+                    prefixText: 'Para: ',
+                  ),
+                  items: fields,
+                );
+              },
             ),
             const SizedBox(height: 16.0),
             Expanded(
@@ -133,8 +150,10 @@ class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: msgIndexValue != null ? sendMessage : null,
-              child: const Text('Enviar'),
+              onPressed: msgIndexValue != null && sendingValue == false
+                  ? sendMessage
+                  : null,
+              child: Text(sendingValue ? 'Enviando...' : 'Enviar'),
             ),
           ],
         ),

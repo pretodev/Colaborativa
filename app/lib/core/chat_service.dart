@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:colaborativa_app/core/entities/user.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -5,23 +7,19 @@ import 'entities/emitter.dart';
 import 'entities/message.dart';
 
 class ChatService {
-  ChatService({
+  ChatService(
+    this._userId, {
     required FirebaseDatabase db,
     required Dio colaborativaApi,
+    required FirebaseFirestore firestore,
   })  : _db = db,
+        _firestore = firestore,
         _colaborativaApi = colaborativaApi;
 
+  final String _userId;
   final FirebaseDatabase _db;
+  final FirebaseFirestore _firestore;
   final Dio _colaborativaApi;
-
-  Stream<List<Message>> get messages {
-    final messageRef = _db.ref('messages');
-    return messageRef.onValue.map(
-      (event) {
-        return event.snapshot.children.map(_fromDataSnapshot).toList();
-      },
-    );
-  }
 
   Stream<Message> get onNewMessage {
     final messageRef = _db.ref('messages');
@@ -42,13 +40,21 @@ class ChatService {
     return data.children.map(_fromDataSnapshot).toList();
   }
 
+  Future<List<User>> get destinations async {
+    final users = await _firestore.collection('users').get();
+    return users.docs
+        .map((doc) => User(id: doc.id, name: doc.get('name')))
+        .where((user) => user.id != _userId)
+        .toList();
+  }
+
   Future<void> sendMessage({
     required String content,
     String destination = '@todos',
   }) async {
     await _colaborativaApi.post('/send-message', data: {
       'content': content,
-      'destination': destination,
+      'to': destination,
     });
   }
 }
