@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/pretodev/colaborativa/functions/models"
+	"github.com/pretodev/colaborativa/functions/services"
 	"log"
 	"net/http"
 	"os"
@@ -26,6 +27,8 @@ var activityRepo *repositories.ActivityRepo
 var messageRepo *repositories.MessageRepo
 var scoreRepo *repositories.ScoreRepo
 var achievementRepo *repositories.AchievementRepo
+
+var notificationServ *services.NotificationService
 
 var saveMessage commands.SaveMessageCommand
 
@@ -64,12 +67,18 @@ func init() {
 	if err != nil {
 		log.Fatalf("app.Firestore: %v", err)
 	}
+	msg, err := app.Messaging(ctx)
+	if err != nil {
+		log.Fatalf("app.Messaging: %s\n", err)
+	}
 	userRepo = repositories.NewUserRepo(firestore, database)
 	feelingRepo = repositories.NewFeelingRepo(database)
 	activityRepo = repositories.NewActivityRepo(database)
 	messageRepo = repositories.NewMessageRepo(database)
 	scoreRepo = repositories.NewScoreRepo(firestore, database)
 	achievementRepo = repositories.NewAchievementRepo(firestore, database)
+
+	notificationServ = services.NewNotificationService(msg)
 
 	saveMessage = commands.NewSaveMessageCommand(messageRepo)
 }

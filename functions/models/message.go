@@ -11,6 +11,7 @@ var AdminUser = User{
 
 type UserMessage struct {
 	Content string `json:"content" validate:"required"`
+	To      string `json:"to"`
 }
 
 type MessageEmitter struct {

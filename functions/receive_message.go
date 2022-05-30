@@ -37,5 +37,17 @@ func ReceiveMessage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
 		return
 	}
+	toUser, _ := userRepo.FromId(ctx, userMessage.To)
+	if toUser != nil {
+		err = notificationServ.SendTo(ctx, userMessage.Content, toUser.Tokens)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+			return
+		}
+	}
+	if err := scoreRepo.ScoreAction(ctx, *user, models.ActionSendMessage); err != nil {
+		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+		return
+	}
 	helpers.Response(w, "Success", http.StatusCreated)
 }

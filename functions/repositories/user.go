@@ -23,7 +23,7 @@ func NewUserRepo(firestore *firestore.Client, database *db.Client) *UserRepo {
 	}
 }
 
-func (repo *UserRepo) Save(ctx context.Context, userId string, profile models.User) error {
+func (repo *UserRepo) Save(ctx context.Context, userId string, profile models.EditingUser) error {
 	ref := repo.firestore.Collection("users").Doc(userId)
 	_, err := ref.Set(ctx, profile)
 	return err

@@ -11,7 +11,7 @@ import (
 
 func SaveProfile(w http.ResponseWriter, r *http.Request) {
 	ctx := context.Background()
-	var editingUser models.User
+	var editingUser models.EditingUser
 	if err, code := helpers.ParsePost(r, &editingUser); code >= 400 {
 		http.Error(w, fmt.Sprintf("%s", err), code)
 		return
