@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/page_body.dart';
-import '../../widgets/profile_avatar.dart';
+import '../../widgets/profile_avatar_widget.dart';
 import 'widgets/profile_form.dart';
 
 class ProfileEditorView extends StatefulWidget {
@@ -73,7 +73,7 @@ class _ProfileEditorViewState extends State<ProfileEditorView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const ProfileAvatar(),
+              const ProfileAvatarWidget(),
               const SizedBox(height: 16),
               ProfileForm(
                 initialValue: _profile,

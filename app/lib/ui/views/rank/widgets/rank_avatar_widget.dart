@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/entities/rank_user.dart';
 import '../../../theme/colors.dart';
-import '../../../widgets/profile_avatar.dart';
+import '../../../widgets/profile_avatar_widget.dart';
 import 'rank_avatar_number_widget.dart';
 
 class RankAvatarWidget extends StatelessWidget {
@@ -29,7 +29,7 @@ class RankAvatarWidget extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.all(paddings[number - 1]),
-              child: ProfileAvatar(size: sizes[number - 1]),
+              child: ProfileAvatarWidget(size: sizes[number - 1]),
             ),
             RankAvatarNumberWidget(number: number),
           ],

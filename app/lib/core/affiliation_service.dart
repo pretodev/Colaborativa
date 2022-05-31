@@ -41,9 +41,12 @@ class AffiliationService {
     });
   }
 
-  Future<User?> get mentor async {
-    final snapshot = await _firestore.collection('users').doc(_userId).get();
-    if (snapshot.exists) {
+  Stream<User?> get mentor {
+    return _firestore
+        .doc('users/$_userId')
+        .snapshots()
+        .asyncMap((snapshot) async {
+      if (!snapshot.exists) return null;
       final mentorId = snapshot.get('mentor');
       if (mentorId != null) {
         final mentorSnapshot =
@@ -55,7 +58,7 @@ class AffiliationService {
           );
         }
       }
-    }
-    return null;
+      return null;
+    });
   }
 }

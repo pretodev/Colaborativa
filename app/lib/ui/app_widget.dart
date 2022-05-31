@@ -1,11 +1,13 @@
-import 'package:colaborativa_app/core/affiliation_service.dart';
 import 'package:colaborativa_app/ui/views/news_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../core/notification_service.dart';
+import '../core/user_service.dart';
 import '../utils/context_extension.dart';
 import 'controllers/app_controller.dart';
 import 'controllers/auth_controller.dart';
+import 'controllers/chat_controller.dart';
 import 'navigation/routes.dart';
 import 'theme/theme.dart';
 import 'views/achievements/achievements_view.dart';
@@ -59,12 +61,10 @@ class _AppWidgetState extends State<AppWidget> {
           _navigateTo(Routes.register);
         },
         authenticated: (_) async {
-          final affiliation = context.read<AffiliationService>();
-          if (await affiliation.canAffiliate) {
-            _navigateTo(Routes.affiliation);
-          } else {
-            _navigateTo(Routes.home);
-          }
+          context.read<NotificationService>().subscribe();
+          context.read<UserService>().registerAccess();
+          context.read<ChatController>().load();
+          _navigateTo(Routes.home);
         },
       );
     });

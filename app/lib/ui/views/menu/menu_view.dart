@@ -7,7 +7,7 @@ import '../../controllers/auth_controller.dart';
 import '../../theme/colors.dart';
 import '../../theme/pictures.dart';
 import '../../widgets/page_body.dart';
-import '../../widgets/profile_avatar.dart';
+import '../../widgets/profile_avatar_widget.dart';
 import 'widgets/menu_item_widget.dart';
 
 class MenuView extends StatelessWidget {
@@ -29,7 +29,7 @@ class MenuView extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const ProfileAvatar(),
+          const ProfileAvatarWidget(),
           const SizedBox(height: 8),
           UserWidget(
             builder: (context, user) => Text(

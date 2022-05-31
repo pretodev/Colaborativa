@@ -10,6 +10,7 @@ class SelectableListTileWidget extends StatelessWidget {
     this.subtitle,
     this.onClicked,
     this.trailing,
+    this.leading,
   }) : super(key: key);
 
   final bool selected;
@@ -17,6 +18,7 @@ class SelectableListTileWidget extends StatelessWidget {
   final Widget? subtitle;
   final VoidCallback? onClicked;
   final Widget? trailing;
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class SelectableListTileWidget extends StatelessWidget {
         color: selected ? AppColors.backgroundDark : null,
       ),
       child: ListTile(
+        leading: leading,
         title: title,
         selected: selected,
         subtitle: subtitle,

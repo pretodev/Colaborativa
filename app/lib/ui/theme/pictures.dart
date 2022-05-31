@@ -10,3 +10,7 @@ class SvgPictures {
   static const starActive = 'assets/images/svg/star_active.svg';
   static const starInactive = 'assets/images/svg/star_inactive.svg';
 }
+
+class PngPicture {
+  static const helpingHand = 'assets/images/png/helping-hand.png';
+}

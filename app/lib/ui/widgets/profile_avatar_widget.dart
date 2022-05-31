@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../theme/colors.dart';
 import '../theme/pictures.dart';
 
-class ProfileAvatar extends StatelessWidget {
-  const ProfileAvatar({
+class ProfileAvatarWidget extends StatelessWidget {
+  const ProfileAvatarWidget({
     Key? key,
     this.size = 100,
   }) : super(key: key);
