@@ -1,4 +1,5 @@
 enum MessageTypesEnum {
+  none,
   acknowledgment,
   support,
   incentive,

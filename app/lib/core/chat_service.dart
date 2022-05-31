@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:colaborativa_app/core/entities/user.dart';
+import 'package:colaborativa_app/core/enums/message_types_enum.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -51,10 +52,12 @@ class ChatService {
   Future<void> sendMessage({
     required String content,
     String destination = '@todos',
+    MessageTypesEnum type = MessageTypesEnum.none,
   }) async {
     await _colaborativaApi.post('/send-message', data: {
       'content': content,
       'to': destination,
+      'type': type.name,
     });
   }
 }
