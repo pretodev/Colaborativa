@@ -8,7 +8,11 @@ import 'package:provider/provider.dart';
 
 import '../../widgets/page_body.dart';
 import '../chat_input_view.dart';
-import 'widgets/chat_message.dart';
+import 'widgets/chat_message_widget.dart';
+
+const myMessage = Color(0xFFFFC107);
+const otherMessage = Color(0xFF17A2B8);
+const systemMessage = Color(0xFF28A745);
 
 class ChatView extends StatefulWidget {
   const ChatView({Key? key}) : super(key: key);
@@ -69,9 +73,17 @@ class _ChatViewState extends State<ChatView> {
                     itemBuilder: (_, index) {
                       final message = chat.messages[index];
                       final emitterId = message.emitter.id;
-                      return ChatMessage(
+                      final isMe = emitterId == auth.user?.id;
+                      final Color color = isMe
+                          ? myMessage
+                          : message.emitter.name == 'ColaborAtiva'
+                              ? systemMessage
+                              : otherMessage;
+
+                      return ChatMessageWidget(
                         message: message,
-                        isMe: emitterId == auth.user?.id,
+                        isMe: isMe,
+                        titleColor: color,
                         isAvatarVisible: index == 0 ||
                             emitterId != chat.messages[index - 1].emitter.id,
                         isNameVisible: index == chat.messages.length - 1 ||

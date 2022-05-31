@@ -1,15 +1,18 @@
+import 'package:colaborativa_app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 import '../../../../core/entities/message.dart';
 import '../../../theme/colors.dart';
 import 'chat_avatar.dart';
 
-class ChatMessage extends StatelessWidget {
-  const ChatMessage({
+class ChatMessageWidget extends StatelessWidget {
+  const ChatMessageWidget({
     Key? key,
     this.isNameVisible = true,
     this.isAvatarVisible = true,
     this.isMe = false,
+    this.titleColor,
     required this.message,
   }) : super(key: key);
 
@@ -18,6 +21,7 @@ class ChatMessage extends StatelessWidget {
   final bool isNameVisible;
   final bool isAvatarVisible;
   final bool isMe;
+  final Color? titleColor;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +49,10 @@ class ChatMessage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text(
-                    message.emitter.name,
-                    style: theme.textTheme.bodyText2,
+                    message.emitter.name.capitalize,
+                    style: theme.textTheme.bodyText2?.copyWith(
+                      color: titleColor,
+                    ),
                   ),
                 ),
               ),
@@ -59,7 +65,7 @@ class ChatMessage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    message.timestamp.toString(),
+                    Jiffy(message.timestamp).fromNow(),
                     style: theme.textTheme.bodyText2?.copyWith(fontSize: 12.0),
                   ),
                 ],
