@@ -1,4 +1,5 @@
 import 'package:colaborativa_app/core/enums/message_types_enum.dart';
+import 'package:colaborativa_app/ui/controllers/auth_controller.dart';
 import 'package:colaborativa_app/ui/controllers/chat_controller.dart';
 import 'package:colaborativa_app/ui/navigation/routes.dart';
 import 'package:colaborativa_app/ui/views/chat/widgets/chat_menu_widget.dart';
@@ -17,6 +18,8 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
+  late final AuthController auth;
+
   void sendMessage() {
     showModalBottomSheet(
       context: context,
@@ -42,6 +45,12 @@ class _ChatViewState extends State<ChatView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    auth = context.read<AuthController>();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -52,23 +61,26 @@ class _ChatViewState extends State<ChatView> {
         child: Column(
           children: [
             Expanded(
-              child: Consumer<ChatController>(builder: (context, chat, chil) {
-                return ListView.builder(
-                  reverse: true,
-                  itemCount: chat.messages.length,
-                  itemBuilder: (_, index) {
-                    final message = chat.messages[index];
-                    final emitterId = message.emitter.id;
-                    return ChatMessage(
-                      message: message,
-                      isAvatarVisible: index == 0 ||
-                          emitterId != chat.messages[index - 1].emitter.id,
-                      isNameVisible: index == chat.messages.length - 1 ||
-                          emitterId != chat.messages[index + 1].emitter.id,
-                    );
-                  },
-                );
-              }),
+              child: Consumer<ChatController>(
+                builder: (context, chat, chil) {
+                  return ListView.builder(
+                    reverse: true,
+                    itemCount: chat.messages.length,
+                    itemBuilder: (_, index) {
+                      final message = chat.messages[index];
+                      final emitterId = message.emitter.id;
+                      return ChatMessage(
+                        message: message,
+                        isMe: emitterId == auth.user?.id,
+                        isAvatarVisible: index == 0 ||
+                            emitterId != chat.messages[index - 1].emitter.id,
+                        isNameVisible: index == chat.messages.length - 1 ||
+                            emitterId != chat.messages[index + 1].emitter.id,
+                      );
+                    },
+                  );
+                },
+              ),
             ),
             const SizedBox(height: 16),
             ChatMenuWidget(
