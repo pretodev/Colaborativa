@@ -1,4 +1,6 @@
+import 'package:colaborativa_app/core/chat_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChatInputView extends StatefulWidget {
   const ChatInputView({Key? key}) : super(key: key);
@@ -8,10 +10,21 @@ class ChatInputView extends StatefulWidget {
 }
 
 class _ChatInputViewState extends State<ChatInputView> {
+  late final ChatService chat;
+  late final NavigatorState navigate;
+
   final editor = TextEditingController();
 
-  void sendMessage() {
-    Navigator.of(context).pop();
+  void sendMessage() async {
+    await chat.sendMessage(content: editor.text);
+    navigate.pop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    navigate = Navigator.of(context);
+    chat = context.read<ChatService>();
   }
 
   @override
