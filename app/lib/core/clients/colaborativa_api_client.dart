@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-const baseUrl = "https://9f93-168-232-228-63.sa.ngrok.io/";
+const baseUrl =
+    "https://southamerica-east1-colaborativa-dda97.cloudfunctions.net/";
 
 class ColaborativaApiClient {
   ColaborativaApiClient(FirebaseAuth auth)
