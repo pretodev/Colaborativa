@@ -43,6 +43,10 @@ func SaveProfile(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
 			return
 		}
+		if err := mentoringRepo.PrepareUser(ctx, *user); err != nil {
+			http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+			return
+		}
 	}
 	helpers.Response(w, "Success", http.StatusOK)
 }

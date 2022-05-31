@@ -27,6 +27,7 @@ var activityRepo *repositories.ActivityRepo
 var messageRepo *repositories.MessageRepo
 var scoreRepo *repositories.ScoreRepo
 var achievementRepo *repositories.AchievementRepo
+var mentoringRepo *repositories.MentoringRepo
 
 var notificationServ *services.NotificationService
 
@@ -77,6 +78,7 @@ func init() {
 	messageRepo = repositories.NewMessageRepo(database)
 	scoreRepo = repositories.NewScoreRepo(firestore, database)
 	achievementRepo = repositories.NewAchievementRepo(firestore, database)
+	mentoringRepo = repositories.NewMentoringRepo(firestore)
 
 	notificationServ = services.NewNotificationService(msg)
 

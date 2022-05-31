@@ -22,5 +22,6 @@ func main() {
 	routes.HandleFunc("/check-activity", functions.CheckActivity)
 	routes.HandleFunc("/send-message", functions.ReceiveMessage)
 	routes.HandleFunc("/register-access", functions.RegisterAccess)
+	routes.HandleFunc("/affiliate", functions.Affiliate)
 	log.Fatal(http.ListenAndServe(":8080", routes))
 }

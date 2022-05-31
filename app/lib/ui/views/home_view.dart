@@ -1,15 +1,32 @@
 import 'package:colaborativa_app/ui/widgets/user_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
+import '../../core/notification_service.dart';
+import '../../core/user_service.dart';
+import '../controllers/chat_controller.dart';
 import '../navigation/routes.dart';
 import '../theme/pictures.dart';
 import 'activities/activities_view.dart';
 import 'score_view.dart';
 import 'share_feeling_view.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    context.read<NotificationService>().subscribe();
+    context.read<UserService>().registerAccess();
+    context.read<ChatController>().load();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:colaborativa_app/core/affiliation_service.dart';
 import 'package:colaborativa_app/core/clients/colaborativa_api_client.dart';
 import 'package:colaborativa_app/core/notification_service.dart';
 import 'package:colaborativa_app/ui/controllers/chat_controller.dart';
@@ -98,6 +99,14 @@ final appProviders = [
       ctx.userId,
       firestore: ctx.read(),
       messaging: ctx.read(),
+    ),
+    lazy: true,
+  ),
+  Provider(
+    create: (ctx) => AffiliationService(
+      ctx.userId,
+      firestore: ctx.read(),
+      colaborativaApi: ctx.read<ColaborativaApiClient>().client,
     ),
     lazy: true,
   ),

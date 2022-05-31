@@ -17,7 +17,6 @@ class ScoreService {
   }
 
   Future<List<RankUser>> fromPeriod(PeriodEnum period) async {
-    print('score/${period.path}');
     final snap = await _db.ref('score/${period.path}').get();
     if (snap.value == null) return [];
     final result = snap.value as Map;

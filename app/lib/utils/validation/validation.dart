@@ -9,6 +9,15 @@ ValidateCallback isRequired([String? message]) {
   };
 }
 
+ValidateCallback min(int count, [String? message]) {
+  return (String? value) {
+    if (value == null || value.length < count) {
+      return message ?? 'Campo deve ter pelo menos $count caracteres';
+    }
+    return null;
+  };
+}
+
 extension ValidationsExtension on List<ValidateCallback> {
   ValidateCallback validate() {
     return (String? value) {

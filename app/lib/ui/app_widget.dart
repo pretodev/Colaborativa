@@ -1,6 +1,4 @@
-import 'package:colaborativa_app/core/notification_service.dart';
-import 'package:colaborativa_app/core/user_service.dart';
-import 'package:colaborativa_app/ui/controllers/chat_controller.dart';
+import 'package:colaborativa_app/core/affiliation_service.dart';
 import 'package:colaborativa_app/ui/views/news_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +9,7 @@ import 'controllers/auth_controller.dart';
 import 'navigation/routes.dart';
 import 'theme/theme.dart';
 import 'views/achievements/achievements_view.dart';
+import 'views/affiliation_view.dart';
 import 'views/chat/chat_view.dart';
 import 'views/chat_message_selector_view.dart';
 import 'views/confirm_sms_code/confirm_sms_code_view.dart';
@@ -59,11 +58,13 @@ class _AppWidgetState extends State<AppWidget> {
         unregistered: () {
           _navigateTo(Routes.register);
         },
-        authenticated: (_) {
-          context.read<NotificationService>().subscribe();
-          context.read<UserService>().registerAccess();
-          context.read<ChatController>().load();
-          _navigateTo(Routes.home);
+        authenticated: (_) async {
+          final affiliation = context.read<AffiliationService>();
+          if (await affiliation.canAffiliate) {
+            _navigateTo(Routes.affiliation);
+          } else {
+            _navigateTo(Routes.home);
+          }
         },
       );
     });
@@ -92,6 +93,7 @@ class _AppWidgetState extends State<AppWidget> {
         Routes.chatMessageSelector: (ctx) =>
             ChatMessageSelectorView(messageType: ctx.args()),
         Routes.news: (ctx) => const NewsView(),
+        Routes.affiliation: (ctx) => const AffiliationView(),
       },
     );
   }

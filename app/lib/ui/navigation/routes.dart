@@ -12,4 +12,5 @@ class Routes {
   static const achievements = '/achievements';
   static const profile = '/profile';
   static const news = '/news';
+  static const affiliation = '/affiliation';
 }

@@ -75,6 +75,7 @@ class _ProfileFormState extends State<ProfileForm> {
               onSaved: (value) => _name = value,
               validator: [
                 isRequired('Nome obrigatório'),
+                min(3),
               ].validate(),
             ),
           ),
