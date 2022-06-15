@@ -21,12 +21,12 @@ class _MentorViewState extends State<MentorView> {
   late final NavigatorState navigate;
   late final AffiliationService affiliation;
 
-  void showChat() async {
-    await navigate.pushNamed<bool>(Routes.chat);
+  void showChat() {
+    navigate.pushNamed(Routes.chat);
   }
 
   void chooseMentor() {
-    navigate.pushNamed(Routes.affiliation) as bool?;
+    navigate.pushNamed(Routes.affiliation);
   }
 
   @override
