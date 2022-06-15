@@ -41,6 +41,65 @@ class _DropdownFieldState<T> extends State<DropdownField<T>> {
 
   InputDecoration _decoration = const InputDecoration();
 
+  void unfocus() {
+    if (_focusNode.hasFocus) {
+      _focusNode.unfocus();
+    }
+  }
+
+  OverlayEntry showEntries() {
+    final renderBox = context.findRenderObject()! as RenderBox;
+    var size = renderBox.size;
+    return OverlayEntry(
+      builder: (context) => Stack(
+        children: [
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: unfocus,
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
+          Positioned(
+            width: size.width,
+            child: CompositedTransformFollower(
+              link: _layerLink,
+              showWhenUnlinked: false,
+              offset: Offset(0.0, size.height + 5.0),
+              child: Material(
+                elevation: 4.0,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxHeight: 150.0,
+                  ),
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    children: widget.items
+                        .map(
+                          (item) => InkWell(
+                            child: ListTile(
+                              title: Text(item.label),
+                            ),
+                            onTap: () => {
+                              widget.onChanged(item.value),
+                              _controller.text = item.label,
+                              _focusNode.unfocus(),
+                            },
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -53,49 +112,12 @@ class _DropdownFieldState<T> extends State<DropdownField<T>> {
     }
     _focusNode.addListener(() {
       if (_focusNode.hasFocus && !widget.readOnly) {
-        _overlayEntry = _createOverlayEntry();
+        _overlayEntry = showEntries();
         Overlay.of(context)?.insert(_overlayEntry!);
         return;
       }
       _overlayEntry?.remove();
     });
-  }
-
-  OverlayEntry _createOverlayEntry() {
-    final renderBox = context.findRenderObject()! as RenderBox;
-    var size = renderBox.size;
-
-    return OverlayEntry(
-      builder: (context) => Positioned(
-        width: size.width,
-        child: CompositedTransformFollower(
-          link: _layerLink,
-          showWhenUnlinked: false,
-          offset: Offset(0.0, size.height + 5.0),
-          child: Material(
-            elevation: 4.0,
-            child: ListView(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              children: widget.items
-                  .map(
-                    (item) => InkWell(
-                      child: ListTile(
-                        title: Text(item.label),
-                      ),
-                      onTap: () => {
-                        widget.onChanged(item.value),
-                        _controller.text = item.label,
-                        _focusNode.unfocus(),
-                      },
-                    ),
-                  )
-                  .toList(),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
