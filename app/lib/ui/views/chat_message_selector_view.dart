@@ -83,7 +83,7 @@ class _ChatMessageSelectorViewState extends State<ChatMessageSelectorView> {
   Widget build(BuildContext context) {
     const titles = {
       MessageTypesEnum.support: 'Mensagems para Apoiar',
-      MessageTypesEnum.incentive: 'Mensagens para Incentivar',
+      MessageTypesEnum.notification: 'Lembretes',
       MessageTypesEnum.acknowledgment: 'Mensagens de Agradecimento',
     };
     return Scaffold(

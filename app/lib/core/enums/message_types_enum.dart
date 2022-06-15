@@ -2,7 +2,7 @@ enum MessageTypesEnum {
   none,
   acknowledgment,
   support,
-  incentive,
+  notification,
   custom;
 
   String get individualSuggestionKey => '${name}Individual';

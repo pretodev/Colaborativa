@@ -1,3 +1,4 @@
+import 'package:colaborativa_app/core/enums/message_types_enum.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../utils/collections.dart';
@@ -18,7 +19,7 @@ class AppService {
 
   Map<String, List<String>> _getChatSuggestions(Map config) {
     final chatSSuggestions = config['chat_suggestions'] as Map;
-    final types = ['support', 'acknowledgment', 'incentive'];
+    final types = MessageTypesEnum.values.map((type) => type.name).toList();
     final chatSSuggestionsMap = <String, List<String>>{};
     for (var type in types) {
       final typeMessages = chatSSuggestions[type] as Map?;

@@ -57,8 +57,8 @@ class ChatMenuWidget extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   style: buttonStyle,
-                  child: const Text('Incentivo'),
-                  onPressed: () => onItemClicked(MessageTypesEnum.incentive),
+                  child: const Text('Lembretes'),
+                  onPressed: () => onItemClicked(MessageTypesEnum.notification),
                 ),
               ),
               const SizedBox(width: 10),
