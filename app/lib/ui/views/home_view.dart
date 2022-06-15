@@ -43,16 +43,19 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: const [
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: ShareFeelingView(),
-          ),
-          ActivitiesView(),
-          MentorView(),
-          ScoreView(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: ShareFeelingView(),
+            ),
+            ActivitiesView(),
+            MentorView(),
+            ScoreView(),
+            SizedBox(height: 32.0),
+          ],
+        ),
       ),
     );
   }
